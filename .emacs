@@ -11,16 +11,15 @@
 (menu-bar-mode -1) ; No menu bar
 (kill-buffer "*scratch*") ; Remove scratch buffer
 
-(add-hook 'prog-mode-hook 'global-linum-mode)
-(setq linum-format "%4d \u2502 ")
+(add-hook 'prog-mode-hook 'global-linum-mode) ; linum mode when programming
+(setq linum-format "%4d \u2502 ") ; nb | text...
 
-(load-theme 'firecode t)
+;(load-theme 'find-a-cool-theme t)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;; use mouse
 (require 'mouse)
 (xterm-mouse-mode t)
-(global-set-key (kbd "<mouse-1>") 'select-window)
 (global-set-key (kbd "<mouse-2>") 'nil)
 (global-set-key (kbd "<mouse-3>") 'nil)
 (global-set-key (kbd "<mouse-4>") 'scroll-down-line)
@@ -37,7 +36,6 @@
 (global-set-key (kbd "C-c c") 'comment-or-uncomment-region)
 (global-set-key [f5] 'hs-hide-all)
 (global-set-key [f6] 'hs-show-all)
-(global-set-key (kbd "C-c c") 'comment-or-uncomment-region)
 (global-set-key (kbd "C-g") 'keyboard-escape-quit)
 (global-set-key (kbd "C-x g") 'goto-line)
 (global-set-key (kbd "C-x x") 'hs-toggle-hiding)
@@ -74,7 +72,7 @@
 (add-hook 'prog-mode-hook 'highlight-parentheses-mode)
 
 (add-hook 'prog-mode-hook 'global-highlight-thing-mode)
-(setq highlight-thing-delay-seconds 0.2)
+(setq highlight-thing-delay-seconds 0.05)
 
 (define-globalized-minor-mode global-highlight-parentheses-mode
 highlight-parentheses-mode
