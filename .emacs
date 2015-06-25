@@ -40,6 +40,10 @@
 (global-set-key (kbd "C-x g") 'goto-line)
 (global-set-key (kbd "C-x x") 'hs-toggle-hiding)
 
+(custom-set-variables '(scroll-conservatively 1) '(scroll-margin 10)) ; pre scroll
+
+
+
 (global-set-key (kbd "C-x t") 'tuareg-mode)
 
 (global-set-key (kbd "C-x a a") 'neotree-toggle)
@@ -115,8 +119,8 @@ highlight-parentheses-mode
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;; this is not vi(m)
 
-(defconst wq "You mean Use C-x C-c ?")
-(defconst qq "You mean Use C-x C-c ?")
+(defconst wq "You mean C-x C-c ?")
+(defconst qq "You mean C-x C-c ?")
 (defconst w "You mean C-x C-s ?")
 (defconst q! "You mean C-x C-c ?")
 (defconst !q "You mean C-x C-c ?")
