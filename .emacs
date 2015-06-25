@@ -132,25 +132,25 @@ highlight-parentheses-mode
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;; installed packages
 
-  caml               
-  cyberpunk-theme    
-  firecode-theme     
-  highlight-paren... 
-  highlight-thing    
-  monokai-theme      
-  mouse+             
-  multiple-cursors   
-  neotree            
-  pastels-on-dark... 
-  rainbow-delimiters 
-  rainbow-identif... 
-  rainbow-mode       
-  strings            
-  tab-group          
-  tabbar             
-  tabbar-ruler       
-  tuareg             
-  undo-tree          
+  ;; caml               
+  ;; cyberpunk-theme    
+  ;; firecode-theme     
+  ;; highlight-paren... 
+  ;; highlight-thing    
+  ;; monokai-theme      
+  ;; mouse+             
+  ;; multiple-cursors   
+  ;; neotree            
+  ;; pastels-on-dark... 
+  ;; rainbow-delimiters 
+  ;; rainbow-identif... 
+  ;; rainbow-mode       
+  ;; strings            
+  ;; tab-group          
+  ;; tabbar             
+  ;; tabbar-ruler       
+  ;; tuareg             
+  ;; undo-tree          
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
