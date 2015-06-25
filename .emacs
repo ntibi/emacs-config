@@ -33,6 +33,9 @@
 (add-hook 'python-mode-hook 'hs-minor-mode)
 (add-hook 'tuareg-mode-hook 'hs-minor-mode)
 
+(global-set-key (kbd "C-c m") 'compile)
+
+
 (global-set-key (kbd "C-c c") 'comment-or-uncomment-region)
 (global-set-key [f5] 'hs-hide-all)
 (global-set-key [f6] 'hs-show-all)
@@ -102,7 +105,7 @@ highlight-parentheses-mode
 (global-set-key (kbd "C-j") 'tabbar-forward-tab)
 (global-set-key (kbd "M-n") 'tabbar-backward-group)
 (global-set-key (kbd "M-j") 'tabbar-forward-group)
-;(setq tabbar-use-images nil) ; fastah
+(setq tabbar-use-images nil) ; fastah
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
