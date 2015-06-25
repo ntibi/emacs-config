@@ -11,21 +11,25 @@
 (menu-bar-mode -1) ; No menu bar
 (kill-buffer "*scratch*") ; Remove scratch buffer
 
-(add-hook 'prog-mode-hook 'global-linum-mode) ; linum mode when programming
+(global-set-key (kbd "C-x l") 'global-linum-mode) ; linum mode when programming
 (setq linum-format "%4d \u2502 ") ; nb | text...
 
-;(load-theme 'find-a-cool-theme t)
+(add-hook 'prog-mode-hook 'line-number-mode)
+(add-hook 'prog-mode-hook 'column-number-mode)
+
+(load-theme 'monokai t)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;; use mouse
+
 (require 'mouse)
 (xterm-mouse-mode t)
 (global-set-key (kbd "<mouse-2>") 'nil)
 (global-set-key (kbd "<mouse-3>") 'nil)
 (global-set-key (kbd "<mouse-4>") 'scroll-down-line)
 (global-set-key (kbd "<mouse-5>") 'scroll-up-line)
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (add-hook 'c-mode-common-hook 'hs-minor-mode)
 (add-hook 'lisp-mode-hook 'hs-minor-mode)
@@ -57,6 +61,7 @@
    (quote
     ("18a33cdb764e4baf99b23dcd5abdbf1249670d412c6d3a8092ae1a7b211613d5" "90edd91338ebfdfcd52ecd4025f1c7f731aced4c9c49ed28cfbebb3a3654840b" "1db337246ebc9c083be0d728f8d20913a0f46edc0a00277746ba411c149d7fe5" default)))
  '(hl-paren-delay 0.01)
+ '(initial-scratch-message "")
  '(scroll-conservatively 1000)
  '(scroll-margin 10)
  '(tabbar-separator (quote (0.5)))
@@ -103,7 +108,7 @@
 (setq auto-save-list-file-prefix
       emacs-tmp-dir)
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;; 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
 
@@ -122,7 +127,7 @@
 (add-hook 'prog-mode-hook 'global-highlight-thing-mode) ;; Underline current word
 
 ;; underline current word after n secs
-(setq highlight-thing-delay-seconds 0.01)
+(setq highlight-thing-delay-seconds 0.1)
 
 (setq show-paren-delay 0)
 
@@ -178,25 +183,25 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;; installed packages
 
-  ;; caml               
-  ;; cyberpunk-theme    
-  ;; firecode-theme     
-  ;; highlight-paren... 
-  ;; highlight-thing    
-  ;; monokai-theme      
-  ;; mouse+             
-  ;; multiple-cursors   
-  ;; neotree            
-  ;; pastels-on-dark... 
-  ;; rainbow-delimiters 
-  ;; rainbow-identif... 
-  ;; rainbow-mode       
-  ;; strings            
-  ;; tab-group          
-  ;; tabbar             
-  ;; tabbar-ruler       
-  ;; tuareg             
-  ;; undo-tree          
+;; caml
+;; cyberpunk-theme
+;; firecode-theme
+;; highlight-paren...
+;; highlight-thing
+;; monokai-theme
+;; mouse+
+;; multiple-cursors
+;; neotree
+;; pastels-on-dark...
+;; rainbow-delimiters
+;; rainbow-identif...
+;; rainbow-mode
+;; strings
+;; tab-group
+;; tabbar
+;; tabbar-ruler
+;; tuareg
+;; undo-tree
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;
