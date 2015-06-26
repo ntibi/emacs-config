@@ -18,7 +18,8 @@
 (add-hook 'after-init-hook #'global-flycheck-mode)
 (add-hook 'python-mode-hook 'flymake-python-pyflakes-load)
 
-
+(require 'zone)
+(zone-when-idle 60)
 
 (add-hook 'prog-mode-hook 'global-linum-mode) ; linum mode when programming
 (setq linum-format "%4d \u2502 ") ; nb | text...
