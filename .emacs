@@ -236,7 +236,7 @@
  ;; If there is more than one, they won't work right.
  '(flycheck-error ((t (:inherit error :underline "red"))))
  '(flycheck-warning ((t (:inherit warning :background "yellow"))))
- '(hi-yellow ((t (:background "color-23"))))
+ '(hi-yellow ((t (:underline t))))
  '(region ((t (:background "color-240"))))
  '(tabbar-button ((t (:inherit tabbar-default :box (:line-width 1 :color "gray20") :underline nil))))
  '(tabbar-button-highlight ((t (:inherit tabbar-default))))
