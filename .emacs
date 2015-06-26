@@ -1,3 +1,7 @@
+;;; .emacs --- my .emacs
+;;; commentary:
+;;; code:
+
 (when (>= emacs-major-version 24)
   (require 'package)
   (package-initialize)
@@ -11,11 +15,16 @@
 (menu-bar-mode -1) ; No menu bar
 (kill-buffer "*scratch*") ; Remove scratch buffer
 
+(add-hook 'after-init-hook #'global-flycheck-mode)
+(add-hook 'python-mode-hook 'flymake-python-pyflakes-load)
+
+
+
 (add-hook 'prog-mode-hook 'global-linum-mode) ; linum mode when programming
 (setq linum-format "%4d \u2502 ") ; nb | text...
+(ac-config-default)
 
 ;(load-theme 'find-a-cool-theme t)
-
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;; use mouse
 (require 'mouse)
@@ -27,18 +36,13 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
-(add-hook 'c-mode-common-hook 'hs-minor-mode)
-(add-hook 'lisp-mode-hook 'hs-minor-mode)
-(add-hook 'emacs-lisp-mode-hook 'hs-minor-mode)
-(add-hook 'python-mode-hook 'hs-minor-mode)
-(add-hook 'tuareg-mode-hook 'hs-minor-mode)
-
 (global-set-key (kbd "C-c m") 'compile)
 
 (global-set-key (kbd "C-c c") 'comment-or-uncomment-region)
 
 
 ;; factorize functions {...}
+(add-hook 'prog-mode-hook 'hs-minor-mode)
 (global-set-key [f5] 'hs-hide-all)
 (global-set-key [f6] 'hs-show-all)
 (global-set-key (kbd "C-x x") 'hs-toggle-hiding)
@@ -84,7 +88,6 @@
  '(vc-annotate-very-old-color "#DC8CC3"))
 
 
-
 (global-set-key (kbd "C-x t") 'tuareg-mode)
 
 
@@ -122,7 +125,7 @@
 (add-hook 'prog-mode-hook 'global-highlight-thing-mode) ;; Underline current word
 
 ;; underline current word after n secs
-(setq highlight-thing-delay-seconds 0.01)
+(setq highlight-thing-delay-seconds 0.1)
 
 (setq show-paren-delay 0)
 
@@ -178,16 +181,30 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;; installed packages
 
+  ;; auto-complete      
   ;; caml               
   ;; cyberpunk-theme    
+  ;; dash               
+  ;; epl                
   ;; firecode-theme     
+  ;; flycheck           
+  ;; flycheck-clangc... 
+  ;; flycheck-ocaml     
+  ;; flymake-easy       
+  ;; flymake-python-... 
+  ;; flymake-shell      
   ;; highlight-paren... 
   ;; highlight-thing    
+  ;; let-alist          
+  ;; merlin             
   ;; monokai-theme      
   ;; mouse+             
   ;; multiple-cursors   
   ;; neotree            
   ;; pastels-on-dark... 
+  ;; pkg-info           
+  ;; popup              
+  ;; popup-complete     
   ;; rainbow-delimiters 
   ;; rainbow-identif... 
   ;; rainbow-mode       
@@ -197,7 +214,7 @@
   ;; tabbar-ruler       
   ;; tuareg             
   ;; undo-tree          
-
+  ;; zenburn-theme      
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -213,7 +230,9 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(hi-yellow ((t (:underline t))))
+ '(flycheck-error ((t (:inherit error :underline "red"))))
+ '(flycheck-warning ((t (:inherit warning :background "yellow"))))
+ '(hi-yellow ((t (:background "color-23"))))
  '(region ((t (:background "color-240"))))
  '(tabbar-button ((t (:inherit tabbar-default :box (:line-width 1 :color "gray20") :underline nil))))
  '(tabbar-button-highlight ((t (:inherit tabbar-default))))
