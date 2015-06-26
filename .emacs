@@ -15,6 +15,9 @@
 (menu-bar-mode -1) ; No menu bar
 (kill-buffer "*scratch*") ; Remove scratch buffer
 
+(column-number-mode t)
+(line-number-mode t)
+
 (add-hook 'after-init-hook #'global-flycheck-mode)
 (add-hook 'python-mode-hook 'flymake-python-pyflakes-load)
 
@@ -25,7 +28,7 @@
 (setq linum-format "%4d \u2502 ") ; nb | text...
 (ac-config-default)
 
-;(load-theme 'find-a-cool-theme t)
+(load-theme 'monokai t)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;; use mouse
 (require 'mouse)
