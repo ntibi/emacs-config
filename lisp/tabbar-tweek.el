@@ -1,4 +1,4 @@
-;; by gfanton 
+;; by gfanton
 
 ;; Tabbar
 (require 'tabbar)
@@ -38,20 +38,20 @@
  '(tabbar-separator (quote (0.5))))
 ;; adding spaces
 (defun tabbar-buffer-tab-label (tab)
-    "Return a label for TAB.
+      "Return a label for TAB.
 That is, a string used to represent it on the tab bar."
-    (let ((label  (if tabbar--buffer-show-groups
-		      (format "[%s]  " (tabbar-tab-tabset tab))
-		    (format "%s  " (tabbar-tab-value tab)))))
-      ;; Unless the tab bar auto scrolls to keep the selected tab
-      ;; visible, shorten the tab label to keep as many tabs as possible
-      ;; in the visible area of the tab bar.
-      (if tabbar-auto-scroll-flag
-	  label
-	(tabbar-shorten
-	 label (max 1 (/ (window-width)
-			 (length (tabbar-view
-				  (tabbar-current-tabset)))))))))
+      (let ((label  (if tabbar--buffer-show-groups
+			(format " [%s]  " (tabbar-tab-tabset tab))
+		      (format " %s  " (tabbar-tab-value tab)))))
+	;; Unless the tab bar auto scrolls to keep the selected tab
+	;; visible, shorten the tab label to keep as many tabs as possible
+	;; in the visible area of the tab bar.
+	(if tabbar-auto-scroll-flag
+	    label
+	  (tabbar-shorten
+	   label (max 1 (/ (window-width)
+			   (length (tabbar-view
+				    (tabbar-current-tabset)))))))))
 
 (tabbar-mode 1)
 (provide 'tabbar-tweek)

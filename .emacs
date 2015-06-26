@@ -64,6 +64,7 @@
  '(custom-safe-themes
    (quote
     ("18a33cdb764e4baf99b23dcd5abdbf1249670d412c6d3a8092ae1a7b211613d5" "90edd91338ebfdfcd52ecd4025f1c7f731aced4c9c49ed28cfbebb3a3654840b" "1db337246ebc9c083be0d728f8d20913a0f46edc0a00277746ba411c149d7fe5" default)))
+ '(highlight-thing-what-thing (quote word))
  '(hl-paren-delay 0.01)
  '(scroll-conservatively 1000)
  '(scroll-margin 10)
@@ -126,10 +127,10 @@
 (add-hook 'prog-mode-hook 'rainbow-identifiers-mode) ;; different variables colors
 (add-hook 'prog-mode-hook 'highlight-parentheses-mode) ;; highlight surrounding parentheses
 (add-hook 'prog-mode-hook 'rainbow-delimiters-mode) ;;  parentheses color according to depth
-(add-hook 'prog-mode-hook 'global-highlight-thing-mode) ;; Underline current word
 
+;(add-hook 'prog-mode-hook 'global-highlight-thing-mode) ;; Underline current word
 ;; underline current word after n secs
-(setq highlight-thing-delay-seconds 0.1)
+;(setq highlight-thing-delay-seconds 0.1)
 
 (setq show-paren-delay 0)
 
@@ -240,4 +241,5 @@
  '(region ((t (:background "color-240"))))
  '(tabbar-button ((t (:inherit tabbar-default :box (:line-width 1 :color "gray20") :underline nil))))
  '(tabbar-button-highlight ((t (:inherit tabbar-default))))
- '(tabbar-default ((t (:inherit variable-pitch :background "gray20" :foreground "gray20" :box (:line-width 1 :color "gray20") :underline nil :height 0.8)))))
+ '(tabbar-default ((t (:inherit variable-pitch :background "gray20" :foreground "gray20" :box (:line-width 1 :color "gray20") :underline nil :height 1))))
+ '(tabbar-separator ((t (:inherit tabbar-default :background "gray20")))))
