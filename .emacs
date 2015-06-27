@@ -21,8 +21,9 @@
 (add-hook 'python-mode-hook 'flymake-python-pyflakes-load)
 
 (add-hook 'prog-mode-hook 'global-linum-mode) ; linum mode when programming
-(global-set-key (kbd "C-x l") 'global-linum-mode)
 (setq linum-format "%4d \u2502 ") ; nb | text...
+
+
 (ac-config-default)
 
 (load-theme 'monokai t)
@@ -207,6 +208,7 @@
   ;; highlight-paren... 
   ;; highlight-thing    
   ;; let-alist          
+  ;; linum-relative     
   ;; merlin             
   ;; monokai-theme      
   ;; mouse+             
@@ -227,7 +229,6 @@
   ;; undo-tree          
   ;; zenburn-theme      
 
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
@@ -240,7 +241,7 @@
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
+ ;; Your init file should contain only 
  ;; If there is more than one, they won't work right.
  '(flycheck-error ((t (:inherit error :underline "red"))))
  '(flycheck-warning ((t (:inherit warning :background "yellow"))))
