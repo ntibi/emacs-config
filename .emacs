@@ -150,6 +150,7 @@
 
 (global-set-key (kbd "C-x <left>") 'tabbar-backward-tab)
 (global-set-key (kbd "C-x <right>") 'tabbar-forward-tab)
+(global-set-key (kbd "C-x p") 'tabbar-forward-tab)
 (global-set-key (kbd "C-x <down>") 'tabbar-backward-group)
 (global-set-key (kbd "C-x <up>") 'tabbar-forward-group)
 (setq tabbar-use-images nil) ; fastah
