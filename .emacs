@@ -13,7 +13,6 @@
 (add-to-list 'load-path "~/.emacs.d/lisp/")
 
 (menu-bar-mode -1) ; No menu bar
-(kill-buffer "*scratch*") ; Remove scratch buffer
 
 (column-number-mode t)
 (line-number-mode t)
@@ -21,10 +20,8 @@
 (add-hook 'after-init-hook #'global-flycheck-mode)
 (add-hook 'python-mode-hook 'flymake-python-pyflakes-load)
 
-(require 'zone)
-(zone-when-idle 60)
-
 (add-hook 'prog-mode-hook 'global-linum-mode) ; linum mode when programming
+(global-set-key (kbd "C-x l") 'global-linum-mode)
 (setq linum-format "%4d \u2502 ") ; nb | text...
 (ac-config-default)
 
@@ -163,10 +160,18 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;; Multiple cursors
 
 (require 'multiple-cursors)
-(global-set-key (kbd "<C-down-mouse-3>") 'mc/add-cursor-on-click)
+(global-set-key (kbd "<C-down-mouse-1>") 'mc/add-cursor-on-click)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;; zone
+
+(require 'zone)
+(zone-when-idle 60)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;; this is not vi(m)
@@ -185,6 +190,7 @@
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;; installed packages
+
 
   ;; auto-complete      
   ;; caml               
@@ -220,6 +226,7 @@
   ;; tuareg             
   ;; undo-tree          
   ;; zenburn-theme      
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
