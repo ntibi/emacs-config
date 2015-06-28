@@ -10,48 +10,25 @@
   (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/") t)
   )
 
-(add-to-list 'load-path "~/.emacs.d/lisp/")
+(add-to-list 'load-path "~/.emacs.d/lisp/") ;; config files path
+(add-to-list 'load-path "~/.emacs.d/lisp/42/") ;; 42 files path
 
-(menu-bar-mode -1) ; No menu bar
 
-(column-number-mode t)
-(line-number-mode t)
+;; load 42 files
+(load "list.el")
+(load "string.el")
+(load "comments.el")
+(load "header.el")
+
+;; my config on vanilla emacs
+(load "myconfig.el")
 
 (add-hook 'after-init-hook #'global-flycheck-mode)
 (add-hook 'python-mode-hook 'flymake-python-pyflakes-load)
 
-(add-hook 'prog-mode-hook 'global-linum-mode) ; linum mode when programming
-(setq linum-format "%4d \u2502 ") ; nb | text...
-
-
 (ac-config-default)
 
 (load-theme 'monokai t)
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;; use mouse
-(require 'mouse)
-(xterm-mouse-mode t)
-(global-set-key (kbd "<mouse-2>") 'nil)
-(global-set-key (kbd "<mouse-3>") 'nil)
-(global-set-key (kbd "<mouse-4>") 'scroll-down-line)
-(global-set-key (kbd "<mouse-5>") 'scroll-up-line)
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-
-(global-set-key (kbd "C-c m") 'compile)
-
-(global-set-key (kbd "C-c c") 'comment-or-uncomment-region)
-
-
-;; factorize functions {...}
-(add-hook 'prog-mode-hook 'hs-minor-mode)
-(global-set-key [f5] 'hs-hide-all)
-(global-set-key [f6] 'hs-show-all)
-(global-set-key (kbd "C-x x") 'hs-toggle-hiding)
-
-(global-set-key (kbd "C-g") 'keyboard-escape-quit)
-(global-set-key (kbd "C-x g") 'goto-line)
-
 
 ;; preventive scroll
 (custom-set-variables
@@ -64,8 +41,6 @@
     ("18a33cdb764e4baf99b23dcd5abdbf1249670d412c6d3a8092ae1a7b211613d5" "90edd91338ebfdfcd52ecd4025f1c7f731aced4c9c49ed28cfbebb3a3654840b" "1db337246ebc9c083be0d728f8d20913a0f46edc0a00277746ba411c149d7fe5" default)))
  '(highlight-thing-what-thing (quote word))
  '(hl-paren-delay 0.01)
- '(scroll-conservatively 1000)
- '(scroll-margin 10)
  '(tabbar-separator (quote (0.5)))
  '(vc-annotate-background "#3b3b3b")
  '(vc-annotate-color-map
@@ -91,9 +66,6 @@
  '(vc-annotate-very-old-color "#DC8CC3"))
 
 
-(global-set-key (kbd "C-x t") 'tuareg-mode)
-
-
 ;; cool neotree
 (global-set-key (kbd "C-x a a") 'neotree-toggle)
 
@@ -101,13 +73,6 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;; Backup dir
 
-(defconst emacs-tmp-dir (format "%s/%s%s/" temporary-file-directory "emacs" (user-uid)))
-(setq backup-directory-alist
-      `((".*" . ,emacs-tmp-dir)))
-(setq auto-save-file-name-transforms
-      `((".*" ,emacs-tmp-dir t)))
-(setq auto-save-list-file-prefix
-      emacs-tmp-dir)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;; 
 
@@ -126,10 +91,6 @@
 (add-hook 'prog-mode-hook 'highlight-parentheses-mode) ;; highlight surrounding parentheses
 (add-hook 'prog-mode-hook 'rainbow-delimiters-mode) ;;  parentheses color according to depth
 
-;(add-hook 'prog-mode-hook 'global-highlight-thing-mode) ;; Underline current word
-;; underline current word after n secs
-;(setq highlight-thing-delay-seconds 0.1)
-
 (setq show-paren-delay 0)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;; undo tree
@@ -143,9 +104,9 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;; tabbar
 (require 'tabbar)
+(require 'tab-group)
 
 (tabbar-mode t)
-
 (load "tabbar-tweek.el") ; nice config
 
 (global-set-key (kbd "C-x <left>") 'tabbar-backward-tab)
@@ -195,7 +156,6 @@
 
 
   ;; auto-complete      
-  ;; caml               
   ;; cyberpunk-theme    
   ;; dash               
   ;; epl                
@@ -225,8 +185,6 @@
   ;; strings            
   ;; tab-group          
   ;; tabbar             
-  ;; tabbar-ruler       
-  ;; tuareg             
   ;; undo-tree          
   ;; zenburn-theme      
 
