@@ -15,6 +15,7 @@
 
 
 ;; load 42 files
+(load "42config.el")
 (load "list.el")
 (load "string.el")
 (load "comments.el")

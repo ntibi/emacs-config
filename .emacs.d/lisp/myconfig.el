@@ -3,7 +3,8 @@
 ;;; code:
 
 (menu-bar-mode -1) ;; No menu bar
-(setq initial-scratch-message ";; Scratch buffer\n\n\n")
+(setq inhibit-startup-message t) ;; no startup message
+(setq initial-scratch-message ";; Scratch buffer\n") ;; Scratch buffer message
 
 ;; (line, column)
 (column-number-mode t)
