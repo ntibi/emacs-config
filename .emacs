@@ -27,17 +27,21 @@
 (add-hook 'after-init-hook #'global-flycheck-mode)
 (add-hook 'python-mode-hook 'flymake-python-pyflakes-load)
 
-(ac-config-default)
-(setq ac-use-fuzzy t)
-
 (load-theme 'monokai t)
+
+
+;; company auto complete
+(add-hook 'after-init-hook 'global-company-mode)
+(global-set-key (kbd "M-/") 'company-complete)
+(global-set-key (kbd "M-.") 'company-show-doc-buffer)
+;;
+
 
 ;; cool neotree
 (require 'neotree)
 (global-set-key (kbd "C-x a a") 'neotree-toggle)
 
-
-;; Rainbow/Highlight stuff
+;; rainbow/highlight stuff
 (require 'rainbow-identifiers)
 (require 'rainbow-mode)
 (require 'rainbow-delimiters)
@@ -136,41 +140,49 @@
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;; installed packages
-;; auto-complete
-;; caml
-;; cyberpunk-theme
-;; dash
-;; epl
-;; flycheck
-;; flycheck-clangc...
-;; flycheck-ocaml
-;; flycheck-pos-tip
-;; flycheck-tip
-;; flymake-easy
-;; flymake-python-...
-;; flymake-shell
-;; fuzzy
-;; highlight-paren...
-;; highlight-thing
-;; let-alist
-;; linum-relative
-;; monokai-theme
-;; mouse+
-;; multiple-cursors
-;; neotree
-;; pastels-on-dark...
-;; pkg-info
-;; popup
-;; popup-complete
-;; rainbow-delimiters
-;; rainbow-identif...
-;; rainbow-mode
-;; strings
-;; tab-group
-;; tabbar
-;; tuareg
-;; undo-tree
-;; zenburn-theme
+
+
+  ;; caml
+  ;; company
+  ;; cyberpunk-theme
+  ;; dash
+  ;; elpy
+  ;; epl
+  ;; find-file-in-pr...
+  ;; flycheck
+  ;; flycheck-clangc...
+  ;; flycheck-ocaml
+  ;; flycheck-pos-tip
+  ;; flycheck-tip
+  ;; flymake-easy
+  ;; flymake-python-...
+  ;; flymake-shell
+  ;; fuzzy
+  ;; highlight-inden...
+  ;; highlight-paren...
+  ;; highlight-thing
+  ;; let-alist
+  ;; linum-relative
+  ;; merlin
+  ;; monokai-theme
+  ;; mouse+
+  ;; multiple-cursors
+  ;; neotree
+  ;; pastels-on-dark...
+  ;; pkg-info
+  ;; popup
+  ;; pyvenv
+  ;; rainbow-delimiters
+  ;; rainbow-identif...
+  ;; rainbow-mode
+  ;; strings
+  ;; tab-group
+  ;; tabbar
+  ;; tuareg
+  ;; undo-tree
+  ;; yasnippet
+  ;; zenburn-theme
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
