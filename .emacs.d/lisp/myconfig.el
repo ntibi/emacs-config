@@ -24,21 +24,32 @@
 
 
 ;; linum mode
+(require 'linum)
+
 (add-hook 'prog-mode-hook 'global-linum-mode)
 (setq linum-format "%4d \u2502 ")
 ;;
 
 
 ;; factorize functions {...}
+(require 'hideshow)
+
 (add-hook 'prog-mode-hook 'hs-minor-mode)
 (global-set-key [f5] 'hs-hide-all)
 (global-set-key [f6] 'hs-show-all)
 (global-set-key (kbd "C-x x") 'hs-toggle-hiding)
 ;;
 
+;; show paren
+(require 'paren)
+
+(show-paren-mode 1)
+(setq show-paren-delay 0)
+;;
 
 ;; use mouse
 (require 'mouse)
+
 (xterm-mouse-mode t)
 (global-set-key (kbd "<mouse-2>") 'nil)
 (global-set-key (kbd "<mouse-3>") 'nil)
