@@ -25,7 +25,6 @@
 (load "myconfig.el")
 
 (add-hook 'after-init-hook #'global-flycheck-mode)
-;(add-hook 'python-mode-hook 'flymake-python-pyflakes-load)
 
 (load-theme 'monokai t)
 
@@ -36,6 +35,8 @@
 (add-hook 'python-mode-hook 'anaconda-mode)
 (global-set-key (kbd "M-/") 'company-complete)
 (global-set-key (kbd "M-.") 'company-show-doc-buffer)
+(global-set-key (kbd "M-,") 'company-show-location)
+(add-to-list 'completion-styles 'initials t)
 ;;
 
 
