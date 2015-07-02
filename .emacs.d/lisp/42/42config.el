@@ -1,4 +1,4 @@
-;; 42-C default config
+;; 42 C default config
 
 
 (setq-default font-lock-global-modes nil)

@@ -58,7 +58,11 @@
 ;;
 
 
-;; set backup dir (/tmp/emacs{uid})
+(require 'zone)							; kind of screen saver
+(zone-when-idle 60)						; after 60s
+
+
+; set backup dir (/tmp/emacs{uid})
 (defconst emacs-tmp-dir (format "%s/%s%s/" temporary-file-directory "emacs" (user-uid)))
 (setq backup-directory-alist
       `((".*" . ,emacs-tmp-dir)))
@@ -66,7 +70,16 @@
       `((".*" ,emacs-tmp-dir t)))
 (setq auto-save-list-file-prefix
       emacs-tmp-dir)
-;;
+
+
+; this is not vi(m)
+(defconst wq "You mean C-x C-c ?")
+(defconst qq "You mean C-x C-c ?")
+(defconst w "You mean C-x C-s ?")
+(defconst q! "You mean C-x C-c ?")
+(defconst !q "You mean C-x C-c ?")
+(defconst wq! "You mean C-x C-c ?")
+(defconst qw! "You mean C-x C-c ?")
 
 
 (provide 'myconfig)
