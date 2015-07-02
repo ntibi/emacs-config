@@ -40,12 +40,12 @@
 (global-set-key (kbd "C-x x") 'hs-toggle-hiding)
 ;;
 
-;; show paren
-(require 'paren)
 
-(show-paren-mode 1)
-(setq show-paren-delay 0)
-;;
+
+(require 'paren)						; show matching parenthese
+;(show-paren-mode 1)						; ON
+(setq show-paren-delay 0)				; delay
+
 
 ;; use mouse
 (require 'mouse)

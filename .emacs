@@ -10,90 +10,84 @@
   (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/") t)
   )
 
-(add-to-list 'load-path "~/.emacs.d/lisp/") ;; config files path
+(add-to-list 'load-path "~/.emacs.d/lisp/")	   ;; config files path
 (add-to-list 'load-path "~/.emacs.d/lisp/42/") ;; 42 files path
 
+(load "myconfig.el")					; vanilla config
 
 ;; load 42 files
-(load "42config.el")
-(load "list.el")
-(load "string.el")
-(load "comments.el")
-(load "header.el")
+(load "42config.el")					; C-style indentation
+(load "header.el")						; 42 header
 
-;; my config on vanilla emacs
-(load "myconfig.el")
+;(load "list.el")						; list functions
+;(load "string.el")						; string function
+;(load "comments.el")					; comments functions
 
-(add-hook 'after-init-hook #'global-flycheck-mode)
-
-(load-theme 'monokai t)
-
-;; company auto complete
-(require 'company)
-(add-hook 'after-init-hook 'global-company-mode)
-(add-to-list 'company-backends 'company-anaconda)
-(add-hook 'python-mode-hook 'anaconda-mode)
-(global-set-key (kbd "M-/") 'company-complete)
-(global-set-key (kbd "M-.") 'company-show-doc-buffer)
-(global-set-key (kbd "M-,") 'company-show-location)
-(add-to-list 'completion-styles 'initials t)
-;;
+(load-theme 'monokai t)					; default theme
 
 
-;; cool neotree
-(require 'neotree)
-(global-set-key (kbd "C-x a a") 'neotree-toggle)
 
-;; rainbow/highlight stuff
-(require 'rainbow-identifiers)
-(require 'rainbow-mode)
-(require 'rainbow-delimiters)
-(require 'highlight-parentheses)
-(require 'highlight-thing)
-
-(add-hook 'prog-mode-hook 'rainbow-mode) ;; Colorize color hexcodes
-(add-hook 'prog-mode-hook 'rainbow-identifiers-mode) ;; different variables colors
-(add-hook 'prog-mode-hook 'highlight-parentheses-mode) ;; highlight surrounding parentheses
-(add-hook 'prog-mode-hook 'rainbow-delimiters-mode) ;;  parentheses color according to depth
-;;
-
-;; undo tree
-(require 'undo-tree)
-(global-undo-tree-mode)
-;;
+(require 'flycheck)								   ; flycheck
+(add-hook 'after-init-hook #'global-flycheck-mode) ; flycheck ON
 
 
-;; tabbar
-(require 'tabbar)
-(require 'tab-group)
+(require 'company)						; company auto complete
+(add-hook 'after-init-hook 'global-company-mode) ; company auto-compete ON
+(add-to-list 'company-backends 'company-anaconda) ; anaconda mode for python ac
+(add-hook 'python-mode-hook 'anaconda-mode)		  ; python auto complete
+(global-set-key (kbd "M-/") 'company-complete)	  ; launch ac
+(global-set-key (kbd "M-.") 'company-show-doc-buffer) ;show doc
+(global-set-key (kbd "M-,") 'company-show-location)	  ; show source
+(add-to-list 'completion-styles 'initials t)		  ; initials auto complete
 
-(tabbar-mode t)
-(load "tabbar-tweek.el") ; nice config
+
+
+(require 'rainbow-identifiers)			; different variables color
+(require 'rainbow-mode)					; colorize hex codes
+(require 'rainbow-delimiters)			; parentheses color according to depth
+(require 'highlight-parentheses)		; highlight surrounding parentheses
+(require 'highlight-thing)				; highlight current line/word
+
+(add-hook 'prog-mode-hook 'rainbow-mode)
+(add-hook 'prog-mode-hook 'rainbow-identifiers-mode)
+(add-hook 'prog-mode-hook 'highlight-parentheses-mode)
+(add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
+
+
+
+(require 'neotree)						; neo tree
+(global-set-key (kbd "C-x a a") 'neotree-toggle) ; open neo tree
+
+
+(require 'undo-tree)					; undo tree
+(global-undo-tree-mode)					; set undo-tree as default undo (C-x u)
+
+
+
+(require 'tabbar)						; tabbar mode
+(require 'tab-group)					; organize tabs in groups
+
+(tabbar-mode t)							; ON
+(load "tabbar-tweek.el")				; nice tabbar config
 
 (global-set-key (kbd "C-x <left>") 'tabbar-backward-tab)
 (global-set-key (kbd "C-x <right>") 'tabbar-forward-tab)
 (global-set-key (kbd "C-x p") 'tabbar-forward-tab)
 (global-set-key (kbd "C-x <down>") 'tabbar-backward-group)
 (global-set-key (kbd "C-x <up>") 'tabbar-forward-group)
-(setq tabbar-use-images nil) ; fastah
-;;
+(setq tabbar-use-images nil)			; faster ?
 
 
 
-;; Multiple cursors
-(require 'multiple-cursors)
-(global-set-key (kbd "<C-down-mouse-1>") 'mc/add-cursor-on-click)
-;;
+(require 'multiple-cursors)				; multiple cursors
+(global-set-key (kbd "<C-down-mouse-1>") 'mc/add-cursor-on-click) ; ctrl clic to add cursor
 
 
-
-;; zone
-(require 'zone)
-(zone-when-idle 60)
-;;
+(require 'zone)							; kind of screen saver
+(zone-when-idle 60)						; after 60s
 
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;; this is not vi(m)
+; this is not vi(m)
 (defconst wq "You mean C-x C-c ?")
 (defconst qq "You mean C-x C-c ?")
 (defconst w "You mean C-x C-s ?")
@@ -101,8 +95,6 @@
 (defconst !q "You mean C-x C-c ?")
 (defconst wq! "You mean C-x C-c ?")
 (defconst qw! "You mean C-x C-c ?")
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
 
 
 (custom-set-variables
