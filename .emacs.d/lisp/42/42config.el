@@ -1,5 +1,6 @@
-;; 42 C default config
-
+;;; 42config.el --- 42 C programming default config
+;;; commentary:
+;;; code:
 
 (setq-default font-lock-global-modes nil)
 (setq-default tab-width 4)
