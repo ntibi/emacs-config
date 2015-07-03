@@ -19,14 +19,16 @@
 (setq scroll-conservatively 1000)		; keep prescrolling ?
 
 
-(global-set-key (kbd "M-<down>") 'enlarge-window)
-(global-set-key (kbd "M-<up>") 'shrink-window)
-(global-set-key (kbd "M-<left>") 'enlarge-window-horizontally)
-(global-set-key (kbd "M-<right>") 'shrink-window-horizontally)
+;; resize hotkeys
+(global-set-key (kbd "C-x }") 'enlarge-window)
+(global-set-key (kbd "C-x {") 'shrink-window)
+(global-set-key (kbd "C-x ]") 'enlarge-window-horizontally)
+(global-set-key (kbd "C-x [") 'shrink-window-horizontally)
 
 (require 'linum)						; get line number
 (add-hook 'prog-mode-hook 'global-linum-mode)
 (setq linum-format "%4d \u2502 ")
+(global-set-key (kbd "C-x l") 'global-linum-mode) ; toggle line number
 
 
 (require 'hideshow)						; factorize functions {...}

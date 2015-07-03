@@ -27,7 +27,6 @@
 ;(load "comments.el")					; comments functions
 
 
-
 ;;; auto-set config variables:
 
 (custom-set-variables
