@@ -1,4 +1,4 @@
-;;; myconfig.el --- vanilla emacs config
+77;10103;0c;;; myconfig.el --- vanilla emacs config
 ;;; commentary:
 ;;; code:
 
@@ -20,10 +20,10 @@
 
 
 ;; resize hotkeys
-(global-set-key (kbd "C-x }") 'enlarge-window)
-(global-set-key (kbd "C-x {") 'shrink-window)
-(global-set-key (kbd "C-x ]") 'enlarge-window-horizontally)
-(global-set-key (kbd "C-x [") 'shrink-window-horizontally)
+(global-set-key (kbd "M-<down>") 'enlarge-window)
+(global-set-key (kbd "M-<up>") 'shrink-window)
+(global-set-key (kbd "M-<right>") 'enlarge-window-horizontally)
+(global-set-key (kbd "M-<left>") 'shrink-window-horizontally)
 
 (require 'linum)						; get line number
 (add-hook 'prog-mode-hook 'global-linum-mode)
