@@ -13,21 +13,21 @@
 (add-to-list 'load-path "~/.emacs.d/lisp/")	   ;; my config files path
 (add-to-list 'load-path "~/.emacs.d/lisp/42/") ;; 42 config files path
 
-; load config files
+;; load config files
 (load "myconfig.el")					; vanilla config
 (load "packages-config.el")				; packages config
 
-; load 42 files
+;; load 42 files
 (load "42config.el")					; C-style indentation
 (load "header.el")						; 42 header
 
-; additional files
+;; additional files
 ;(load "list.el")						; list functions
 ;(load "string.el")						; string function
 ;(load "comments.el")					; comments functions
 
 
-;;; auto-set config variables:
+;; auto-set config variables:
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -39,6 +39,7 @@
 	("18a33cdb764e4baf99b23dcd5abdbf1249670d412c6d3a8092ae1a7b211613d5" "90edd91338ebfdfcd52ecd4025f1c7f731aced4c9c49ed28cfbebb3a3654840b" "1db337246ebc9c083be0d728f8d20913a0f46edc0a00277746ba411c149d7fe5" default)))
  '(highlight-thing-what-thing (quote word))
  '(hl-paren-delay 0.01)
+ '(rainbow-identifiers-face-count 16)
  '(tabbar-separator (quote (0.5)))
  '(vc-annotate-background "#3b3b3b")
  '(vc-annotate-color-map
