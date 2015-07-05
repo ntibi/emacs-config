@@ -1,7 +1,7 @@
 ;;; .emacs --- my .emacs
 ;;; commentary:
 ;;; code:
-
+test
 (when (>= emacs-major-version 24)
   (require 'package)
   (package-initialize)
