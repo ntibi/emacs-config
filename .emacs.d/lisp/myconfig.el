@@ -1,4 +1,4 @@
-77;10103;0c;;; myconfig.el --- vanilla emacs config
+;;; myconfig.el --- vanilla emacs config
 ;;; commentary:
 ;;; code:
 
@@ -9,6 +9,9 @@
 (column-number-mode t)					; print column number
 (line-number-mode t)					; print line number
 
+(display-time-mode 1)					; display time
+(setq display-time-24hr-format t)
+(setq display-time-day-and-date t)
 
 (global-set-key (kbd "C-x g") 'goto-line)
 (global-set-key (kbd "C-c m") 'compile)
@@ -18,6 +21,8 @@
 (setq scroll-margin 10)					; pre scroll
 (setq scroll-conservatively 1000)		; keep prescrolling ?
 
+(global-set-key (kbd "C-x w") 'whitespace-mode) ; 'cat -e' like
+(global-set-key (kbd "C-x c") 'whitespace-cleanup-region) ; remove trailing whitespaces in region
 
 ;; resize hotkeys
 (global-set-key (kbd "M-<down>") 'enlarge-window)
@@ -56,8 +61,7 @@
 (require 'zone)							; kind of screen saver
 (zone-when-idle 60)						; after 60s
 
-
-; set backup dir (/tmp/emacs{uid})
+;; set backup dir (/tmp/emacs{uid})
 (defconst emacs-tmp-dir (format "%s/%s%s/" temporary-file-directory "emacs" (user-uid)))
 (setq backup-directory-alist
       `((".*" . ,emacs-tmp-dir)))

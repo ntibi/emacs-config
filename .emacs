@@ -10,18 +10,16 @@
   (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/") t)
   )
 
-
-(add-to-list 'load-path "~/.emacs.d/lisp/42/") ;; 42 config files path
-;; load 42 files
-(load "42config.el")					; C-style indentation
-(load "header.el")						; 42 header
-
-
 (add-to-list 'load-path "~/.emacs.d/lisp/")	   ;; my config files path
+(add-to-list 'load-path "~/.emacs.d/lisp/42/") ;; 42 config files path
+
 ;; load config files
 (load "myconfig.el")					; vanilla config
 (load "packages-config.el")				; packages config
 
+;; load 42 files
+(load "42config.el")					; C-style indentation
+(load "header.el")						; 42 header
 
 ;; additional files
 ;(load "list.el")						; list functions
