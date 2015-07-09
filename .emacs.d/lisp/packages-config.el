@@ -5,7 +5,6 @@
 
 ; installed packages
   ;; auto-complete
-  ;; caml
   ;; company
   ;; cyberpunk-theme
   ;; dash
@@ -38,7 +37,6 @@
   ;; tab-group
   ;; tabbar
   ;; tabbar-ruler
-  ;; tuareg
   ;; undo-tree
   ;; yasnippet
   ;; zenburn-theme
@@ -48,7 +46,8 @@
 
 (require 'flycheck)								   ; flycheck
 (add-hook 'after-init-hook #'global-flycheck-mode) ; flycheck ON
-
+(set 'flycheck-clang-include-path (list "./" "./includes/" "../includes/"))
+;; (add-hook 'c-mode-common-hook  (lambda () DO STUFF ))
 
 (require 'company)						; company auto complete
 (add-hook 'after-init-hook 'global-company-mode) ; company auto-compete ON
@@ -59,6 +58,13 @@
 (global-set-key (kbd "M-,") 'company-show-location)	  ; show source
 (add-to-list 'completion-styles 'initials t)		  ; initials auto complete
 (add-to-list 'company-backends 'company-c-headers)	  ; headers auto completion
+
+(require 'company-clang)
+(set 'company-clang-arguments (list (concat "-I" (file-name-directory load-file-name) "./") (concat "-I" (file-name-directory load-file-name) "/includes/") (concat "-I" (file-name-directory load-file-name) "../includes/")))
+
+
+(require 'company-c-headers)
+(set 'company-c-headers-path-user (list "./" "./includes/" "../includes/"))
 
 
 (require 'yasnippet)							 ; yet another snippet
@@ -72,7 +78,6 @@
 	(append (if (consp backend) backend (list backend))
 			'(:with company-yasnippet))))
 (setq company-backends (mapcar #'company-mode/backend-with-yas company-backends))
-
 
 
 (require 'highlight-thing)				; highlight current line/word

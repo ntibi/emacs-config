@@ -40,6 +40,10 @@
  '(highlight-thing-what-thing (quote word))
  '(hl-paren-delay 0.01)
  '(rainbow-identifiers-face-count 16)
+ '(safe-local-variable-values
+   (quote
+	((company-clang-arguments "-I/nfs/zfs-student-5/users/2014/ntibi/.brew/Cellar/boost/1.58.0/include/")
+	 (company-clang-arguments "-I/nfs/zfs-student-5/users/2014/ntibi/.brew/include/boost"))))
  '(tabbar-separator (quote (0.5)))
  '(vc-annotate-background "#3b3b3b")
  '(vc-annotate-color-map

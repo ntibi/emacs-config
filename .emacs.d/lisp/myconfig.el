@@ -58,8 +58,8 @@
 
 
 
-(require 'zone)							; kind of screen saver
-(zone-when-idle 60)						; after 60s
+;; (require 'zone)							; kind of screen saver
+;; (zone-when-idle 60)						; after 60s
 
 ;; set backup dir (/tmp/emacs{uid})
 (defconst emacs-tmp-dir (format "%s/%s%s/" temporary-file-directory "emacs" (user-uid)))
