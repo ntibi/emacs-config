@@ -4,67 +4,106 @@
 
 
 ; installed packages
-  ;; auto-complete
+  ;; anaconda-mode
   ;; company
+  ;; company-anaconda
+  ;; company-c-headers
+  ;; company-irony
   ;; cyberpunk-theme
   ;; dash
+  ;; elpy
   ;; epl
-  ;; firecode-theme
+  ;; f
+  ;; find-file-in-pr
   ;; flycheck
-  ;; flycheck-clangc...
+  ;; flycheck-clangc
+  ;; flycheck-irony
   ;; flycheck-ocaml
+  ;; flycheck-pos-tip
+  ;; flycheck-tip
   ;; flymake-easy
-  ;; flymake-python-...
+  ;; flymake-python
   ;; flymake-shell
-  ;; highlight-paren...
+  ;; function-args
+  ;; fuzzy
+  ;; highlight-inden
+  ;; highlight-paren
   ;; highlight-thing
+  ;; irony
+  ;; json-rpc
   ;; let-alist
   ;; linum-relative
   ;; merlin
-  ;; molokai-theme
   ;; monokai-theme
-  ;; mouse+
+  ;; mouse
   ;; multiple-cursors
   ;; neotree
-  ;; pastels-on-dark...
+  ;; pastels-on-dark
   ;; pkg-info
   ;; popup
-  ;; popup-complete
+  ;; pyvenv
   ;; rainbow-delimiters
-  ;; rainbow-identif...
+  ;; rainbow-identif
   ;; rainbow-mode
+  ;; s
   ;; strings
+  ;; swiper
   ;; tab-group
   ;; tabbar
-  ;; tabbar-ruler
   ;; undo-tree
   ;; yasnippet
   ;; zenburn-theme
 
-
 (load-theme 'monokai t)					; default theme
 
 (require 'flycheck)								   ; flycheck
+(require 'flycheck-clangcheck)					   ; clangcheck
 (add-hook 'after-init-hook #'global-flycheck-mode) ; flycheck ON
-(set 'flycheck-clang-include-path (list "./" "./includes/" "../includes/"))
+(set 'flycheck-clang-include-path (list "./" "./includes/" "../includes/" "/nfs/zfs-student-5/users/2014/ntibi/.brew/Cellar/boost/1.58.0/include/"))
+(setq flycheck-clangcheck-analyze t)
+(setq flycheck-check-syntax-automatically '(mode-enabled save)) ; check at save
 ;; (add-hook 'c-mode-common-hook  (lambda () DO STUFF ))
+
+
+
+(require 'cc-mode)
+(require 'semantic)
+(global-semanticdb-minor-mode 1)
+(global-semantic-idle-scheduler-mode 1)	; update DB wen idle
+(semantic-mode 1)
+(semantic-add-system-include "/nfs/zfs-student-5/users/2014/ntibi/.brew/Cellar/boost/1.58.0/include/")
+
 
 (require 'company)						; company auto complete
 (add-hook 'after-init-hook 'global-company-mode) ; company auto-compete ON
+(company-semantic 1)							 ; company with semantic backend
+(global-set-key (kbd "M-/") 'company-complete)	  ; launch ac
+;; (global-set-key (kbd "M-.") 'company-show-doc-buffer) ; show doc
+;; (global-set-key (kbd "M-,") 'company-show-location)	  ; show source
+(add-to-list 'completion-styles 'initials t)		  ; initials auto complete
+(add-to-list 'completion-styles 'semantic)
+;; (add-to-list 'company-backends 'company-c-headers)	  ; headers auto completion
 (add-to-list 'company-backends 'company-anaconda) ; anaconda mode for python ac
 (add-hook 'python-mode-hook 'anaconda-mode)		  ; python auto complete
-(global-set-key (kbd "M-/") 'company-complete)	  ; launch ac
-(global-set-key (kbd "M-.") 'company-show-doc-buffer) ;show doc
-(global-set-key (kbd "M-,") 'company-show-location)	  ; show source
-(add-to-list 'completion-styles 'initials t)		  ; initials auto complete
-(add-to-list 'company-backends 'company-c-headers)	  ; headers auto completion
+
+
+(require 'function-args)
+(fa-config-default)
+(define-key c-mode-map  [(control tab)] 'moo-complete)
+(define-key c++-mode-map  [(control tab)] 'moo-complete)
+(define-key c-mode-map (kbd "M-.")  'fa-show)
+(define-key c++-mode-map (kbd "M-.")  'fa-show)
+
 
 (require 'company-clang)
-(set 'company-clang-arguments (list (concat "-I" (file-name-directory load-file-name) "./") (concat "-I" (file-name-directory load-file-name) "/includes/") (concat "-I" (file-name-directory load-file-name) "../includes/")))
+;; (set 'company-clang-arguments (list (concat "-I" (file-name-directory load-file-name) "./") (concat "-I" (file-name-directory load-file-name) "/includes/") (concat "-I" (file-name-directory load-file-name) "../includes/")))
 
 
-(require 'company-c-headers)
-(set 'company-c-headers-path-user (list "./" "./includes/" "../includes/"))
+;; (require 'company-c-headers)
+;; (set 'company-c-headers-path-user (list "./" "./includes/" "../includes/"))
+
+
+
 
 
 (require 'yasnippet)							 ; yet another snippet
