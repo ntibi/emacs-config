@@ -84,10 +84,9 @@
 (add-to-list 'company-backends 'company-anaconda) ; anaconda mode for python ac
 (add-hook 'python-mode-hook 'anaconda-mode)		  ; python auto complete
 
-
 (require 'function-args)
 (fa-config-default)
-;(global-set-key (kbd "M-/") 'moo-complete)
+(global-set-key (kbd "M-i") 'fa-show)
 (define-key c-mode-map  [(control tab)] 'moo-complete) ; need a redefine !
 (define-key c++-mode-map  [(control tab)] 'moo-complete) ; need a redefine !
 
