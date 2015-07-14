@@ -13,6 +13,12 @@
 (setq display-time-24hr-format t)
 (setq display-time-day-and-date t)
 
+(defun reload-dotemacs-file ()			; function to reload emacs config
+  "reload .emacs"
+  (interactive)
+  (load-file "~/.emacs") )
+(global-set-key (kbd "C-c r") 'reload-dotemacs-file) ; reload emacs config
+
 (global-set-key (kbd "C-x g") 'goto-line)
 (global-set-key (kbd "C-c m") 'compile)
 (global-set-key (kbd "C-c c") 'comment-or-uncomment-region)
