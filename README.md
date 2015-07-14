@@ -3,3 +3,4 @@ todo list
 - clean that shit
 - use (define-key mode (kbd "keys") 'function)
 - create a 'resize minor mode
+- fix the error when i press space in M-x
