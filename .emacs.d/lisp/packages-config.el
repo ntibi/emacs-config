@@ -64,40 +64,35 @@
 (setq flycheck-check-syntax-automatically '(mode-enabled save)) ; check at save
 ;; (add-hook 'c-mode-common-hook  (lambda () DO STUFF ))
 
-
-
 (require 'cc-mode)
 (require 'semantic)
+(semantic-mode 1)
 (global-semanticdb-minor-mode 1)
 (global-semantic-idle-scheduler-mode 1)	; update DB wen idle
-(semantic-mode 1)
 (semantic-add-system-include "/nfs/zfs-student-5/users/2014/ntibi/.brew/Cellar/boost/1.58.0/include/")
-
+(global-set-key (kbd "C-x j") 'semantic-complete-jump)
 
 (require 'company)						; company auto complete
 (add-hook 'after-init-hook 'global-company-mode) ; company auto-compete ON
 (company-semantic 1)							 ; company with semantic backend
 (global-set-key (kbd "M-/") 'company-complete)	  ; launch ac
-;; (global-set-key (kbd "M-.") 'company-show-doc-buffer) ; show doc
-;; (global-set-key (kbd "M-,") 'company-show-location)	  ; show source
+(global-set-key (kbd "M-.") 'company-show-doc-buffer) ; show doc
+(global-set-key (kbd "M-,") 'company-show-location)	  ; show source
 (add-to-list 'completion-styles 'initials t)		  ; initials auto complete
 (add-to-list 'completion-styles 'semantic)
-;; (add-to-list 'company-backends 'company-c-headers)	  ; headers auto completion
+(add-to-list 'company-backends 'company-c-headers)	  ; headers auto completion
 (add-to-list 'company-backends 'company-anaconda) ; anaconda mode for python ac
 (add-hook 'python-mode-hook 'anaconda-mode)		  ; python auto complete
 
 
 (require 'function-args)
 (fa-config-default)
-(define-key c-mode-map  [(control tab)] 'moo-complete)
-(define-key c++-mode-map  [(control tab)] 'moo-complete)
-(define-key c-mode-map (kbd "M-.")  'fa-show)
-(define-key c++-mode-map (kbd "M-.")  'fa-show)
-
+;(global-set-key (kbd "M-/") 'moo-complete)
+(define-key c-mode-map  [(control tab)] 'moo-complete) ; need a redefine !
+(define-key c++-mode-map  [(control tab)] 'moo-complete) ; need a redefine !
 
 (require 'company-clang)
 ;; (set 'company-clang-arguments (list (concat "-I" (file-name-directory load-file-name) "./") (concat "-I" (file-name-directory load-file-name) "/includes/") (concat "-I" (file-name-directory load-file-name) "../includes/")))
-
 
 ;; (require 'company-c-headers)
 ;; (set 'company-c-headers-path-user (list "./" "./includes/" "../includes/"))
