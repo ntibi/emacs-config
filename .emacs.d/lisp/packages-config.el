@@ -56,6 +56,7 @@
 
 (load-theme 'monokai t)					; default theme
 
+
 (require 'flycheck)								   ; flycheck
 (require 'flycheck-clangcheck)					   ; clangcheck
 (add-hook 'after-init-hook #'global-flycheck-mode) ; flycheck ON
@@ -87,8 +88,6 @@
 (require 'function-args)
 (fa-config-default)
 (global-set-key (kbd "M-i") 'fa-show)
-(define-key c-mode-map  [(control tab)] 'moo-complete) ; need a redefine !
-(define-key c++-mode-map  [(control tab)] 'moo-complete) ; need a redefine !
 
 (require 'company-clang)
 ;; (set 'company-clang-arguments (list (concat "-I" (file-name-directory load-file-name) "./") (concat "-I" (file-name-directory load-file-name) "/includes/") (concat "-I" (file-name-directory load-file-name) "../includes/")))

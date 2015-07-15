@@ -9,6 +9,7 @@
 (column-number-mode t)					; print column number
 (line-number-mode t)					; print line number
 
+
 (display-time-mode 1)					; display time
 (setq display-time-24hr-format t)
 (setq display-time-day-and-date t)
