@@ -9,6 +9,9 @@
 (column-number-mode t)					; print column number
 (line-number-mode t)					; print line number
 
+(global-set-key (kbd "C-x C-d") (lambda() "open dired ." (interactive) (dired ".")))
+
+(global-set-key (kbd "M-i") (lambda () "insert tab" (interactive) (insert-tab)))
 
 (display-time-mode 1)					; display time
 (setq display-time-24hr-format t)
@@ -52,7 +55,7 @@
 
 
 (require 'paren)						; show matching parenthese
-;(show-paren-mode 1)						; ON
+(show-paren-mode 1)						; ON
 (setq show-paren-delay 0)				; delay
 
 
