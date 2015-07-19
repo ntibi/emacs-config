@@ -11,11 +11,40 @@
 
 (global-set-key (kbd "C-x C-d") (lambda() "open dired ." (interactive) (dired ".")))
 
+(global-set-key (kbd "C-c C-t") 'eshell) ; terminal
+(global-set-key (kbd "C-c C-s") 'eshell) ; shell
+
+(global-set-key (kbd "C-c p") '(lambda () "execute python"
+								 (interactive) (progn
+												 (insert "\n")
+												 (insert (shell-command-to-string (concat "python2.7 -c \"" (replace-regexp-in-string "\"" "'" (buffer-substring (region-beginning) (region-end))) "\"")))
+												 )))
+
+(global-set-key (kbd "C-c s") '(lambda () "replace string python-style"
+								 (interactive) (let ((s (replace-regexp-in-string "\"" "'" (buffer-substring (line-beginning-position) (line-end-position)))))
+												 (progn
+												   (kill-region (line-beginning-position) (line-end-position))
+												   (insert (shell-command-to-string (concat "python2.7 -c \"print (" s ")\"")))
+												   )
+												 )
+								 ))
+
 (global-set-key (kbd "M-i") (lambda () "insert tab" (interactive) (insert-tab)))
 
 (display-time-mode 1)					; display time
 (setq display-time-24hr-format t)
 (setq display-time-day-and-date t)
+
+
+(defun switch-to-scratch-and-back ()
+      "Toggle between *scratch* buffer and the current buffer.
+     If the *scratch* buffer does not exist, create it."
+	  (interactive)
+	  (let ((scratch-buffer-name (get-buffer-create "*scratch*")))
+		(if (equal (current-buffer) scratch-buffer-name)
+			(switch-to-buffer (other-buffer))
+		  (switch-to-buffer scratch-buffer-name (lisp-interaction-mode)))))
+(global-set-key (kbd "C-x b") 'switch-to-scratch-and-back) ; switch to scratch buffer
 
 (defun reload-dotemacs-file ()			; function to reload emacs config
   "reload .emacs"
@@ -51,7 +80,6 @@
 (global-set-key [f5] 'hs-hide-all)
 (global-set-key [f6] 'hs-show-all)
 (global-set-key (kbd "C-x x") 'hs-toggle-hiding)
-
 
 
 (require 'paren)						; show matching parenthese

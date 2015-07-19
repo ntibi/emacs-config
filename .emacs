@@ -41,7 +41,7 @@
  '(highlight-thing-what-thing (quote word))
  '(history-delete-duplicates t)
  '(hl-paren-delay 0.01)
- '(rainbow-identifiers-face-count 16)
+ '(rainbow-identifiers-face-count 15)
  '(safe-local-variable-values
    (quote
 	((company-clang-arguments "-I/nfs/zfs-student-5/users/2014/ntibi/.brew/Cellar/boost/1.58.0/include/")
