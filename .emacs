@@ -91,7 +91,7 @@
  '(flycheck-warning ((t (:inherit warning :background "yellow"))))
  '(hi-yellow ((t (:underline t))))
  '(region ((t (:background "color-240"))))
- '(show-paren-match ((t (:foreground "color-34"))))
+ '(show-paren-match ((t nil)))
  '(show-paren-mismatch ((t (:background "#1B1E1C" :foreground "red" :inverse-video t :weight normal))))
  '(tabbar-button ((t (:inherit tabbar-default :box (:line-width 1 :color "gray20") :underline nil))))
  '(tabbar-button-highlight ((t (:inherit tabbar-default))))

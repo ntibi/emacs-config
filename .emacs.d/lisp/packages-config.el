@@ -69,7 +69,8 @@
 (global-semanticdb-minor-mode 1)
 (global-semantic-idle-scheduler-mode 1)	; update DB wen idle
 (semantic-add-system-include "/nfs/zfs-student-5/users/2014/ntibi/.brew/Cellar/boost/1.58.0/include/")
-(global-set-key (kbd "C-x j") 'semantic-complete-jump)
+(global-set-key (kbd "C-x j") 'semantic-complete-jump) ; jump to local symbol
+
 
 (require 'company)						; company auto complete
 (add-hook 'after-init-hook 'global-company-mode) ; company auto-compete ON
@@ -109,6 +110,20 @@
 	(append (if (consp backend) backend (list backend))
 			'(:with company-yasnippet))))
 (setq company-backends (mapcar #'company-mode/backend-with-yas company-backends))
+
+
+(require 'helm)
+(helm-mode 1)
+(eval-after-load 'company
+  '(progn
+	 (define-key company-mode-map (kbd "C-/") 'helm-company)
+	      (define-key company-active-map (kbd "C-/") 'helm-company)))
+(define-key global-map [remap find-file] 'helm-find-files) ; helm custom find-file
+(define-key global-map [remap occur] 'helm-occur) ; use helm occur (dunno what occur is)
+(define-key global-map [remap list-buffers] 'helm-buffers-list) ; use helm buffer-list
+(define-key global-map [remap dabbrev-expand] 'helm-dabbrev) ; use helm dabbrev
+(global-set-key (kbd "M-x") 'helm-M-x)	; use custom minibuffer
+(helm-autoresize-mode 1)				; shrink minibuffer if possible
 
 
 (require 'highlight-thing)				; highlight current line/word
