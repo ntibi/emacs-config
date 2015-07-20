@@ -20,7 +20,7 @@
 					(kill-region (region-beginning) (region-end))
 					(insert (shell-command-to-string (concat "python2.7 -c \"" s "\"")))
 					)
-				  ))
+				  ))					
 (defun region-as-python-string () "replace region by python-string"
 	   (interactive) (let ((s (replace-regexp-in-string "\"" "'" (buffer-substring (region-beginning) (region-end)))))
 					   (progn
@@ -74,7 +74,6 @@
 (require 'linum)						; get line number
 (add-hook 'prog-mode-hook 'global-linum-mode)
 (setq linum-format "%4d \u2502 ")
-(global-set-key (kbd "C-x l") 'global-linum-mode) ; toggle line number
 
 
 (require 'hideshow)						; factorize functions {...}
@@ -97,9 +96,9 @@
 (global-set-key (kbd "<mouse-5>") 'scroll-up-line)
 
 
-
 ;; (require 'zone)							; kind of screen saver
 ;; (zone-when-idle 60)						; after 60s
+
 
 ;; set backup dir (/tmp/emacs{uid})
 (defconst emacs-tmp-dir (format "%s/%s%s/" temporary-file-directory "emacs" (user-uid)))

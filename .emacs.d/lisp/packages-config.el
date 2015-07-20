@@ -56,7 +56,6 @@
 
 (load-theme 'monokai t)					; default theme
 
-
 (require 'flycheck)								   ; flycheck
 (require 'flycheck-clangcheck)					   ; clangcheck
 (add-hook 'after-init-hook #'global-flycheck-mode) ; flycheck ON
