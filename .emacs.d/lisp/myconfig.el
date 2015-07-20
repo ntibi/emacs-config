@@ -21,15 +21,15 @@
 					(insert (shell-command-to-string (concat "python2.7 -c \"" s "\"")))
 					)
 				  ))
-(defun line-as-python-print () "replace line by python-print output"
-	   (interactive) (let ((s (replace-regexp-in-string "\"" "'" (buffer-substring (line-beginning-position) (line-end-position)))))
+(defun region-as-python-string () "replace region by python-string"
+	   (interactive) (let ((s (replace-regexp-in-string "\"" "'" (buffer-substring (region-beginning) (region-end)))))
 					   (progn
-						 (kill-region (line-beginning-position) (line-end-position))
-						 (insert (shell-command-to-string (concat "python2.7 -c \"print (" s ")\"")))
+						 (kill-region (region-beginning) (region-end))
+						 (insert (shell-command-to-string (concat "python2.7 -c \"import sys; sys.stdout.write(" s "); sys.stdout.flush()\"")))
 						 )
 					   ))
 (global-set-key (kbd "C-c p") 'region-execute-python)
-(global-set-key (kbd "C-c s") 'line-as-python-print)
+(global-set-key (kbd "C-c s") 'region-as-python-string)
 
 (global-set-key (kbd "M-i") (lambda () "insert tab" (interactive) (insert-tab)))
 
