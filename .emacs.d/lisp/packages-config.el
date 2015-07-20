@@ -54,7 +54,6 @@
   ;; yasnippet
   ;; zenburn-theme
 
-(load-theme 'monokai t)					; default theme
 
 (require 'flycheck)								   ; flycheck
 (require 'flycheck-clangcheck)					   ; clangcheck
@@ -112,6 +111,11 @@
 
 
 (require 'highlight-thing)				; highlight current line/word
+(add-hook 'prog-mode-hook 'highlight-thing-mode)
+(setq highlight-thing-what-thing 'word)	; underline word
+(setq highlight-thing-delay-seconds 0.1)
+(custom-set-faces '(hi-yellow ((t (:underline t)))))
+
 
 (require 'rainbow-mode)					; colorize hex codes
 (add-hook 'prog-mode-hook 'rainbow-mode)
