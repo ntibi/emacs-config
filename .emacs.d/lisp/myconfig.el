@@ -14,20 +14,22 @@
 (global-set-key (kbd "C-c C-t") 'eshell) ; terminal
 (global-set-key (kbd "C-c C-s") 'eshell) ; shell
 
-(global-set-key (kbd "C-c p") '(lambda () "execute python"
-								 (interactive) (progn
-												 (insert "\n")
-												 (insert (shell-command-to-string (concat "python2.7 -c \"" (replace-regexp-in-string "\"" "'" (buffer-substring (region-beginning) (region-end))) "\"")))
-												 )))
-
-(global-set-key (kbd "C-c s") '(lambda () "replace string python-style"
-								 (interactive) (let ((s (replace-regexp-in-string "\"" "'" (buffer-substring (line-beginning-position) (line-end-position)))))
-												 (progn
-												   (kill-region (line-beginning-position) (line-end-position))
-												   (insert (shell-command-to-string (concat "python2.7 -c \"print (" s ")\"")))
-												   )
-												 )
-								 ))
+(defun region-execute-python() "replace region by python output"
+  (interactive) (let ((s (replace-regexp-in-string "\"" "'" (buffer-substring (region-beginning) (region-end)))))
+				  (progn
+					(kill-region (region-beginning) (region-end))
+					(insert (shell-command-to-string (concat "python2.7 -c \"" s "\"")))
+					)
+				  ))
+(defun line-as-python-print () "replace line by python-print output"
+	   (interactive) (let ((s (replace-regexp-in-string "\"" "'" (buffer-substring (line-beginning-position) (line-end-position)))))
+					   (progn
+						 (kill-region (line-beginning-position) (line-end-position))
+						 (insert (shell-command-to-string (concat "python2.7 -c \"print (" s ")\"")))
+						 )
+					   ))
+(global-set-key (kbd "C-c p") 'region-execute-python)
+(global-set-key (kbd "C-c s") 'line-as-python-print)
 
 (global-set-key (kbd "M-i") (lambda () "insert tab" (interactive) (insert-tab)))
 
