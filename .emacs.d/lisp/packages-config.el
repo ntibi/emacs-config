@@ -57,9 +57,10 @@
 (require 'flycheck)								   ; flycheck
 (require 'flycheck-clangcheck)					   ; clangcheck
 (add-hook 'after-init-hook #'global-flycheck-mode) ; flycheck ON
-(set 'flycheck-clang-include-path (list "./" "./includes/" "../includes/" "/nfs/zfs-student-5/users/2014/ntibi/.brew/Cellar/boost/1.58.0/include/"))
+(set 'flycheck-clang-include-path (list "./" "./includes/" "../includes/" "./include/" "../include/" "/nfs/zfs-student-5/users/2014/ntibi/.brew/Cellar/boost/1.58.0/include/"))
 (setq flycheck-clangcheck-analyze t)
 (setq flycheck-check-syntax-automatically '(mode-enabled save)) ; check at save
+(add-hook 'c++-mode-hook (lambda () (setq flycheck-clang-language-standard "c++11"))) ; --std=c++11
 ;; (add-hook 'c-mode-common-hook  (lambda () DO STUFF ))
 
 (require 'cc-mode)
