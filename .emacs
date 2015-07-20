@@ -42,10 +42,12 @@
  '(enable-recursive-minibuffers nil)
  '(history-delete-duplicates t)
  '(hl-paren-delay 0.01)
+ '(initial-buffer-choice nil)
  '(rainbow-identifiers-face-count 15)
  '(safe-local-variable-values
    (quote
-	((eval when
+	((semantic-add-system-include "/nfs/zfs-student-5/users/2014/ntibi/.brew/include/")
+	 (eval when
 		   (fboundp
 			(quote aggressive-indent-mode))
 		   (aggressive-indent-mode -1))
@@ -87,6 +89,7 @@
  ;; If there is more than one, they won't work right.
  '(flycheck-error ((t (:inherit error :underline "red"))))
  '(flycheck-warning ((t (:inherit warning :background "yellow"))))
+ '(hi-yellow ((t (:underline t))))
  '(region ((t (:background "color-240"))))
  '(show-paren-match ((t (:foreground "color-34"))))
  '(show-paren-mismatch ((t (:background "#1B1E1C" :foreground "red" :inverse-video t :weight normal))))

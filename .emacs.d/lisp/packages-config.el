@@ -54,7 +54,6 @@
   ;; yasnippet
   ;; zenburn-theme
 
-
 (require 'flycheck)								   ; flycheck
 (require 'flycheck-clangcheck)					   ; clangcheck
 (add-hook 'after-init-hook #'global-flycheck-mode) ; flycheck ON
@@ -80,12 +79,11 @@
 (add-to-list 'completion-styles 'initials t)		  ; initials auto complete
 (add-to-list 'completion-styles 'semantic)
 (add-to-list 'company-backends 'company-c-headers)	  ; headers auto completion
-(add-to-list 'company-backends 'company-anaconda) ; anaconda mode for python ac
-(add-hook 'python-mode-hook 'anaconda-mode)		  ; python auto complete
+
 
 (require 'function-args)
 (fa-config-default)
-(global-set-key (kbd "M-i") 'fa-show)
+
 
 (require 'company-clang)
 ;; (set 'company-clang-arguments (list (concat "-I" (file-name-directory load-file-name) "./") (concat "-I" (file-name-directory load-file-name) "/includes/") (concat "-I" (file-name-directory load-file-name) "../includes/")))
@@ -94,13 +92,15 @@
 ;; (set 'company-c-headers-path-user (list "./" "./includes/" "../includes/"))
 
 
-
+(add-hook 'python-mode-hook 'anaconda-mode)
+(add-hook 'python-mode-hook 'eldoc-mode)
+(add-hook 'python-mode-hook (lambda () "" (interactive) (add-to-list 'company-backends 'company-anaconda)))
+(add-hook 'python-mode-hook (lambda () "" (interactive) (pyenv-mode)))
 
 
 (require 'yasnippet)							 ; yet another snippet
-(add-hook 'prog-mode-hook #'yas-minor-mode)		 ; enable
 (setq yas-snippet-dirs '("~/.emacs.d/snippets")) ; snippets path
-(yas-global-mode 1)								 ; enable yas
+(add-hook 'after-init-hook (lambda () "" (interactive) (yas-global-mode 1))) ; enable yas
 (defvar company-mode/enable-yas t)				 ; snippets completion in company
 (defun company-mode/backend-with-yas (backend)
   (if (or (not company-mode/enable-yas) (and (listp backend) (member 'company-yasnippet backend)))
