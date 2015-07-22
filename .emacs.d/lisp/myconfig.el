@@ -37,16 +37,6 @@
 (setq display-time-24hr-format t)
 (setq display-time-day-and-date t)
 
-(defun switch-to-scratch-and-back ()
-      "Toggle between *scratch* buffer and the current buffer.
-     If the *scratch* buffer does not exist, create it."
-	  (interactive)
-	  (let ((scratch-buffer-name (get-buffer-create "*scratch*")))
-		(if (equal (current-buffer) scratch-buffer-name)
-			(switch-to-buffer (other-buffer))
-		  (switch-to-buffer scratch-buffer-name (lisp-interaction-mode)))))
-(global-set-key (kbd "C-x b") 'switch-to-scratch-and-back) ; switch to scratch buffer
-
 (defun reload-dotemacs-file ()			; function to reload emacs config
   "reload .emacs"
   (interactive)
@@ -80,6 +70,7 @@
 (global-set-key [f5] 'hs-hide-all)
 (global-set-key [f6] 'hs-show-all)
 (global-set-key (kbd "C-x x") 'hs-toggle-hiding)
+(global-set-key (kbd "C-v") 'hs-toggle-hiding)
 
 
 (require 'paren)						; show matching parenthese

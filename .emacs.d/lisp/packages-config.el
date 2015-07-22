@@ -162,6 +162,7 @@
 
 (require 'undo-tree)					; undo tree
 (global-undo-tree-mode)					; set undo-tree as default undo (C-x u)
+(global-set-key (kbd "C-x u") 'undo-tree-visualize)
 
 
 (require 'tabbar)						; tabbar mode
