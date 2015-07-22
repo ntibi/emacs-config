@@ -37,7 +37,6 @@
 (setq display-time-24hr-format t)
 (setq display-time-day-and-date t)
 
-
 (defun switch-to-scratch-and-back ()
       "Toggle between *scratch* buffer and the current buffer.
      If the *scratch* buffer does not exist, create it."
