@@ -5,29 +5,38 @@
 
 ; installed packages
   ;; anaconda-mode
+  ;; async
+  ;; auto-complete
   ;; company
   ;; company-anaconda
   ;; company-c-headers
   ;; company-irony
+  ;; concurrent
+  ;; ctable
   ;; cyberpunk-theme
   ;; dash
+  ;; deferred
   ;; elpy
+  ;; epc
   ;; epl
   ;; f
-  ;; find-file-in-pr
+  ;; find-file-in-pr...
   ;; flycheck
-  ;; flycheck-clangc
+  ;; flycheck-clangc...
   ;; flycheck-irony
   ;; flycheck-ocaml
   ;; flycheck-pos-tip
   ;; flycheck-tip
   ;; flymake-easy
-  ;; flymake-python
+  ;; flymake-python-...
   ;; flymake-shell
   ;; function-args
   ;; fuzzy
-  ;; highlight-inden
-  ;; highlight-paren
+  ;; helm
+  ;; helm-company
+  ;; helm-core
+  ;; highlight-inden...
+  ;; highlight-paren...
   ;; highlight-thing
   ;; irony
   ;; json-rpc
@@ -35,15 +44,17 @@
   ;; linum-relative
   ;; merlin
   ;; monokai-theme
-  ;; mouse
+  ;; mouse+
   ;; multiple-cursors
   ;; neotree
-  ;; pastels-on-dark
+  ;; pastels-on-dark...
   ;; pkg-info
   ;; popup
+  ;; pyenv-mode
+  ;; python-environment
   ;; pyvenv
   ;; rainbow-delimiters
-  ;; rainbow-identif
+  ;; rainbow-identif...
   ;; rainbow-mode
   ;; s
   ;; strings
@@ -53,6 +64,7 @@
   ;; undo-tree
   ;; yasnippet
   ;; zenburn-theme
+
 
 (require 'flycheck)								   ; flycheck
 (require 'flycheck-clangcheck)					   ; clangcheck
@@ -117,7 +129,7 @@
 (eval-after-load 'company
   '(progn
 	 (define-key company-mode-map (kbd "C-/") 'helm-company)
-	      (define-key company-active-map (kbd "C-/") 'helm-company)))
+		  (define-key company-active-map (kbd "C-/") 'helm-company)))
 (define-key global-map [remap find-file] 'helm-find-files) ; helm custom find-file
 (define-key global-map [remap occur] 'helm-occur) ; use helm occur (dunno what occur is)
 (define-key global-map [remap list-buffers] 'helm-buffers-list) ; use helm buffer-list

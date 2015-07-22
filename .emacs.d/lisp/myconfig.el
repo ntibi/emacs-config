@@ -62,8 +62,8 @@
 (setq scroll-margin 10)					; pre scroll
 (setq scroll-conservatively 1000)		; keep prescrolling ?
 
-(global-set-key (kbd "C-x w") 'whitespace-mode) ; 'cat -e' like
-(global-set-key (kbd "C-x c") 'whitespace-cleanup-region) ; remove trailing whitespaces in region
+(global-set-key (kbd "C-c e") 'whitespace-mode) ; 'cat -e' like
+(global-set-key (kbd "C-c w") 'whitespace-cleanup-region) ; remove trailing whitespaces in region
 
 ;; resize hotkeys
 (global-set-key (kbd "M-<down>") 'enlarge-window)
