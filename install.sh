@@ -1,21 +1,17 @@
 #!/bin/bash
 
-PWD = pwd
+TRASH=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1)
+TRASH="/tmp/old.emacs/$TRASH"
+mkdir -p $TRASH
 
-if [ -f ~/.emacs ];
-then
-	mv ~/.emacs /tmp
-fi
-ln -sF ~/emacs-config/.emacs ~/.emacs
+[ -e ~/.emacs ] && mv ~/.emacs $TRASH
+ln -s ~/emacs-config/.emacs ~/.emacs
 
-if [ -d ~/.emacs.d/lisp ];
-then
-	mv ~/.emacs.d/lisp /tmp
-fi
-ln -sF ~/emacs-config/.emacs.d/lisp/ ~/.emacs.d/lisp
+[ ! -d ~/.emacs.d ] && mkdir ~/.emacs
 
-if [ -d ~/.emacs.d/snippets ];
-then
-	mv ~/.emacs.d/snippets /tmp
-fi
-ln -sF ~/emacs-config/.emacs.d/snippets/ ~/.emacs.d/snippets
+[ -d ~/.emacs.d/lisp ] || [ -h ~/.emacs.d/lisp ] && mv ~/.emacs.d/lisp $TRASH
+ln -s ~/emacs-config/.emacs.d/lisp ~/.emacs.d/lisp
+
+[ -d ~/.emacs.d/snippets ] || [ -h ~/.emacs.d/snippets ] && mv ~/.emacs.d/snippets $TRASH
+ln -s ~/emacs-config/.emacs.d/snippets ~/.emacs.d/snippets
+
