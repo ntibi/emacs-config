@@ -7,10 +7,10 @@
   ;; anaconda-mode
   ;; async
   ;; auto-complete
+  ;; auto-complete-c...
   ;; company
   ;; company-anaconda
   ;; company-c-headers
-  ;; company-irony
   ;; concurrent
   ;; ctable
   ;; cyberpunk-theme
@@ -23,7 +23,6 @@
   ;; find-file-in-pr...
   ;; flycheck
   ;; flycheck-clangc...
-  ;; flycheck-irony
   ;; flycheck-ocaml
   ;; flycheck-pos-tip
   ;; flycheck-tip
@@ -38,9 +37,8 @@
   ;; highlight-inden...
   ;; highlight-paren...
   ;; highlight-thing
-  ;; irony
   ;; json-rpc
-  ;; let-alist
+  ;; let-alist          1.
   ;; linum-relative
   ;; merlin
   ;; monokai-theme
@@ -63,11 +61,10 @@
   ;; tabbar
   ;; undo-tree
   ;; yasnippet
-  ;; zenburn-theme
 
 
-(require 'flycheck)								   ; flycheck
-(require 'flycheck-clangcheck)					   ; clangcheck
+(require 'flycheck)
+(require 'flycheck-clangcheck)
 (add-hook 'after-init-hook #'global-flycheck-mode) ; flycheck ON
 (set 'flycheck-clang-include-path (list "./" "./includes/" "../includes/" "./include/" "../include/" "/nfs/zfs-student-5/users/2014/ntibi/.brew/Cellar/boost/1.58.0/include/"))
 (setq flycheck-clangcheck-analyze t)
