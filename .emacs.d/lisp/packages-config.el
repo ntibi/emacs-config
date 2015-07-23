@@ -91,7 +91,6 @@
 (add-to-list 'completion-styles 'semantic)
 (add-to-list 'company-backends 'company-c-headers)	  ; headers auto completion
 
-
 (require 'function-args)
 (fa-config-default)
 
@@ -129,6 +128,7 @@
 
 
 (require 'helm)
+(require 'helm-company)
 (helm-mode 1)
 (eval-after-load 'company
   '(progn
@@ -141,6 +141,9 @@
 (global-set-key (kbd "M-x") 'helm-M-x)	; use custom minibuffer
 (helm-autoresize-mode 1)				; shrink minibuffer if possible
 
+(require 'find-file-in-project)
+(setq ffip-project-file ".git")
+(global-set-key (kbd "C-x f") 'find-file-in-project) ; find file anywhere in the project
 
 (require 'highlight-thing)				; highlight current line/word
 (add-hook 'prog-mode-hook 'highlight-thing-mode)
