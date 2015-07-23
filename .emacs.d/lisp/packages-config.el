@@ -112,6 +112,13 @@
 (add-hook 'python-mode-hook (lambda () "" (interactive) (pyenv-mode)))
 
 
+(defun my:ac-c-headers-init ()
+  (require 'auto-complete-c-headers)
+  (add-to-list 'ac-sources 'ac-source-c-headers))
+(add-hook 'c++-mode-hook 'my:ac-c-headers-init)
+(add-hook 'c-mode-hook 'my:ac-c-headers-init)
+
+
 (require 'yasnippet)							 ; yet another snippet
 (setq yas-snippet-dirs '("~/.emacs.d/snippets")) ; snippets path
 (add-hook 'after-init-hook (lambda () "" (interactive) (yas-global-mode 1))) ; enable yas
@@ -176,7 +183,6 @@
 (global-set-key (kbd "C-x <down>") 'tabbar-backward-group)
 (global-set-key (kbd "C-x <up>") 'tabbar-forward-group)
 (setq tabbar-use-images nil)			; faster ?
-
 
 
 (require 'multiple-cursors)				; multiple cursors
