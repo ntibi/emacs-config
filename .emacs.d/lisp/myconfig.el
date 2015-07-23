@@ -1,6 +1,20 @@
 ;;; myconfig.el --- vanilla emacs config
 ;;; commentary:
+;;; keybinds and modes available on default emacs >= 24
 ;;; code:
+
+(load "myfunctions.el")
+
+;; config
+
+;; set backup dir (/tmp/emacs{uid})
+(defconst emacs-tmp-dir (format "%s/%s%s/" temporary-file-directory "emacs" (user-uid)))
+(setq backup-directory-alist
+      `((".*" . ,emacs-tmp-dir)))
+(setq auto-save-file-name-transforms
+      `((".*" ,emacs-tmp-dir t)))
+(setq auto-save-list-file-prefix
+      emacs-tmp-dir)
 
 (menu-bar-mode -1) ;; No menu bar
 (setq inhibit-startup-message t) ;; no startup message
@@ -9,104 +23,35 @@
 (column-number-mode t)					; print column number
 (line-number-mode t)					; print line number
 
-(global-set-key (kbd "C-x C-d") (lambda() "open dired ." (interactive) (dired ".")))
-
-(global-set-key (kbd "C-c C-t") 'eshell) ; terminal
-(global-set-key (kbd "C-c C-s") 'eshell) ; shell
-
-(defun duplicate-line-or-region (&optional n)
-    "Duplicate current line, or region if active.
-With argument N, make N copies.
-With negative N, comment out original line and use the absolute value."
-	(interactive "*p")
-	(let ((use-region (use-region-p)))
-	  (save-excursion
-		(let ((text (if use-region        ;Get region if active, otherwise line
-						(buffer-substring (region-beginning) (region-end))
-					  (prog1 (thing-at-point 'line)
-						(end-of-line)
-						(if (< 0 (forward-line 1)) ;Go to beginning of next line, or make a new one
-							(newline))))))
-		  (dotimes (i (abs (or n 1)))     ;Insert N times, or once if not specified
-			(insert text))))
-	  (if use-region nil                  ;Only if we're working with a line (not a region)
-		(let ((pos (- (point) (line-beginning-position)))) ;Save column
-		  (if (> 0 n)                             ;Comment out original with negative arg
-			  (comment-region (line-beginning-position) (line-end-position)))
-		  (forward-line 1)
-		  (forward-char pos)))))
-(global-set-key (kbd "C-c d") 'duplicate-line-or-region) ; explicit name ;)
-
-(defun copy-line (arg)
-      "Copy lines (as many as prefix argument) in the kill ring.
-      Ease of use features:
-      - Move to start of next line.
-      - Appends the copy on sequential calls.
-      - Use newline as last char even on the last line of the buffer.
-      - If region is active, copy its lines."
-	  (interactive "p")
-	  (let ((beg (line-beginning-position))
-			(end (line-end-position arg)))
-		(when mark-active
-		  (if (> (point) (mark))
-			  (setq beg (save-excursion (goto-char (mark)) (line-beginning-position)))
-			(setq end (save-excursion (goto-char (mark)) (line-end-position)))))
-		(if (eq last-command 'copy-line)
-			(kill-append (buffer-substring beg end) (< end beg))
-		  (kill-ring-save beg end)))
-	  (kill-append "\n" nil)
-	  (beginning-of-line (or (and arg (1+ arg)) 2))
-	  (if (and arg (not (= 1 arg))) (message "%d lines copied" arg)))
-
-(global-set-key (kbd "C-x c") 'copy-line)
-
-(defun region-execute-python() "replace region by python output"
-  (interactive) (let ((s (replace-regexp-in-string "\"" "'" (buffer-substring (region-beginning) (region-end)))))
-				  (progn
-					(kill-region (region-beginning) (region-end))
-					(insert (shell-command-to-string (concat "python2.7 -c \"" s "\"")))
-					)
-				  ))					
-(defun region-as-python-string () "replace region by python-string"
-	   (interactive) (let ((s (replace-regexp-in-string "\"" "'" (buffer-substring (region-beginning) (region-end)))))
-					   (progn
-						 (kill-region (region-beginning) (region-end))
-						 (insert (shell-command-to-string (concat "python2.7 -c \"import sys; sys.stdout.write(" s "); sys.stdout.flush()\"")))
-						 )
-					   ))
-(global-set-key (kbd "C-c p") 'region-execute-python)
-(global-set-key (kbd "C-c s") 'region-as-python-string)
-
-(global-set-key (kbd "M-i") (lambda () "insert tab" (interactive) (insert-tab)))
-
 (display-time-mode 1)					; display time
 (setq display-time-24hr-format t)
 (setq display-time-day-and-date t)
 
-(defun reload-dotemacs-file ()			; function to reload emacs config
-  "reload .emacs"
-  (interactive)
-  (load-file "~/.emacs") )
-(global-set-key (kbd "C-c r") 'reload-dotemacs-file) ; reload emacs config
-
-(global-set-key (kbd "C-x g") 'goto-line)
-(global-set-key (kbd "C-c m") 'compile)
-
-(defun comment-or-uncomment-region-or-line ()
-  "Comments or uncomments the region or the current line if there's no active region."
-  (interactive)
-  (let (beg end)
-	(if (region-active-p)
-		(setq beg (region-beginning) end (region-end))
-	  (setq beg (line-beginning-position) end (line-end-position)))
-	(comment-or-uncomment-region beg end)
-	(next-line)))
-
-(global-set-key (kbd "C-c c") 'comment-or-uncomment-region-or-line)
-
-
 (setq scroll-margin 10)					; pre scroll
 (setq scroll-conservatively 1000)		; keep prescrolling ?
+
+
+;; keybinds to functions from myfunctions.el
+(global-set-key (kbd "C-c p") 'region-execute-python)
+(global-set-key (kbd "C-c s") 'region-as-python-string)
+
+(global-set-key (kbd "C-c d") 'duplicate-line-or-region) ; explicit name ;)
+(global-set-key (kbd "C-x c") 'copy-line)				 ; copy line
+(global-set-key (kbd "C-c c") 'comment-or-uncomment-region-or-line)
+
+(global-set-key (kbd "C-c r") 'reload-dotemacs-file) ; reload emacs config
+
+;; keybinds to emacs functions
+(global-set-key (kbd "C-x C-d") (lambda() "open dired ." (interactive) (dired "."))) ; emacs . for file navigation
+
+(global-set-key (kbd "C-c C-t") 'eshell) ; start terminal
+(global-set-key (kbd "C-c C-s") 'eshell) ; start shell
+
+(global-set-key (kbd "M-i") (lambda () "insert tab" (interactive) (insert-tab)))
+
+(global-set-key (kbd "C-x g") 'goto-line)
+
+(global-set-key (kbd "C-c m") 'compile)
 
 (global-set-key (kbd "C-c e") 'whitespace-mode) ; 'cat -e' like
 (global-set-key (kbd "C-c w") 'whitespace-cleanup-region) ; remove trailing whitespaces in region
@@ -117,6 +62,13 @@ With negative N, comment out original line and use the absolute value."
 (global-set-key (kbd "M-<right>") 'enlarge-window-horizontally)
 (global-set-key (kbd "M-<left>") 'shrink-window-horizontally)
 
+(global-set-key (kbd "M-2") 'enlarge-window)
+(global-set-key (kbd "M-8") 'shrink-window)
+(global-set-key (kbd "M-6") 'enlarge-window-horizontally)
+(global-set-key (kbd "M-4") 'shrink-window-horizontally)
+
+
+;; configs and keybinds from modes
 (require 'linum)						; get line number
 (add-hook 'prog-mode-hook 'global-linum-mode)
 (setq linum-format "%4d \u2502 ")
@@ -147,16 +99,6 @@ With negative N, comment out original line and use the absolute value."
 ;; (zone-when-idle 60)						; after 60s
 
 
-;; set backup dir (/tmp/emacs{uid})
-(defconst emacs-tmp-dir (format "%s/%s%s/" temporary-file-directory "emacs" (user-uid)))
-(setq backup-directory-alist
-      `((".*" . ,emacs-tmp-dir)))
-(setq auto-save-file-name-transforms
-      `((".*" ,emacs-tmp-dir t)))
-(setq auto-save-list-file-prefix
-      emacs-tmp-dir)
-
-
 ; this is not vi(m)
 (defconst wq "You mean C-x C-c ?")
 (defconst qq "You mean C-x C-c ?")
@@ -164,7 +106,6 @@ With negative N, comment out original line and use the absolute value."
 (defconst q! "You mean C-x C-c ?")
 (defconst wq! "You mean C-x C-c ?")
 (defconst qw! "You mean C-x C-c ?")
-
 
 (provide 'myconfig)
 ;;; myconfig.el ends here
