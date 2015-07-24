@@ -53,6 +53,8 @@
 
 (global-set-key (kbd "C-c m") 'compile)
 
+(global-set-key (kbd "C-c C-g") 'search-google) ; preform a google search of region/input
+
 (global-set-key (kbd "C-c e") 'whitespace-mode) ; 'cat -e' like
 (global-set-key (kbd "C-c w") 'whitespace-cleanup-region) ; remove trailing whitespaces in region
 
