@@ -2,4 +2,4 @@
 # name: throw
 # key: throw
 # --
-throw ${1:MyError}($0);
+throw ${1:MyException}($0);
