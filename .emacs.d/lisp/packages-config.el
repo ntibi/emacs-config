@@ -143,6 +143,12 @@
 (setq ffip-project-file ".git")
 (global-set-key (kbd "C-x f") 'find-file-in-project) ; find file anywhere in the project
 
+
+
+(global-set-key (kbd "C-c j") 'senator-go-to-up-reference) ; jump to definition
+
+
+
 (require 'highlight-thing)				; highlight current line/word
 (add-hook 'prog-mode-hook 'highlight-thing-mode)
 (setq highlight-thing-what-thing 'word)	; underline word
