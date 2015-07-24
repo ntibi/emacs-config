@@ -15,7 +15,9 @@
 (add-to-list 'load-path "~/.emacs.d/lisp/themes/") ;; themes path
 
 ;; load config files
-(load "packages-config.el")				; packages config
+(when (>= emacs-major-version 24)
+  (load "packages-config.el")				; packages config
+)
 (load "myconfig.el")					; vanilla config
 
 ;; load 42 files
@@ -27,8 +29,9 @@
 ;(load "string.el")						; string function
 ;(load "comments.el")					; comments functions
 
-(load "monokai-theme.el")				; load monokai theme
-
+(when (>= emacs-major-version 24)
+  (load "monokai-theme.el")				; load monokai theme
+)
 ;; auto-set config variables:
 
 (custom-set-variables
