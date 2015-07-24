@@ -63,8 +63,6 @@
   ;; yasnippet
 
 
-(require 'flycheck)
-(require 'flycheck-clangcheck)
 (add-hook 'after-init-hook #'global-flycheck-mode) ; flycheck ON
 (set 'flycheck-clang-include-path (list "./" "./includes/" "../includes/" "./include/" "../include/" "/nfs/zfs-student-5/users/2014/ntibi/.brew/Cellar/boost/1.58.0/include/"))
 (setq flycheck-clangcheck-analyze t)

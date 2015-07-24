@@ -70,7 +70,7 @@
 
 ;; configs and keybinds from modes
 (require 'linum)						; get line number
-(add-hook 'prog-mode-hook 'global-linum-mode)
+(global-linum-mode)
 (setq linum-format "%4d \u2502 ")
 
 
