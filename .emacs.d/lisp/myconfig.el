@@ -69,8 +69,21 @@
 (global-set-key (kbd "M-6") 'enlarge-window-horizontally)
 (global-set-key (kbd "M-4") 'shrink-window-horizontally)
 
-
 ;; configs and keybinds from modes
+(require 'cc-mode)
+(require 'semantic)
+(require 'semantic/ia)
+(global-ede-mode 1)                      ; Enable the Project management system
+(semantic-mode 1)
+(global-semanticdb-minor-mode 1)
+(global-semantic-idle-scheduler-mode 1)	; update DB wen idle
+(semantic-add-system-include "/nfs/zfs-student-5/users/2014/ntibi/.brew/Cellar/boost/1.58.0/include/")
+(global-set-key (kbd "C-x j") 'semantic-complete-jump) ; jump to local symbol
+(global-set-key (kbd "C-c j") 'senator-go-to-up-reference) ; jump to definition
+(global-semantic-show-parser-state-mode)
+(global-semantic-highlight-edits-mode)
+(global-semantic-mru-bookmark-mode)
+
 (require 'linum)						; get line number
 (global-linum-mode)
 (setq linum-format "%4d \u2502 ")

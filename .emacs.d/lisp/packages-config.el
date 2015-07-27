@@ -70,14 +70,6 @@
 (add-hook 'c++-mode-hook (lambda () (setq flycheck-clang-language-standard "c++11"))) ; --std=c++11
 ;; (add-hook 'c-mode-common-hook  (lambda () DO STUFF ))
 
-(require 'cc-mode)
-(require 'semantic)
-(semantic-mode 1)
-(global-semanticdb-minor-mode 1)
-(global-semantic-idle-scheduler-mode 1)	; update DB wen idle
-(semantic-add-system-include "/nfs/zfs-student-5/users/2014/ntibi/.brew/Cellar/boost/1.58.0/include/")
-(global-set-key (kbd "C-x j") 'semantic-complete-jump) ; jump to local symbol
-
 
 (require 'company)						; company auto complete
 (add-hook 'after-init-hook 'global-company-mode) ; company auto-compete ON
@@ -122,7 +114,7 @@
 	  backend
 	(append (if (consp backend) backend (list backend))
 			'(:with company-yasnippet))))
-(setq company-backends (mapcar #'company-mode/backend-with-yas company-backends))
+;; (setq company-backends (mapcar #'company-mode/backend-with-yas company-backends)) ; i don't want yasnippet suggestions
 
 
 (require 'helm)
@@ -142,11 +134,6 @@
 (require 'find-file-in-project)
 (setq ffip-project-file ".git")
 (global-set-key (kbd "C-x f") 'find-file-in-project) ; find file anywhere in the project
-
-
-
-(global-set-key (kbd "C-c j") 'senator-go-to-up-reference) ; jump to definition
-
 
 
 (require 'highlight-thing)				; highlight current line/word
