@@ -38,6 +38,7 @@
 (global-set-key (kbd "C-c d") 'duplicate-line-or-region) ; explicit name ;)
 (global-set-key (kbd "C-x c") 'copy-line)				 ; copy line
 (global-set-key (kbd "C-c c") 'comment-or-uncomment-region-or-line)
+(global-set-key (kbd "C-;") 'comment-or-uncomment-region-or-line)
 
 (global-set-key (kbd "C-c r") 'reload-dotemacs-file) ; reload emacs config
 
