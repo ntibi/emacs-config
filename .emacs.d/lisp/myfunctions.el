@@ -9,23 +9,23 @@
   (interactive)
   (load-file "~/.emacs"))
 
-(defun region-execute-python()
+(defun region-execute-python ()
   "Replace region by python output."
-  (interactive) (let ((s (replace-regexp-in-string "\"" "'" (buffer-substring (region-beginning) (region-end)))))
-				  (progn
-					(kill-region (region-beginning) (region-end))
-					(insert (shell-command-to-string (concat "python2.7 -c \"" s "\"")))
-					)
-				  ))
-
+  (interactive)
+  (let ((s (replace-regexp-in-string "\"" "'" (buffer-substring (region-beginning) (region-end)))))
+	(progn
+	  (kill-region (region-beginning) (region-end))
+	  (insert (shell-command-to-string (concat "python2.7 -c \"" s "\"")))
+	  )))
+																								   
 (defun region-as-python-string ()
   "Replace region by python-string."
-  (interactive) (let ((s (replace-regexp-in-string "\"" "'" (buffer-substring (region-beginning) (region-end)))))
-				  (progn
-					(kill-region (region-beginning) (region-end))
-					(insert (shell-command-to-string (concat "python2.7 -c \"import sys; sys.stdout.write(" s "); sys.stdout.flush()\"")))
-					)
-				  ))
+  (interactive)
+  (let ((s (replace-regexp-in-string "\"" "'" (buffer-substring (region-beginning) (region-end)))))
+	(progn
+	  (kill-region (region-beginning) (region-end))
+	  (insert (shell-command-to-string (concat "python2.7 -c \"import sys; sys.stdout.write(" s "); sys.stdout.flush()\"")))
+	  )))
 
 (defun search-google ()
   "Googles a query or region if any."
