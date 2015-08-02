@@ -37,8 +37,12 @@
 
 (global-set-key (kbd "C-c d") 'duplicate-line-or-region) ; explicit name ;)
 (global-set-key (kbd "C-x c") 'copy-line)				 ; copy line
+<<<<<<< HEAD
 (global-set-key (kbd "C-c k") 'kill-whole-line)			 ; kill line
 
+=======
+(global-set-key (kbd "C-c k") 'kill-whole-line)			 ; kill whole line
+>>>>>>> 31e117fcd17071bceb17791cbd87e31f12885b40
 (global-set-key (kbd "C-c c") 'comment-or-uncomment-region-or-line)
 (global-set-key (kbd "C-;") 'comment-or-uncomment-region-or-line)
 
@@ -72,6 +76,8 @@
 (global-set-key (kbd "M-6") 'enlarge-window-horizontally)
 (global-set-key (kbd "M-4") 'shrink-window-horizontally)
 
+(global-auto-revert-mode t)				; auto update changed files
+
 ;; configs and keybinds from modes
 (require 'cc-mode)
 (require 'semantic)
@@ -84,7 +90,7 @@
 (global-set-key (kbd "C-x j") 'semantic-complete-jump) ; jump to local symbol
 (global-set-key (kbd "C-c j") 'senator-go-to-up-reference) ; jump to definition
 (global-semantic-show-parser-state-mode)
-(global-semantic-highlight-edits-mode)
+;; (global-semantic-highlight-edits-mode)
 (global-semantic-mru-bookmark-mode)
 
 (require 'linum)						; get line number
