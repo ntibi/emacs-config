@@ -1,7 +1,7 @@
 ;;; myfunctions.el --- vanilla emacs config
 ;;; Commentary:
-;;; some homemade python functions and others
-;;; some are just proudly copy-pasted functions
+;;; some homemade functions
+;;; and some proudly copy-pasted functions
 ;;; code:
 
 (defun reload-dotemacs-file ()
@@ -9,21 +9,31 @@
   (interactive)
   (load-file "~/.emacs"))
 
+(defun smart-beginning ()
+  "Obvious."
+  (interactive)
+  (if (region-active-p) (region-beginning) (line-beginning-position)))
+
+(defun smart-end ()
+  "Same."
+  (interactive)
+  (if (region-active-p) (region-end) (line-end-position)))
+
 (defun region-execute-python ()
   "Replace region by python output."
   (interactive)
-  (let ((s (replace-regexp-in-string "\"" "'" (buffer-substring (region-beginning) (region-end)))))
+  (let ((s (replace-regexp-in-string "\"" "'" (buffer-substring (smart-beginning) (smart-end)))))
 	(progn
-	  (kill-region (region-beginning) (region-end))
+	  (kill-region (smart-beginning) (smart-end))
 	  (insert (shell-command-to-string (concat "python2.7 -c \"" s "\"")))
 	  )))
 																								   
 (defun region-as-python-string ()
   "Replace region by python-string."
   (interactive)
-  (let ((s (replace-regexp-in-string "\"" "'" (buffer-substring (region-beginning) (region-end)))))
+  (let ((s (replace-regexp-in-string "\"" "'" (buffer-substring (smart-beginning) (smart-end)))))
 	(progn
-	  (kill-region (region-beginning) (region-end))
+	  (kill-region (smart-beginning) (smart-end))
 	  (insert (shell-command-to-string (concat "python2.7 -c \"import sys; sys.stdout.write(" s "); sys.stdout.flush()\"")))
 	  )))
 
@@ -34,7 +44,7 @@
    (concat
 	"http://www.google.com/search?ie=utf-8&oe=utf-8&q="
 	(if mark-active
-		(buffer-substring (region-beginning) (region-end))
+		(buffer-substring (smart-beginning) (smart-end))
 	  (read-string "Google: ")))))
 
 (defun duplicate-line-or-region (&optional n)

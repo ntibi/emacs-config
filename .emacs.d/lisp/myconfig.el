@@ -36,13 +36,9 @@
 (global-set-key (kbd "C-c s") 'region-as-python-string)
 
 (global-set-key (kbd "C-c d") 'duplicate-line-or-region) ; explicit name ;)
-(global-set-key (kbd "C-x c") 'copy-line)				 ; copy line
-<<<<<<< HEAD
-(global-set-key (kbd "C-c k") 'kill-whole-line)			 ; kill line
+(global-set-key (kbd "C-x c") 'copy-line)		 ; copy line
+(global-set-key (kbd "C-c k") 'kill-whole-line)	; kill whole line
 
-=======
-(global-set-key (kbd "C-c k") 'kill-whole-line)			 ; kill whole line
->>>>>>> 31e117fcd17071bceb17791cbd87e31f12885b40
 (global-set-key (kbd "C-c c") 'comment-or-uncomment-region-or-line)
 (global-set-key (kbd "C-;") 'comment-or-uncomment-region-or-line)
 
