@@ -45,6 +45,8 @@
 (global-set-key (kbd "C-c r") 'reload-dotemacs-file) ; reload emacs config
 
 ;; keybinds to emacs functions
+(global-set-key (kbd "C-o") 'other-window) ; faster windows switching
+
 (global-set-key (kbd "C-x C-d") (lambda() "open dired ." (interactive) (dired "."))) ; emacs . for file navigation
 
 (global-set-key (kbd "C-c C-t") 'eshell) ; start terminal
