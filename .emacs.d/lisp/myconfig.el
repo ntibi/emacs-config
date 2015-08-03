@@ -30,19 +30,23 @@
 (setq scroll-margin 10)					; pre scroll
 (setq scroll-conservatively 1000)		; keep prescrolling ?
 
+(global-auto-revert-mode t)				; auto update changed files
+
+(defalias 'yes-or-no-p 'y-or-n-p)		; always (y or n) instead of (yes or no)
 
 ;; keybinds to functions from myfunctions.el
 (global-set-key (kbd "C-c p") 'region-execute-python)
 (global-set-key (kbd "C-c s") 'region-as-python-string)
 
 (global-set-key (kbd "C-c d") 'duplicate-line-or-region) ; explicit name ;)
-(global-set-key (kbd "C-x c") 'copy-line)		 ; copy line
+(global-set-key (kbd "C-c c") 'copy-line)		 ; copy line
 (global-set-key (kbd "C-c k") 'kill-whole-line)	; kill whole line
 
-(global-set-key (kbd "C-c c") 'comment-or-uncomment-region-or-line)
 (global-set-key (kbd "C-;") 'comment-or-uncomment-region-or-line)
 
 (global-set-key (kbd "C-c r") 'reload-dotemacs-file) ; reload emacs config
+
+(global-set-key (kbd "C-c C-g") 'search-google) ; preform a google search of region/input
 
 ;; keybinds to emacs functions
 (global-set-key (kbd "C-o") 'other-window) ; faster windows switching
@@ -58,8 +62,6 @@
 
 (global-set-key (kbd "C-c m") 'compile)
 
-(global-set-key (kbd "C-c C-g") 'search-google) ; preform a google search of region/input
-
 (global-set-key (kbd "C-c e") 'whitespace-mode) ; 'cat -e' like
 (global-set-key (kbd "C-c w") 'whitespace-cleanup-region) ; remove trailing whitespaces in region
 
@@ -73,8 +75,6 @@
 (global-set-key (kbd "M-8") 'shrink-window)
 (global-set-key (kbd "M-6") 'enlarge-window-horizontally)
 (global-set-key (kbd "M-4") 'shrink-window-horizontally)
-
-(global-auto-revert-mode t)				; auto update changed files
 
 ;; configs and keybinds from modes
 (require 'cc-mode)
