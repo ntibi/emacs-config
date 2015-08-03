@@ -65,6 +65,8 @@
 (global-set-key (kbd "C-c e") 'whitespace-mode) ; 'cat -e' like
 (global-set-key (kbd "C-c w") 'whitespace-cleanup-region) ; remove trailing whitespaces in region
 
+(global-set-key (kbd "M-m") 'mark-sexp)	; mark balanced expression
+
 ;; resize hotkeys
 (global-set-key (kbd "M-<down>") 'enlarge-window)
 (global-set-key (kbd "M-<up>") 'shrink-window)
