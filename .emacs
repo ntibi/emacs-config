@@ -18,6 +18,7 @@
 (when (>= emacs-major-version 24)
   (load "packages-config.el")				; packages config
 )
+
 (load "myconfig.el")					; vanilla config
 
 ;; load 42 files
