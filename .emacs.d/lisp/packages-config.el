@@ -63,13 +63,14 @@
   ;; yasnippet
 
 
+(require 'flycheck)
+(require 'flycheck-clangcheck)
 (add-hook 'after-init-hook #'global-flycheck-mode) ; flycheck ON
 (set 'flycheck-clang-include-path (list "./" "./includes/" "../includes/" "./include/" "../include/" "/nfs/zfs-student-5/users/2014/ntibi/.brew/Cellar/boost/1.58.0/include/"))
 (setq flycheck-clangcheck-analyze t)
 (setq flycheck-check-syntax-automatically '(mode-enabled save)) ; check at save
 (add-hook 'c++-mode-hook (lambda () (setq flycheck-clang-language-standard "c++11"))) ; --std=c++11
 ;; (add-hook 'c-mode-common-hook  (lambda () DO STUFF ))
-
 
 (require 'company)						; company auto complete
 (add-hook 'after-init-hook 'global-company-mode) ; company auto-compete ON
@@ -86,10 +87,10 @@
 
 
 (require 'company-clang)
-;; (set 'company-clang-arguments (list (concat "-I" (file-name-directory load-file-name) "./") (concat "-I" (file-name-directory load-file-name) "/includes/") (concat "-I" (file-name-directory load-file-name) "../includes/")))
+(set 'company-clang-arguments (list (concat "-I" (file-name-directory load-file-name) "./") (concat "-I" (file-name-directory load-file-name) "/includes/") (concat "-I" (file-name-directory load-file-name) "../includes/")))
 
-;; (require 'company-c-headers)
-;; (set 'company-c-headers-path-user (list "./" "./includes/" "../includes/"))
+(require 'company-c-headers)
+(set 'company-c-headers-path-user (list "./" "./includes/" "../includes/"))
 
 
 (add-hook 'python-mode-hook 'anaconda-mode)

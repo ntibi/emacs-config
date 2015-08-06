@@ -44,6 +44,7 @@
    (quote
 	("f782ed87369a7d568cee28d14922aa6d639f49dd676124d817dd82c8208985d0" "3dafeadb813a33031848dfebfa0928e37e7a3c18efefa10f3e9f48d1993598d3" "18a33cdb764e4baf99b23dcd5abdbf1249670d412c6d3a8092ae1a7b211613d5" "90edd91338ebfdfcd52ecd4025f1c7f731aced4c9c49ed28cfbebb3a3654840b" "1db337246ebc9c083be0d728f8d20913a0f46edc0a00277746ba411c149d7fe5" default)))
  '(enable-recursive-minibuffers nil)
+ '(flycheck-clang-language-standard "c++11")
  '(history-delete-duplicates t)
  '(hl-paren-delay 0.01)
  '(initial-buffer-choice nil)
