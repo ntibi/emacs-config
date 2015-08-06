@@ -73,6 +73,7 @@
 
 (require 'company)						; company auto complete
 (add-hook 'after-init-hook 'global-company-mode) ; company auto-compete ON
+;; (global-company-mode)
 (company-semantic 1)							 ; company with semantic backend
 (global-set-key (kbd "M-/") 'company-complete)	  ; launch ac
 (global-set-key (kbd "M-.") 'company-show-doc-buffer) ; show doc

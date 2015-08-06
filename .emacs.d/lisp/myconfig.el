@@ -42,7 +42,6 @@
 (global-set-key (kbd "C-c c") 'copy-line)		 ; copy line
 (global-set-key (kbd "C-c k") 'kill-whole-line)	; kill whole line
 
-(global-set-key (kbd "C-;") 'comment-or-uncomment-region-or-line)
 (global-set-key (kbd "C-m") 'comment-or-uncomment-region-or-line)
 
 (global-set-key (kbd "C-c r") 'reload-dotemacs-file) ; reload emacs config
