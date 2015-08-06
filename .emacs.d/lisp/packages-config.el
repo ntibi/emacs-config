@@ -84,9 +84,6 @@
 (add-to-list 'completion-styles 'semantic)
 (add-to-list 'company-backends 'company-c-headers)	  ; headers auto completion
 
-(require 'function-args)
-(fa-config-default)
-
 
 (require 'company-clang)
 ;; (set 'company-clang-arguments (list (concat "-I" (file-name-directory load-file-name) "./") (concat "-I" (file-name-directory load-file-name) "/includes/") (concat "-I" (file-name-directory load-file-name) "../includes/")))
