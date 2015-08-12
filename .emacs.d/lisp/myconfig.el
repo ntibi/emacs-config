@@ -67,6 +67,9 @@
 
 (global-set-key (kbd "M-m") 'mark-sexp)	; mark balanced expression
 
+(global-set-key (kbd "C-c x") 'xterm-mouse-mode)
+(global-set-key (kbd "C-c l") 'global-linum-mode)
+
 ;; resize hotkeys
 (global-set-key (kbd "M-<down>") 'enlarge-window)
 (global-set-key (kbd "M-<up>") 'shrink-window)
