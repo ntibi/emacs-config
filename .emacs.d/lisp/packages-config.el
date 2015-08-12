@@ -174,6 +174,8 @@
 (global-set-key (kbd "<home>") 'tabbar-forward-tab)
 (global-set-key (kbd "C-x <down>") 'tabbar-backward-group)
 (global-set-key (kbd "C-x <up>") 'tabbar-forward-group)
+(global-set-key (kbd "C-<end>") 'tabbar-backward-group)
+(global-set-key (kbd "C-<home>") 'tabbar-forward-group)
 (setq tabbar-use-images nil)			; faster ?
 
 
