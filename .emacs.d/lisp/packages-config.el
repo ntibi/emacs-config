@@ -74,7 +74,7 @@
 
 (require 'company)						; company auto complete
 (add-hook 'after-init-hook 'global-company-mode) ; company auto-compete ON
-;; (global-company-mode)
+(global-company-mode)
 (company-semantic 1)							 ; company with semantic backend
 (global-set-key (kbd "M-/") 'company-complete)	  ; launch ac
 (global-set-key (kbd "M-.") 'company-show-doc-buffer) ; show doc
@@ -97,14 +97,6 @@
 (add-hook 'python-mode-hook 'eldoc-mode)
 (add-hook 'python-mode-hook (lambda () "" (interactive) (add-to-list 'company-backends 'company-anaconda)))
 (add-hook 'python-mode-hook (lambda () "" (interactive) (pyenv-mode)))
-
-
-(defun my:ac-c-headers-init ()
-  (require 'auto-complete-c-headers)
-  (add-to-list 'ac-sources 'ac-source-c-headers))
-(add-hook 'c++-mode-hook 'my:ac-c-headers-init)
-(add-hook 'c-mode-hook 'my:ac-c-headers-init)
-
 
 (require 'yasnippet)							 ; yet another snippet
 (setq yas-snippet-dirs '("~/.emacs.d/snippets")) ; snippets path

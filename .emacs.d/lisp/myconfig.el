@@ -83,7 +83,7 @@
 (require 'semantic)
 (require 'semantic/ia)
 (global-ede-mode 1)                      ; Enable the Project management system
-;; (semantic-mode 1)						 ;
+(semantic-mode 1)						 ;
 (global-semanticdb-minor-mode 1)
 (global-semantic-idle-scheduler-mode 1)	; update DB wen idle
 (semantic-add-system-include "/nfs/zfs-student-5/users/2014/ntibi/.brew/Cellar/boost/1.58.0/include/")
