@@ -146,7 +146,7 @@
 
 
 (require 'neotree)						; neo tree
-(global-set-key (kbd "C-x a a") 'neotree-toggle) ; open neo tree
+(global-set-key (kbd "C-c a") 'neotree-toggle) ; open neo tree
 (global-set-key [f8] 'neotree-toggle)			 ; same
 
 

@@ -32,6 +32,11 @@
 
 (global-auto-revert-mode t)				; auto update changed files
 
+(add-hook 'python-mode-hook
+		  (function (lambda ()
+                      (setq indent-tabs-mode t
+                            tab-width 4))))
+
 (defalias 'yes-or-no-p 'y-or-n-p)		; always (y or n) instead of (yes or no)
 
 ;; keybinds to functions from myfunctions.el
