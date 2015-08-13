@@ -2,7 +2,6 @@
 ;;; commentary:
 ;;; code:
 
-
 ; installed packages
   ;; anaconda-mode
   ;; async

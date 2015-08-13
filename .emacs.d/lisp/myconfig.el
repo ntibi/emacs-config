@@ -38,6 +38,8 @@
 (global-set-key (kbd "C-c p") 'region-execute-python)
 (global-set-key (kbd "C-c s") 'region-as-python-string)
 
+(global-set-key (kbd "C-x y") 'xpaste)
+
 (global-set-key (kbd "C-c d") 'duplicate-line-or-region) ; explicit name ;)
 (global-set-key (kbd "C-c c") 'copy-line)		 ; copy line
 (global-set-key (kbd "C-c k") 'kill-whole-line)	; kill whole line
@@ -66,10 +68,12 @@
 (global-set-key (kbd "C-c e") 'whitespace-mode) ; 'cat -e' like
 (global-set-key (kbd "C-c w") 'whitespace-cleanup-region) ; remove trailing whitespaces in region
 
-(global-set-key (kbd "M-m") 'mark-sexp)	; mark balanced expression
+(global-set-key (kbd "C-c x") 'xterm-mouse-mode) ; toggle mouse
+(global-set-key (kbd "C-c l") 'global-linum-mode) ; toggle line numbers
 
-(global-set-key (kbd "C-c x") 'xterm-mouse-mode)
-(global-set-key (kbd "C-c l") 'global-linum-mode)
+(global-set-key (kbd "M-m") 'mark-sexp)	; mark balanced expression
+(global-set-key (kbd "M-k") 'kill-sexp)	; kill balanced expression
+
 
 ;; resize hotkeys
 (global-set-key (kbd "M-<down>") 'enlarge-window)

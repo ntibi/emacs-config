@@ -4,6 +4,14 @@
 ;;; and some proudly copy-pasted functions
 ;;; code:
 
+
+(defun xpaste ()
+  "paste from x clipboard"
+  (interactive)
+  (insert (shell-command-to-string "cat /dev/clipboard"))
+)
+
+
 (defun reload-dotemacs-file ()
   "Reload .emacs."
   (interactive)
