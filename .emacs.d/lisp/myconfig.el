@@ -74,7 +74,7 @@
 (global-set-key (kbd "C-c w") 'whitespace-cleanup-region) ; remove trailing whitespaces in region
 
 (global-set-key (kbd "C-c x") 'xterm-mouse-mode) ; toggle mouse
-(global-set-key (kbd "C-c l") 'global-linum-mode) ; toggle line numbers
+(global-set-key (kbd "C-c l") 'linum-mode) ; toggle line numbers
 
 (global-set-key (kbd "M-m") 'mark-sexp)	; mark balanced expression
 (global-set-key (kbd "M-k") 'kill-sexp)	; kill balanced expression
@@ -107,7 +107,7 @@
 (global-semantic-mru-bookmark-mode)
 
 (require 'linum)						; get line number
-(global-linum-mode)
+(add-hook 'prog-mode-hook 'linum-mode)
 (setq linum-format "%4d \u2502 ")
 
 
