@@ -79,12 +79,17 @@
 (global-set-key (kbd "M-m") 'mark-sexp)	; mark balanced expression
 (global-set-key (kbd "M-k") 'kill-sexp)	; kill balanced expression
 
-
-;; resize hotkeys
 (global-set-key (kbd "M-<down>") 'enlarge-window)
 (global-set-key (kbd "M-<up>") 'shrink-window)
 (global-set-key (kbd "M-<right>") 'enlarge-window-horizontally)
 (global-set-key (kbd "M-<left>") 'shrink-window-horizontally)
+
+
+;; resize hotkeys
+(global-set-key (kbd "<C-down>") 'forward-paragraph)
+(global-set-key (kbd "<C-up>") 'backward-paragraph)
+(global-set-key (kbd "<C-right>") 'right-word)
+(global-set-key (kbd "<C-left>") 'left-word)
 
 (global-set-key (kbd "M-2") 'enlarge-window)
 (global-set-key (kbd "M-8") 'shrink-window)
