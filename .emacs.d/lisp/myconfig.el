@@ -84,6 +84,7 @@
 (global-set-key (kbd "M-<right>") 'enlarge-window-horizontally)
 (global-set-key (kbd "M-<left>") 'shrink-window-horizontally)
 
+(global-set-key (kbd "C-f") 'repeat)	; repeat command faster
 
 ;; resize hotkeys
 (global-set-key (kbd "<C-down>") 'forward-paragraph)
@@ -95,6 +96,11 @@
 (global-set-key (kbd "M-8") 'shrink-window)
 (global-set-key (kbd "M-6") 'enlarge-window-horizontally)
 (global-set-key (kbd "M-4") 'shrink-window-horizontally)
+
+(global-set-key (kbd "C-c <down>") 'enlarge-window) ; if no numpad
+(global-set-key (kbd "C-c <up>") 'shrink-window)
+(global-set-key (kbd "C-c <right>") 'enlarge-window-horizontally)
+(global-set-key (kbd "C-c <left>") 'shrink-window-horizontally)
 
 ;; configs and keybinds from modes
 (require 'cc-mode)
