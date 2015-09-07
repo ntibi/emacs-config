@@ -159,14 +159,15 @@
 (require 'tab-group)					; organize tabs in groups
 (tabbar-mode t)							; ON
 (load "tabbar-tweek.el")				; nice tabbar config
-(global-set-key (kbd "C-x <left>") 'tabbar-backward-tab)
-(global-set-key (kbd "C-x <right>") 'tabbar-forward-tab)
 (global-set-key (kbd "<end>") 'tabbar-backward-tab)
 (global-set-key (kbd "<home>") 'tabbar-forward-tab)
-(global-set-key (kbd "C-x <down>") 'tabbar-backward-group)
-(global-set-key (kbd "C-x <up>") 'tabbar-forward-group)
 (global-set-key (kbd "C-<end>") 'tabbar-backward-group)
 (global-set-key (kbd "C-<home>") 'tabbar-forward-group)
+
+(global-set-key (kbd "C-x <left>") (rep 'tabbar-backward-tab))
+(global-set-key (kbd "C-x <right>") (rep 'tabbar-forward-tab))
+(global-set-key (kbd "C-x <down>") (rep 'tabbar-backward-group))
+(global-set-key (kbd "C-x <up>") (rep 'tabbar-forward-group)
 (setq tabbar-use-images nil)			; faster ?
 
 

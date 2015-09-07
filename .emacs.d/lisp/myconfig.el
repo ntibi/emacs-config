@@ -73,8 +73,8 @@
 (global-set-key (kbd "C-c e") 'whitespace-mode) ; 'cat -e' like
 (global-set-key (kbd "C-c w") 'whitespace-cleanup-region) ; remove trailing whitespaces in region
 
-(global-set-key (kbd "C-c x") 'xterm-mouse-mode) ; toggle mouse
-(global-set-key (kbd "C-c l") 'linum-mode) ; toggle line numbers
+(global-set-key (kbd "C-c x") (rep 'xterm-mouse-mode)) ; toggle mouse
+(global-set-key (kbd "C-c l") (rep 'linum-mode)) ; toggle line numbers
 
 (global-set-key (kbd "M-m") 'mark-sexp)	; mark balanced expression
 (global-set-key (kbd "M-k") 'kill-sexp)	; kill balanced expression
@@ -97,10 +97,10 @@
 (global-set-key (kbd "M-6") 'enlarge-window-horizontally)
 (global-set-key (kbd "M-4") 'shrink-window-horizontally)
 
-(global-set-key (kbd "C-c <down>") 'enlarge-window) ; if no numpad
-(global-set-key (kbd "C-c <up>") 'shrink-window)
-(global-set-key (kbd "C-c <right>") 'enlarge-window-horizontally)
-(global-set-key (kbd "C-c <left>") 'shrink-window-horizontally)
+(global-set-key (kbd "C-c <down>") (rep 'enlarge-window)) ; if no numpad
+(global-set-key (kbd "C-c <up>") (rep 'shrink-window))
+(global-set-key (kbd "C-c <right>") (rep 'enlarge-window-horizontally))
+(global-set-key (kbd "C-c <left>") (rep 'shrink-window-horizontally))
 
 ;; configs and keybinds from modes
 (require 'cc-mode)
