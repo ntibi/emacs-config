@@ -44,7 +44,6 @@
 (global-set-key (kbd "C-c d") (rep 'duplicate-line-or-region)) ; explicit name ;)
 (global-set-key (kbd "C-c c") (rep 'copy-line))		  ; copy line
 (global-set-key (kbd "C-c k") (rep 'kill-whole-line)) ; kill whole line
-(global-set-key (kbd "C-c k") (rep 'kill-whole-line)) ; kill whole line
 
 (global-set-key (kbd "C-]") 'comment-or-uncomment-region-or-line)
 (global-set-key (kbd "M-c") 'comment-or-uncomment-region-or-line)
@@ -59,7 +58,7 @@
 
 (global-set-key (kbd "C-x C-d") (lambda() "open dired ." (interactive) (dired "."))) ; emacs . for file navigation
 
-(global-set-key (kbd "C-c C-t") 'eshell) ; start terminal
+(global-set-key (kbd "C-c C-t") 'term) ; start terminal
 (global-set-key (kbd "C-c C-s") 'eshell) ; start shell
 
 (global-set-key (kbd "M-i") (lambda () "insert tab" (interactive) (insert-tab)))
@@ -68,7 +67,7 @@
 
 (global-set-key (kbd "C-c m") 'compile)
 
-(global-set-key (kbd "C-c e") (rep 'whitespace-mode)) ; 'cat -e' like
+(global-set-key (kbd "C-c e") 'whitespace-mode) ; 'cat -e' like
 (global-set-key (kbd "C-c w") 'whitespace-cleanup-region) ; remove trailing whitespaces in region
 
 (global-set-key (kbd "C-c x") 'xterm-mouse-mode) ; toggle mouse
