@@ -4,13 +4,34 @@
 ;;; and some proudly copy-pasted functions
 ;;; code:
 
+(require 'repeat)
+(defun rep (cmd)						; if cmd is not a compiled function, it must be already loaded with (require 'source-file)
+    "Returns a new command that is a repeatable version of CMD.
+The new command is named CMD-repeat.  CMD should be a quoted
+command.
+
+This allows you to bind the command to a compound keystroke and
+repeat it with just the final key.  For example:
+
+  (global-set-key (kbd \"C-c a\") (rep 'foo))
+
+will create a new command called foo-repeat.  Typing C-c a will
+just invoke foo.  Typing C-c a a a will invoke foo three times,
+and so on."
+	(fset (intern (concat (symbol-name cmd) "-repeat"))
+		  `(lambda ,(help-function-arglist cmd) ;; arg list
+			 ,(format "A repeatable version of `%s'." (symbol-name cmd)) ;; doc string
+			 ,(interactive-form cmd) ;; interactive form
+			 ;; see also repeat-message-function
+			 (setq last-repeatable-command ',cmd)
+			 (repeat nil)))
+	(intern (concat (symbol-name cmd) "-repeat")))
 
 (defun xpaste ()
   "paste from x clipboard"
   (interactive)
   (insert (shell-command-to-string "cat /dev/clipboard"))
 )
-
 
 (defun reload-dotemacs-file ()
   "Reload .emacs."
@@ -107,29 +128,6 @@ With negative N, comment out original line and use the absolute value."
 	  (setq beg (line-beginning-position) end (line-end-position)))
 	(comment-or-uncomment-region beg end)
 	(next-line)))
-
-(require 'repeat)
-(defun rep (cmd)
-    "Returns a new command that is a repeatable version of CMD.
-The new command is named CMD-repeat.  CMD should be a quoted
-command.
-
-This allows you to bind the command to a compound keystroke and
-repeat it with just the final key.  For example:
-
-  (global-set-key (kbd \"C-c a\") (rep 'foo))
-
-will create a new command called foo-repeat.  Typing C-c a will
-just invoke foo.  Typing C-c a a a will invoke foo three times,
-and so on."
-	(fset (intern (concat (symbol-name cmd) "-repeat"))
-		  `(lambda ,(help-function-arglist cmd) ;; arg list
-			 ,(format "A repeatable version of `%s'." (symbol-name cmd)) ;; doc string
-			 ,(interactive-form cmd) ;; interactive form
-			 ;; see also repeat-message-function
-			 (setq last-repeatable-command ',cmd)
-			 (repeat nil)))
-	(intern (concat (symbol-name cmd) "-repeat")))
 
 (provide 'myfunctions)
 ;;; myfunctions.el ends here

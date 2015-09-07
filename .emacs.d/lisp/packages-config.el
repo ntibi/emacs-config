@@ -167,9 +167,8 @@
 (global-set-key (kbd "C-x <left>") (rep 'tabbar-backward-tab))
 (global-set-key (kbd "C-x <right>") (rep 'tabbar-forward-tab))
 (global-set-key (kbd "C-x <down>") (rep 'tabbar-backward-group))
-(global-set-key (kbd "C-x <up>") (rep 'tabbar-forward-group)
+(global-set-key (kbd "C-x <up>") (rep 'tabbar-forward-group))
 (setq tabbar-use-images nil)			; faster ?
-
 
 (require 'multiple-cursors)				; multiple cursors
 (global-set-key (kbd "<C-down-mouse-1>") 'mc/add-cursor-on-click) ; ctrl clic to add cursor

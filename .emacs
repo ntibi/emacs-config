@@ -14,6 +14,9 @@
 (add-to-list 'load-path "~/.emacs.d/lisp/42/") ;; 42 config files path
 (add-to-list 'load-path "~/.emacs.d/lisp/themes/") ;; themes path
 
+
+(load "myfunctions.el")
+
 ;; load config files
 (when (>= emacs-major-version 24)
   (load "packages-config.el")				; packages config

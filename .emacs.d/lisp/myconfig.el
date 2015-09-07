@@ -3,10 +3,6 @@
 ;;; keybinds and modes available on default emacs >= 24
 ;;; code:
 
-(load "myfunctions.el")
-
-;; config
-
 ;; set backup dir (/tmp/emacs{uid})
 (defconst emacs-tmp-dir (format "%s/%s%s/" temporary-file-directory "emacs" (user-uid)))
 (setq backup-directory-alist
@@ -73,16 +69,12 @@
 (global-set-key (kbd "C-c e") 'whitespace-mode) ; 'cat -e' like
 (global-set-key (kbd "C-c w") 'whitespace-cleanup-region) ; remove trailing whitespaces in region
 
-(global-set-key (kbd "C-c x") (rep 'xterm-mouse-mode)) ; toggle mouse
+(global-set-key (kbd "C-c x") 'xterm-mouse-mode) ; toggle mouse
+(require 'linum)
 (global-set-key (kbd "C-c l") (rep 'linum-mode)) ; toggle line numbers
 
 (global-set-key (kbd "M-m") 'mark-sexp)	; mark balanced expression
 (global-set-key (kbd "M-k") 'kill-sexp)	; kill balanced expression
-
-(global-set-key (kbd "M-<down>") 'enlarge-window)
-(global-set-key (kbd "M-<up>") 'shrink-window)
-(global-set-key (kbd "M-<right>") 'enlarge-window-horizontally)
-(global-set-key (kbd "M-<left>") 'shrink-window-horizontally)
 
 (global-set-key (kbd "C-f") 'repeat)	; repeat command faster
 
@@ -97,7 +89,7 @@
 (global-set-key (kbd "M-6") 'enlarge-window-horizontally)
 (global-set-key (kbd "M-4") 'shrink-window-horizontally)
 
-(global-set-key (kbd "C-c <down>") (rep 'enlarge-window)) ; if no numpad
+(global-set-key (kbd "C-c <down>") (rep 'enlarge-window))
 (global-set-key (kbd "C-c <up>") (rep 'shrink-window))
 (global-set-key (kbd "C-c <right>") (rep 'enlarge-window-horizontally))
 (global-set-key (kbd "C-c <left>") (rep 'shrink-window-horizontally))
