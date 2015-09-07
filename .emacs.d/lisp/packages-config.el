@@ -168,6 +168,23 @@
 (global-set-key (kbd "C-x <right>") (rep 'tabbar-forward-tab))
 (global-set-key (kbd "C-x <down>") (rep 'tabbar-backward-group))
 (global-set-key (kbd "C-x <up>") (rep 'tabbar-forward-group))
+
+(defun resize-mode (cmd)				; resize mode
+  (interactive)
+  (funcall cmd)
+  (set-temporary-overlay-map
+   (let ((map (make-sparse-keymap)))
+	 (define-key map (kbd "<right>") '(lambda () "DOCSTRING" (interactive) (resize-mode 'tabbar-forward-tab)))
+	 (define-key map (kbd "<left>") '(lambda () "DOCSTRING" (interactive) (resize-mode 'tabbar-backward-tab)))
+	 (define-key map (kbd "<up>") '(lambda () "DOCSTRING" (interactive) (resize-mode 'tabbar-forward-group)))
+	 (define-key map (kbd "<down>") '(lambda () "DOCSTRING" (interactive) (resize-mode 'tabbar-backward-group)))
+	 map)))
+
+(global-set-key (kbd "C-x <right>") '(lambda () "DOCSTRING" (interactive) (resize-mode 'tabbar-forward-tab)))
+(global-set-key (kbd "C-x <left>") '(lambda () "DOCSTRING" (interactive) (resize-mode 'tabbar-backward-tab)))
+(global-set-key (kbd "C-x <up>") '(lambda () "DOCSTRING" (interactive) (resize-mode 'tabbar-forward-group)))
+(global-set-key (kbd "C-x <down>") '(lambda () "DOCSTRING" (interactive) (resize-mode 'tabbar-backward-group)))
+
 (setq tabbar-use-images nil)			; faster ?
 
 (require 'multiple-cursors)				; multiple cursors
