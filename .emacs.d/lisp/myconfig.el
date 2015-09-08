@@ -16,6 +16,8 @@
 (setq inhibit-startup-message t) ;; no startup message
 (setq initial-scratch-message ";; Scratch buffer\n") ;; Scratch buffer message
 
+(setq shift-select-mode t)				; handy selection with shift
+
 (column-number-mode t)					; print column number
 (line-number-mode t)					; print line number
 
@@ -79,6 +81,11 @@
 (global-set-key (kbd "<C-up>") 'backward-paragraph)
 (global-set-key (kbd "<C-right>") 'right-word)
 (global-set-key (kbd "<C-left>") 'left-word)
+(global-set-key (kbd "<M-right>") 'forward-sexp)
+(global-set-key (kbd "<M-left>") 'backward-sexp)
+
+(global-set-key (kbd "<M-up>") 'move-text-up)
+(global-set-key (kbd "<M-down>") 'move-text-down)
 
 
 ;; resize hotkeys
