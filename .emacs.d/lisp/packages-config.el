@@ -152,7 +152,8 @@
 
 (require 'undo-tree)					; undo tree
 (global-undo-tree-mode)					; set undo-tree as default undo (C-x u)
-(global-set-key (kbd "C-x u") 'undo-tree-visualize)
+(global-set-key (kbd "C-x u") 'undo-tree-visualize) ; undo with the fancy tree
+(global-set-key (kbd "C--") 'undo-tree-undo) ; normal undo
 
 
 (require 'tabbar)						; tabbar mode
@@ -164,26 +165,29 @@
 (global-set-key (kbd "C-<end>") 'tabbar-backward-group)
 (global-set-key (kbd "C-<home>") 'tabbar-forward-group)
 
-(global-set-key (kbd "C-x <left>") (rep 'tabbar-backward-tab))
-(global-set-key (kbd "C-x <right>") (rep 'tabbar-forward-tab))
-(global-set-key (kbd "C-x <down>") (rep 'tabbar-backward-group))
-(global-set-key (kbd "C-x <up>") (rep 'tabbar-forward-group))
+;; (global-set-key (kbd "C-x <left>") (rep 'tabbar-backward-tab))
+;; (global-set-key (kbd "C-x <right>") (rep 'tabbar-forward-tab))
+;; (global-set-key (kbd "C-x <down>") (rep 'tabbar-backward-group))
+;; (global-set-key (kbd "C-x <up>") (rep 'tabbar-forward-group))
 
-(defun resize-mode (cmd)				; resize mode
+(defun tab-mode (cmd)				; ezly circle between tabs
   (interactive)
   (funcall cmd)
   (set-temporary-overlay-map
    (let ((map (make-sparse-keymap)))
-	 (define-key map (kbd "<right>") '(lambda () "DOCSTRING" (interactive) (resize-mode 'tabbar-forward-tab)))
-	 (define-key map (kbd "<left>") '(lambda () "DOCSTRING" (interactive) (resize-mode 'tabbar-backward-tab)))
-	 (define-key map (kbd "<up>") '(lambda () "DOCSTRING" (interactive) (resize-mode 'tabbar-forward-group)))
-	 (define-key map (kbd "<down>") '(lambda () "DOCSTRING" (interactive) (resize-mode 'tabbar-backward-group)))
+	 (define-key map (kbd "<right>") '(lambda () "DOCSTRING" (interactive) (tab-mode 'tabbar-forward-tab)))
+	 (define-key map (kbd "<left>") '(lambda () "DOCSTRING" (interactive) (tab-mode 'tabbar-backward-tab)))
+	 (define-key map (kbd "<up>") '(lambda () "DOCSTRING" (interactive) (tab-mode 'tabbar-forward-group)))
+	 (define-key map (kbd "<down>") '(lambda () "DOCSTRING" (interactive) (tab-mode 'tabbar-backward-group)))
+	 (define-key map (kbd "q") 'keyboard-quit)
+	 (define-key map (kbd "SPC") 'keyboard-quit)
+	 (define-key map (kbd "RET") 'keyboard-quit)
 	 map)))
 
-(global-set-key (kbd "C-x <right>") '(lambda () "DOCSTRING" (interactive) (resize-mode 'tabbar-forward-tab)))
-(global-set-key (kbd "C-x <left>") '(lambda () "DOCSTRING" (interactive) (resize-mode 'tabbar-backward-tab)))
-(global-set-key (kbd "C-x <up>") '(lambda () "DOCSTRING" (interactive) (resize-mode 'tabbar-forward-group)))
-(global-set-key (kbd "C-x <down>") '(lambda () "DOCSTRING" (interactive) (resize-mode 'tabbar-backward-group)))
+(global-set-key (kbd "C-x <right>") '(lambda () "DOCSTRING" (interactive) (tab-mode 'tabbar-forward-tab)))
+(global-set-key (kbd "C-x <left>") '(lambda () "DOCSTRING" (interactive) (tab-mode 'tabbar-backward-tab)))
+(global-set-key (kbd "C-x <up>") '(lambda () "DOCSTRING" (interactive) (tab-mode 'tabbar-forward-group)))
+(global-set-key (kbd "C-x <down>") '(lambda () "DOCSTRING" (interactive) (tab-mode 'tabbar-backward-group)))
 
 (setq tabbar-use-images nil)			; faster ?
 

@@ -27,6 +27,37 @@ and so on."
 			 (repeat nil)))
 	(intern (concat (symbol-name cmd) "-repeat")))
 
+
+(defun text-manip-mode (cmd)			; copy cut paste
+  (interactive)
+  (funcall cmd 1)
+  (set-temporary-overlay-map
+   (let ((map (make-sparse-keymap)))
+	 (define-key map (kbd "d") '(lambda () "duplicate line or region" (interactive) (text-manip-mode 'duplicate-line-or-region)))
+	 (define-key map (kbd "c") '(lambda () "copy line" (interactive) (text-manip-mode 'copy-line)))
+	 (define-key map (kbd "k") '(lambda () "kill line" (interactive) (text-manip-mode 'kill-whole-line)))
+	 (define-key map (kbd ";") '(lambda () "(un)comment line/region" (interactive) (text-manip-mode 'comment-or-uncomment-region-or-line)))
+	 (define-key map (kbd "y") '(lambda () "tank" (interactive) (text-manip-mode 'yank)))
+	 (define-key map (kbd "q") 'keyboard-quit)
+	 (define-key map (kbd "SPC") 'keyboard-quit)
+	 (define-key map (kbd "RET") 'keyboard-quit)
+	 map)))
+
+(defun resize-mode (cmd)				; resize mode
+  (interactive)
+  (funcall cmd 1)
+  (set-temporary-overlay-map
+   (let ((map (make-sparse-keymap)))
+	 (define-key map (kbd "<right>") '(lambda () "right" (interactive) (resize-mode 'enlarge-window-horizontally)))
+	 (define-key map (kbd "<left>") '(lambda () "left" (interactive) (resize-mode 'shrink-window-horizontally)))
+	 (define-key map (kbd "<down>") '(lambda () "down" (interactive) (resize-mode 'enlarge-window)))
+	 (define-key map (kbd "<up>") '(lambda () "up" (interactive) (resize-mode 'shrink-window)))
+	 (define-key map (kbd "q") 'keyboard-quit)
+	 (define-key map (kbd "SPC") 'keyboard-quit)
+	 (define-key map (kbd "RET") 'keyboard-quit)
+	 map)))
+
+
 (defun xpaste ()
   "paste from x clipboard"
   (interactive)
@@ -119,7 +150,7 @@ With negative N, comment out original line and use the absolute value."
 	  (beginning-of-line (or (and arg (1+ arg)) 2))
 	  (if (and arg (not (= 1 arg))) (message "%d lines copied" arg)))
 
-(defun comment-or-uncomment-region-or-line ()
+(defun comment-or-uncomment-region-or-line (&optional n) ; unused n arg for now
   "Comments or uncomments the region or the current line if there's no active region."
   (interactive)
   (let (beg end)

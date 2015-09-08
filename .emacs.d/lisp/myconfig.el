@@ -41,12 +41,10 @@
 
 (global-set-key (kbd "C-x y") 'xpaste)
 
-(global-set-key (kbd "C-c d") (rep 'duplicate-line-or-region)) ; explicit name ;)
-(global-set-key (kbd "C-c c") (rep 'copy-line))		  ; copy line
-(global-set-key (kbd "C-c k") (rep 'kill-whole-line)) ; kill whole line
-
-(global-set-key (kbd "C-]") 'comment-or-uncomment-region-or-line)
-(global-set-key (kbd "M-c") 'comment-or-uncomment-region-or-line)
+(global-set-key (kbd "C-c d") '(lambda () "" (interactive) (text-manip-mode 'duplicate-line-or-region)))
+(global-set-key (kbd "C-c c") '(lambda () "" (interactive) (text-manip-mode 'copy-line)))
+(global-set-key (kbd "C-c k") '(lambda () "" (interactive) (text-manip-mode 'kill-whole-line)))
+(global-set-key (kbd "C-c ;") '(lambda () "" (interactive) (text-manip-mode 'comment-or-uncomment-region-or-line)))
 
 (global-set-key (kbd "C-c r") 'reload-dotemacs-file) ; reload emacs config
 
@@ -77,21 +75,19 @@
 
 (global-set-key (kbd "C-f") 'repeat)	; repeat command faster
 
-;; resize hotkeys
 (global-set-key (kbd "<C-down>") 'forward-paragraph)
 (global-set-key (kbd "<C-up>") 'backward-paragraph)
 (global-set-key (kbd "<C-right>") 'right-word)
 (global-set-key (kbd "<C-left>") 'left-word)
 
-(global-set-key (kbd "M-2") 'enlarge-window)
-(global-set-key (kbd "M-8") 'shrink-window)
-(global-set-key (kbd "M-6") 'enlarge-window-horizontally)
-(global-set-key (kbd "M-4") 'shrink-window-horizontally)
 
-(global-set-key (kbd "C-c <down>") (rep 'enlarge-window))
-(global-set-key (kbd "C-c <up>") (rep 'shrink-window))
-(global-set-key (kbd "C-c <right>") (rep 'enlarge-window-horizontally))
-(global-set-key (kbd "C-c <left>") (rep 'shrink-window-horizontally))
+;; resize hotkeys
+
+(global-set-key (kbd "C-c <right>") '(lambda () "" (interactive) (resize-mode 'enlarge-window-horizontally)))
+(global-set-key (kbd "C-c <left>") '(lambda () "" (interactive) (resize-mode 'shrink-window-horizontally)))
+(global-set-key (kbd "C-c <down>") '(lambda () "" (interactive) (resize-mode 'enlarge-window)))
+(global-set-key (kbd "C-c <up>") '(lambda () "" (interactive) (resize-mode 'shrink-window)))
+
 
 ;; configs and keybinds from modes
 (require 'cc-mode)
