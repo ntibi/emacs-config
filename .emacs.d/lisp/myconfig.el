@@ -90,10 +90,10 @@
 
 ;; resize hotkeys
 
-(global-set-key (kbd "C-c <right>") '(lambda () "" (interactive) (resize-mode 'enlarge-window-horizontally)))
-(global-set-key (kbd "C-c <left>") '(lambda () "" (interactive) (resize-mode 'shrink-window-horizontally)))
-(global-set-key (kbd "C-c <down>") '(lambda () "" (interactive) (resize-mode 'enlarge-window)))
-(global-set-key (kbd "C-c <up>") '(lambda () "" (interactive) (resize-mode 'shrink-window)))
+(global-set-key (kbd "C-c <right>") '(lambda () "" (interactive) (progn (setq move-n 1) (setq old-resize-call 1) (dynamic-resize-mode 'enlarge-window-horizontally))))
+(global-set-key (kbd "C-c <left>") '(lambda () "" (interactive) (progn (setq move-n 1) (setq old-resize-call 1) (dynamic-resize-mode 'shrink-window-horizontally))))
+(global-set-key (kbd "C-c <down>") '(lambda () "" (interactive) (progn (setq move-n 1) (setq old-resize-call 1) (dynamic-resize-mode 'enlarge-window))))
+(global-set-key (kbd "C-c <up>") '(lambda () "" (interactive) (progn (setq move-n 1) (setq old-resize-call 1) (dynamic-resize-mode 'shrink-window))))
 
 
 ;; configs and keybinds from modes

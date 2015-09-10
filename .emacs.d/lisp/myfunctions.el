@@ -43,20 +43,31 @@ and so on."
 	 (define-key map (kbd "RET") 'keyboard-quit)
 	 map)))
 
-(defun resize-mode (cmd)				; resize mode
+
+(setq move-n 1)							; resize variables for dynamic resize
+(setq old-resize-call nil)
+
+(defun dynamic-resize-mode (cmd)
   (interactive)
-  (funcall cmd 1)
-  (set-temporary-overlay-map
+  "dynamic resize mode (offset doubles every keypress)"
+  (progn
+	(if (eq old-resize-call cmd)		; double resize size every recall in the same dir
+		(if (>= move-n 8) (setq move-n 8) (setq move-n (* 2 move-n))) ; it has to still <= 8
+	  (setq move-n 1)
+	  )
+	(funcall cmd move-n)
+	(setq old-resize-call cmd)
+	)
+  (set-transient-map
    (let ((map (make-sparse-keymap)))
-	 (define-key map (kbd "<right>") '(lambda () "right" (interactive) (resize-mode 'enlarge-window-horizontally)))
-	 (define-key map (kbd "<left>") '(lambda () "left" (interactive) (resize-mode 'shrink-window-horizontally)))
-	 (define-key map (kbd "<down>") '(lambda () "down" (interactive) (resize-mode 'enlarge-window)))
-	 (define-key map (kbd "<up>") '(lambda () "up" (interactive) (resize-mode 'shrink-window)))
+	 (define-key map (kbd "<right>") '(lambda () "right" (interactive) (dynamic-resize-mode 'enlarge-window-horizontally)))
+	 (define-key map (kbd "<left>") '(lambda () "left" (interactive) (dynamic-resize-mode 'shrink-window-horizontally)))
+	 (define-key map (kbd "<up>") '(lambda () "right" (interactive) (dynamic-resize-mode 'shrink-window)))
+	 (define-key map (kbd "<down>") '(lambda () "left" (interactive) (dynamic-resize-mode 'enlarge-window)))
 	 (define-key map (kbd "q") 'keyboard-quit)
 	 (define-key map (kbd "SPC") 'keyboard-quit)
 	 (define-key map (kbd "RET") 'keyboard-quit)
 	 map)))
-
 
 (defun xpaste ()
   "paste from x clipboard"
