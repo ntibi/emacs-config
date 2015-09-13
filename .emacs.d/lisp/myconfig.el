@@ -110,6 +110,7 @@
 (global-semantic-show-parser-state-mode)
 ;; (global-semantic-highlight-edits-mode)
 (global-semantic-mru-bookmark-mode)
+(global-semantic-highlight-func-mode)
 
 (require 'linum)						; get line number
 (add-hook 'prog-mode-hook 'linum-mode)

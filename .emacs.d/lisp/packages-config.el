@@ -61,7 +61,6 @@
   ;; undo-tree
   ;; yasnippet
 
-
 (require 'flycheck)
 (require 'flycheck-clangcheck)
 (add-hook 'after-init-hook #'global-flycheck-mode) ; flycheck ON
@@ -123,6 +122,7 @@
 (global-set-key (kbd "M-x") 'helm-M-x)	; use custom minibuffer
 (helm-autoresize-mode 1)				; shrink minibuffer if possible
 
+
 (require 'find-file-in-project)
 (setq ffip-project-file ".git")
 (global-set-key (kbd "C-x f") 'find-file-in-project) ; find file anywhere in the project
@@ -147,14 +147,12 @@
 
 (require 'neotree)						; neo tree
 (global-set-key (kbd "C-c a") 'neotree-toggle) ; open neo tree
-(global-set-key [f8] 'neotree-toggle)			 ; same
-
+(global-set-key [f8] 'neotree-toggle)			; same
 
 (require 'undo-tree)					; undo tree
 (global-undo-tree-mode)					; set undo-tree as default undo (C-x u)
-(global-set-key (kbd "C-x u") 'undo-tree-visualize) ; undo with the fancy tree
-(global-set-key (kbd "C--") 'undo-tree-undo) ; normal undo
-
+(define-key undo-tree-map (kbd "C-x u") 'undo-tree-visualize) ; undo with the fancy tree
+(define-key undo-tree-map (kbd "C--") 'undo-tree-undo) ; normal undo
 
 (require 'tabbar)						; tabbar mode
 (require 'tab-group)					; organize tabs in groups
@@ -193,7 +191,6 @@
 
 (require 'multiple-cursors)				; multiple cursors
 (global-set-key (kbd "<C-down-mouse-1>") 'mc/add-cursor-on-click) ; ctrl clic to add cursor
-
 
 (provide 'myconfig)
 ;;; packages-config.el ends here
