@@ -58,7 +58,7 @@ and so on."
 	(funcall cmd move-n)
 	(setq old-resize-call cmd)
 	)
-  (set-transient-map
+  (set-temporary-overlay-map
    (let ((map (make-sparse-keymap)))
 	 (define-key map (kbd "<right>") '(lambda () "right" (interactive) (dynamic-resize-mode 'enlarge-window-horizontally)))
 	 (define-key map (kbd "<left>") '(lambda () "left" (interactive) (dynamic-resize-mode 'shrink-window-horizontally)))
