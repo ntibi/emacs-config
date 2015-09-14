@@ -12,9 +12,10 @@
 (setq auto-save-list-file-prefix
       emacs-tmp-dir)
 
-(menu-bar-mode -1) ;; No menu bar
-(setq inhibit-startup-message t) ;; no startup message
-(setq initial-scratch-message ";; Scratch buffer\n") ;; Scratch buffer message
+(menu-bar-mode -1)						; No menu bar
+(tool-bar-mode -1)						; nor toolbar
+(setq inhibit-startup-message t)		; no startup message
+(setq initial-scratch-message ";; Scratch buffer\n") ; Scratch buffer message
 
 (setq shift-select-mode t)				; handy selection with shift
 
