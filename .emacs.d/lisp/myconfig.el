@@ -78,10 +78,14 @@
 
 (global-set-key (kbd "C-f") 'repeat)	; repeat command faster
 
-(global-set-key (kbd "<C-down>") 'forward-paragraph)
-(global-set-key (kbd "<C-up>") 'backward-paragraph)
+
+(global-set-key (kbd "C-<up>") 'scroll-down-line)
+(global-set-key (kbd "C-<down>") 'scroll-up-line)
+
+
 (global-set-key (kbd "<C-right>") 'right-word)
 (global-set-key (kbd "<C-left>") 'left-word)
+
 (global-set-key (kbd "<M-right>") 'forward-sexp)
 (global-set-key (kbd "<M-left>") 'backward-sexp)
 
