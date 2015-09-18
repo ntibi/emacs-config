@@ -36,6 +36,18 @@
                       (setq indent-tabs-mode t
                             tab-width 4))))
 
+(add-to-list 'auto-mode-alist '("\\.cpp\\'" . c++-mode))
+(add-to-list 'auto-mode-alist '("\\.hpp\\'" . c++-mode))
+(add-to-list 'auto-mode-alist '("\\.tpp\\'" . c++-mode))
+
+(add-to-list 'auto-mode-alist '("\\.c\\'" . c-mode))
+(add-to-list 'auto-mode-alist '("\\.h\\'" . c-mode))
+
+(add-to-list 'auto-mode-alist '("\\.sh\\'" . sh-mode))
+(add-to-list 'auto-mode-alist '("\\.zsh\\'" . sh-mode))
+(add-to-list 'auto-mode-alist '("\\.zshrc\\'" . sh-mode))
+(add-to-list 'auto-mode-alist '("\\.myzshrc\\'" . sh-mode))
+
 (defalias 'yes-or-no-p 'y-or-n-p)		; always (y or n) instead of (yes or no)
 
 ;; keybinds to functions from myfunctions.el
