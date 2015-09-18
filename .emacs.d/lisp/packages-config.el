@@ -121,6 +121,7 @@
 (define-key global-map [remap dabbrev-expand] 'helm-dabbrev) ; use helm dabbrev
 (global-set-key (kbd "M-x") 'helm-M-x)	; use custom minibuffer
 (helm-autoresize-mode 1)				; shrink minibuffer if possible
+(global-set-key (kbd "C-c C-f") 'helm-complete-file-name-at-point) ; complete filename
 
 
 (require 'find-file-in-project)
