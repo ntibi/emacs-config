@@ -37,7 +37,21 @@ and so on."
 	 (define-key map (kbd "c") '(lambda () "copy line" (interactive) (text-manip-mode 'copy-line)))
 	 (define-key map (kbd "k") '(lambda () "kill line" (interactive) (text-manip-mode 'kill-whole-line)))
 	 (define-key map (kbd ";") '(lambda () "(un)comment line/region" (interactive) (text-manip-mode 'comment-or-uncomment-region-or-line)))
-	 (define-key map (kbd "y") '(lambda () "tank" (interactive) (text-manip-mode 'yank)))
+	 (define-key map (kbd "y") '(lambda () "yank" (interactive) (text-manip-mode 'yank)))
+	 (define-key map (kbd "q") 'keyboard-quit)
+	 (define-key map (kbd "SPC") 'keyboard-quit)
+	 (define-key map (kbd "RET") 'keyboard-quit)
+	 map)))
+
+(defun scroll-mode (cmd)			; smooth scroll with arrow keys
+  (interactive)
+  (funcall cmd 1)
+  (set-temporary-overlay-map
+   (let ((map (make-sparse-keymap)))
+	 (define-key map (kbd "<up>") '(lambda () "scroll up" (interactive) (scroll-mode 'scroll-down)))
+	 (define-key map (kbd "<down>") '(lambda () "scroll down" (interactive) (scroll-mode 'scroll-up)))
+	 (define-key map (kbd "<left>") '(lambda () "scroll left" (interactive) (scroll-mode 'scroll-right)))
+	 (define-key map (kbd "<right>") '(lambda () "scroll right" (interactive) (scroll-mode 'scroll-left)))
 	 (define-key map (kbd "q") 'keyboard-quit)
 	 (define-key map (kbd "SPC") 'keyboard-quit)
 	 (define-key map (kbd "RET") 'keyboard-quit)

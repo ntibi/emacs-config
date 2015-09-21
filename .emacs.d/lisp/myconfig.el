@@ -26,6 +26,8 @@
 (setq display-time-24hr-format t)
 (setq display-time-day-and-date t)
 
+(set-default 'truncate-lines t)			; truncate long lines with a $
+
 (setq scroll-margin 10)					; pre scroll
 (setq scroll-conservatively 1000)		; keep prescrolling ?
 
@@ -60,6 +62,8 @@
 (global-set-key (kbd "C-c c") '(lambda () "" (interactive) (text-manip-mode 'copy-line)))
 (global-set-key (kbd "C-c k") '(lambda () "" (interactive) (text-manip-mode 'kill-whole-line)))
 (global-set-key (kbd "C-c ;") '(lambda () "" (interactive) (text-manip-mode 'comment-or-uncomment-region-or-line)))
+
+(global-set-key (kbd "C-c t") '(lambda () "DOCSTRING" (interactive) (scroll-mode 'recenter-top-bottom)))
 
 (global-set-key (kbd "C-c r") 'reload-dotemacs-file) ; reload emacs config
 
