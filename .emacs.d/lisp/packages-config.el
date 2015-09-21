@@ -178,6 +178,8 @@
 	 (define-key map (kbd "<left>") '(lambda () "DOCSTRING" (interactive) (tab-mode 'tabbar-backward-tab)))
 	 (define-key map (kbd "<up>") '(lambda () "DOCSTRING" (interactive) (tab-mode 'tabbar-forward-group)))
 	 (define-key map (kbd "<down>") '(lambda () "DOCSTRING" (interactive) (tab-mode 'tabbar-backward-group)))
+	 (define-key map (kbd "k") '(lambda () "DOCSTRING" (interactive) (tab-mode 'kill-buffer)))
+	 (define-key map (kbd "x") '(lambda () "DOCSTRING" (interactive) (tab-mode 'kill-buffer)))
 	 (define-key map (kbd "q") 'keyboard-quit)
 	 (define-key map (kbd "SPC") 'keyboard-quit)
 	 (define-key map (kbd "RET") 'keyboard-quit)
