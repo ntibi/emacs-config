@@ -63,9 +63,12 @@
 
 (global-set-key (kbd "C-c r") 'reload-dotemacs-file) ; reload emacs config
 
-(global-set-key (kbd "C-c C-g") 'search-google) ; preform a google search of region/input
+(global-set-key (kbd "C-c g") 'search-google) ; preform a google search of region/input
 
 ;; keybinds to emacs functions
+(global-set-key (kbd "C-c C-g") 'keyboard-quit) ; quit when misstyped beggining of command
+(global-set-key (kbd "C-x C-g") 'keyboard-quit)
+
 (global-set-key (kbd "C-o") 'other-window) ; faster windows switching
 (global-set-key (kbd "C-x o") (rep 'other-window)) ; activate rep on default window switching
 
