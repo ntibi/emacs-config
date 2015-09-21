@@ -76,7 +76,9 @@
 
 (global-set-key (kbd "M-i") (lambda () "insert tab" (interactive) (insert-tab)))
 
-(global-set-key (kbd "C-x g") 'goto-line)
+(global-set-key (kbd "C-x g") 'goto-line) ; goto specified line
+(global-set-key (kbd "M-,") 'beginning-of-buffer) ; faster than "M-<"
+(global-set-key (kbd "M-.") 'end-of-buffer)		  ; and "M->"
 
 (global-set-key (kbd "C-c m") 'compile)
 

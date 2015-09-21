@@ -75,14 +75,13 @@
 (global-company-mode)
 (company-semantic 1)							 ; company with semantic backend
 (global-set-key (kbd "M-/") 'company-complete)	  ; launch ac
-(global-set-key (kbd "M-.") 'company-show-doc-buffer) ; show doc
-(global-set-key (kbd "M-,") 'company-show-location)	  ; show source
+(define-key company-active-map (kbd "M-.") 'company-show-doc-buffer) ; show doc
+(define-key company-active-map (kbd "M-,") 'company-show-location) ; show source
 (add-to-list 'completion-styles 'emacs22)			  ; completion from buffer(before point) words
 (add-to-list 'completion-styles 'substring)
 (add-to-list 'completion-styles 'initials)		  ; initials auto complete
 (add-to-list 'completion-styles 'semantic)
 (add-to-list 'company-backends 'company-c-headers)	  ; headers auto completion
-
 
 (require 'company-clang)
 (set 'company-clang-arguments (list (concat "-I" (file-name-directory load-file-name) "./") (concat "-I" (file-name-directory load-file-name) "/includes/") (concat "-I" (file-name-directory load-file-name) "../includes/")))

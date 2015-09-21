@@ -72,7 +72,7 @@ and so on."
 (defun xpaste ()
   "paste from x clipboard"
   (interactive)
-  (insert (shell-command-to-string "cat /dev/clipboard"))
+  (insert (shell-command-to-string "xsel"))
 )
 
 (defun reload-dotemacs-file ()
