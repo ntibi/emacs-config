@@ -30,6 +30,8 @@
 
 (setq scroll-margin 10)					; pre scroll
 (setq scroll-conservatively 1000)		; keep prescrolling ?
+(setq hscroll-margin 20)				; pre hscroll
+(setq hscroll-step 1)					; smooth hscroll (1 column by 1)
 
 (global-auto-revert-mode t)				; auto update changed files
 
@@ -63,7 +65,7 @@
 (global-set-key (kbd "C-c k") '(lambda () "" (interactive) (text-manip-mode 'kill-whole-line)))
 (global-set-key (kbd "C-c ;") '(lambda () "" (interactive) (text-manip-mode 'comment-or-uncomment-region-or-line)))
 
-(global-set-key (kbd "C-c t") '(lambda () "DOCSTRING" (interactive) (scroll-mode 'recenter-top-bottom)))
+(global-set-key (kbd "C-c t") '(lambda () "DOCSTRING" (interactive) (scroll-mode 'scroll-up)))
 
 (global-set-key (kbd "C-c r") 'reload-dotemacs-file) ; reload emacs config
 

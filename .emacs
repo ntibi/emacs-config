@@ -81,3 +81,4 @@
 
 (provide '.emacs)
 ;;; .emacs ends here
+(put 'scroll-left 'disabled nil)
