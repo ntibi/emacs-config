@@ -11,9 +11,9 @@
   (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/") t)
   )
 
-(add-to-list 'load-path "~/.emacs.d/lisp/")	   ;; my config files path
+(add-to-list 'load-path "~/.emacs.d/lisp/")    ;; my config files path
 (add-to-list 'load-path "~/.emacs.d/lisp/42/") ;; 42 config files path
-(add-to-list 'load-path "~/.emacs.d/lisp/themes/") ;; themes path
+(add-to-list 'load-path "~/.emacs.d/lisp/themes/")     ;; themes path
 (add-to-list 'load-path "~/.emacs.d/lisp/additional/") ;; additional files
 
 ;; (benchmark-init/activate)				; uncomment to benchmark emacs startup

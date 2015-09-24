@@ -27,7 +27,6 @@ and so on."
 			 (repeat nil)))
 	(intern (concat (symbol-name cmd) "-repeat")))
 
-
 (defun text-manip-mode (cmd)			; copy cut paste
   (interactive)
   (funcall cmd 1)
@@ -95,12 +94,12 @@ and so on."
   (load-file "~/.emacs"))
 
 (defun smart-beginning ()
-  "Obvious."
+  "Get the beginning of region if mark is set, or the beginning of the line"
   (interactive)
   (if (region-active-p) (region-beginning) (line-beginning-position)))
 
 (defun smart-end ()
-  "Same."
+  "Same with the end"
   (interactive)
   (if (region-active-p) (region-end) (line-end-position)))
 

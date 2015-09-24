@@ -102,7 +102,6 @@
 
 (global-set-key (kbd "C-f") 'repeat)	; repeat command faster
 
-
 (global-set-key (kbd "C-<up>") 'scroll-down-line)
 (global-set-key (kbd "C-<down>") 'scroll-up-line)
 
