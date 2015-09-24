@@ -29,6 +29,7 @@
 (set-default 'truncate-lines t)			; truncate long lines with a $
 
 (setq scroll-margin 10)					; pre scroll
+(setq scroll-step 1)					; smooth scroll (1 line by 1)
 (setq scroll-conservatively 1000)		; keep prescrolling ?
 (setq hscroll-margin 20)				; pre hscroll
 (setq hscroll-step 1)					; smooth hscroll (1 column by 1)
