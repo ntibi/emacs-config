@@ -22,6 +22,8 @@
 (column-number-mode t)					; print column number
 (line-number-mode t)					; print line number
 
+(which-function-mode 1)
+
 (display-time-mode 1)					; display time
 (setq display-time-24hr-format t)
 (setq display-time-day-and-date t)
@@ -91,6 +93,8 @@
 (global-set-key (kbd "M-.") 'end-of-buffer)		  ; and "M->"
 
 (global-set-key (kbd "C-c m") 'compile)
+
+(global-set-key (kbd "C-x C-l") 'read-only-mode) ; toggle read only
 
 (global-set-key (kbd "C-c e") 'whitespace-mode) ; 'cat -e' like
 (global-set-key (kbd "C-c w") 'whitespace-cleanup-region) ; remove trailing whitespaces in region
@@ -169,6 +173,37 @@
 
 ;; (require 'zone)							; kind of screen saver
 ;; (zone-when-idle 60)						; after 60s
+
+(setq frame-title-format
+	  '("" invocation-name ": "(:eval (if (buffer-file-name)
+										  (abbreviate-file-name (buffer-file-name))
+										                  "%b"))))
+
+(setq mode-line-format					; better mod line
+	  (list
+	   "["
+	   '(:eval (if overwrite-mode (propertize "O" 'face 'font-lock-warning-face) (propertize "I" 'face 'font-lock-constant-face)))
+	   '(:eval (if (buffer-modified-p) (propertize "*" 'face 'font-lock-type-face) (propertize "-" 'face 'font-lock-constant-face)))
+	   '(:eval (if buffer-read-only (propertize "R" 'face 'font-lock-warning-face) (propertize "W" 'face 'font-lock-constant-face)))
+	   "] <"
+	   '(:eval (propertize "%b" 'face 'font-lock-function-name-face)) ; buffer name
+	   "> ("
+	   (propertize "%03l" 'face 'font-lock-type-face) "," ; line and column
+	   (propertize "%03c" 'face 'font-lock-type-face)
+	   ") ["
+	   (propertize "%p" 'face 'font-lock-constant-face) ; % above top
+	   "/"
+	   (propertize "%I" 'face 'font-lock-constant-face) ; size
+	   "] ["
+	   '(:eval (propertize mode-name 'face 'font-lock-string-face)) ; global mode
+	   "] - "
+	   '(:eval (propertize (format-time-string "%a %b %d") 'face 'font-lock-preprocessor-face)) ; date
+	   '(:eval (propertize (format-time-string " - %H:%M:%S") 'face 'font-lock-constant-face)) ; time
+	   '(:eval (propertize (emacs-uptime " - Up:%hh%mm") 'face 'font-lock-function-name-face)) ; uptime
+	   " --"
+	   minor-mode-alist					; minor modes
+	   " %e%-"				 ; fill with '-'
+	       ))
 
 
 ; this is not vi(m)
