@@ -13,7 +13,6 @@
       emacs-tmp-dir)
 
 
-
 (menu-bar-mode -1)						; No menu bar
 (tool-bar-mode -1)						; nor toolbar
 (setq inhibit-startup-message t)		; no startup message
@@ -172,8 +171,7 @@
 ;; (require 'zone)							; kind of screen saver
 ;; (zone-when-idle 60)						; after 60s
 
-
-; this is not vi(m)
+;; this is not vi(m)
 (defconst wq "You mean C-x C-c ?")
 (defconst qq "You mean C-x C-c ?")
 (defconst w "You mean C-x C-s ?")
