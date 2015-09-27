@@ -163,7 +163,7 @@
 (require 'mouse)
 (xterm-mouse-mode t)					; mouse on mofo
 (global-set-key (kbd "<mouse-2>") 'nil)
-(global-set-key (kbd "<mouse-3>") 'nil)
+(global-set-key (kbd "<mouse-3>") 'xpaste) ; right clic to paste from xclipboard
 (global-set-key (kbd "<mouse-4>") 'scroll-down-line)
 (global-set-key (kbd "<mouse-5>") 'scroll-up-line)
 
