@@ -18,14 +18,16 @@
 
 ;; (benchmark-init/activate)				; uncomment to benchmark emacs startup
 
-(load "myfunctions.el")
 
 ;; load config files
 (when (>= emacs-major-version 24)
   (load "packages-config.el")				; packages config
 )
 
+
+(load "myfunctions.el")					; my defined function
 (load "myconfig.el")					; vanilla config
+(load "mode-line.el")					; nicer mode-line
 
 ;; load 42 files
 (load "42config.el")					; C-style indentation
@@ -84,4 +86,3 @@
 
 (provide '.emacs)
 ;;; .emacs ends here
-(put 'scroll-left 'disabled nil)

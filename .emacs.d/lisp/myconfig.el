@@ -12,6 +12,8 @@
 (setq auto-save-list-file-prefix
       emacs-tmp-dir)
 
+
+
 (menu-bar-mode -1)						; No menu bar
 (tool-bar-mode -1)						; nor toolbar
 (setq inhibit-startup-message t)		; no startup message
@@ -21,12 +23,6 @@
 
 (column-number-mode t)					; print column number
 (line-number-mode t)					; print line number
-
-(which-function-mode 1)
-
-(display-time-mode 1)					; display time
-(setq display-time-24hr-format t)
-(setq display-time-day-and-date t)
 
 (set-default 'truncate-lines t)			; truncate long lines with a $
 
@@ -104,6 +100,8 @@
 (global-set-key (kbd "M-m") 'mark-sexp)	; mark balanced expression
 (global-set-key (kbd "M-k") 'kill-sexp)	; kill balanced expression
 
+(global-set-key (kbd "<f12>") (lambda() (interactive) (switch-to-buffer (get-buffer-create "*scratch*")))) ; go to scratch buffer
+
 (global-set-key (kbd "C-f") 'repeat)	; repeat command faster
 
 (global-set-key (kbd "C-<up>") 'scroll-down-line)
@@ -173,37 +171,6 @@
 
 ;; (require 'zone)							; kind of screen saver
 ;; (zone-when-idle 60)						; after 60s
-
-(setq frame-title-format
-	  '("" invocation-name ": "(:eval (if (buffer-file-name)
-										  (abbreviate-file-name (buffer-file-name))
-										                  "%b"))))
-
-(setq mode-line-format					; better mod line
-	  (list
-	   "["
-	   '(:eval (if overwrite-mode (propertize "O" 'face 'font-lock-warning-face) (propertize "I" 'face 'font-lock-constant-face)))
-	   '(:eval (if (buffer-modified-p) (propertize "*" 'face 'font-lock-type-face) (propertize "-" 'face 'font-lock-constant-face)))
-	   '(:eval (if buffer-read-only (propertize "R" 'face 'font-lock-warning-face) (propertize "W" 'face 'font-lock-constant-face)))
-	   "] <"
-	   '(:eval (propertize "%b" 'face 'font-lock-function-name-face)) ; buffer name
-	   "> ("
-	   (propertize "%03l" 'face 'font-lock-type-face) "," ; line and column
-	   (propertize "%03c" 'face 'font-lock-type-face)
-	   ") ["
-	   (propertize "%p" 'face 'font-lock-constant-face) ; % above top
-	   "/"
-	   (propertize "%I" 'face 'font-lock-constant-face) ; size
-	   "] ["
-	   '(:eval (propertize mode-name 'face 'font-lock-string-face)) ; global mode
-	   "] - "
-	   '(:eval (propertize (format-time-string "%a %b %d") 'face 'font-lock-preprocessor-face)) ; date
-	   '(:eval (propertize (format-time-string " - %H:%M:%S") 'face 'font-lock-constant-face)) ; time
-	   '(:eval (propertize (emacs-uptime " - Up:%hh%mm") 'face 'font-lock-function-name-face)) ; uptime
-	   " --"
-	   minor-mode-alist					; minor modes
-	   " %e%-"				 ; fill with '-'
-	       ))
 
 
 ; this is not vi(m)
