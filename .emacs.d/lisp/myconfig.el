@@ -12,6 +12,36 @@
 (setq auto-save-list-file-prefix
       emacs-tmp-dir)
 
+
+(setq mode-line-format					; better mod line
+	  (list
+	   "%Z"
+	   '(:eval (if overwrite-mode (propertize "O" 'face 'font-lock-warning-face) (propertize "I" 'face 'font-lock-constant-face)))
+	   '(:eval (if (buffer-modified-p) (propertize "*" 'face 'font-lock-type-face) (propertize "-" 'face 'font-lock-constant-face)))
+	   '(:eval (if buffer-read-only (propertize "R" 'face 'font-lock-warning-face) (propertize "W" 'face 'font-lock-constant-face)))
+	   " <"
+	   '(:eval (propertize "%b" 'face 'font-lock-function-name-face)) ; buffer name
+	   "> ("
+	   (propertize "%03l" 'face 'font-lock-type-face) "," ; line and column
+	   (propertize "%03c" 'face 'font-lock-type-face)
+	   ") ["
+	   (propertize "%p" 'face 'font-lock-constant-face) ; % above top
+	   "/"
+	   (propertize "%I" 'face 'font-lock-constant-face) ; size
+	   "] ["
+	   '(:eval (propertize mode-name 'face 'font-lock-string-face)) ; global mode
+	   "] - "
+	   '(:eval (propertize (format-time-string "%a %b %d") 'face 'font-lock-preprocessor-face)) ; date
+	   '(:eval (propertize (format-time-string " - %H:%M:%S") 'face 'font-lock-constant-face)) ; time
+	   '(:eval (propertize (emacs-uptime " - Up:%hh%mm") 'face 'font-lock-function-name-face)) ; uptime
+	   " --"
+	   minor-mode-alist					; minor modes
+	   " %e%-"				 ; fill with '-'
+	   ))
+(face-remap-add-relative 'mode-line '((:foreground "color-232" :background "color-237") mode-line))
+(face-remap-add-relative 'mode-line-inactive '((:foreground "color-232" :background "Color-234") mode-line))
+
+
 (menu-bar-mode -1)						; No menu bar
 (tool-bar-mode -1)						; nor toolbar
 (setq inhibit-startup-message t)		; no startup message
@@ -174,39 +204,7 @@
 ;; (require 'zone)							; kind of screen saver
 ;; (zone-when-idle 60)						; after 60s
 
-(setq frame-title-format
-	  '("" invocation-name ": "(:eval (if (buffer-file-name)
-										  (abbreviate-file-name (buffer-file-name))
-										                  "%b"))))
-
-(setq mode-line-format					; better mod line
-	  (list
-	   "["
-	   '(:eval (if overwrite-mode (propertize "O" 'face 'font-lock-warning-face) (propertize "I" 'face 'font-lock-constant-face)))
-	   '(:eval (if (buffer-modified-p) (propertize "*" 'face 'font-lock-type-face) (propertize "-" 'face 'font-lock-constant-face)))
-	   '(:eval (if buffer-read-only (propertize "R" 'face 'font-lock-warning-face) (propertize "W" 'face 'font-lock-constant-face)))
-	   "] <"
-	   '(:eval (propertize "%b" 'face 'font-lock-function-name-face)) ; buffer name
-	   "> ("
-	   (propertize "%03l" 'face 'font-lock-type-face) "," ; line and column
-	   (propertize "%03c" 'face 'font-lock-type-face)
-	   ") ["
-	   (propertize "%p" 'face 'font-lock-constant-face) ; % above top
-	   "/"
-	   (propertize "%I" 'face 'font-lock-constant-face) ; size
-	   "] ["
-	   '(:eval (propertize mode-name 'face 'font-lock-string-face)) ; global mode
-	   "] - "
-	   '(:eval (propertize (format-time-string "%a %b %d") 'face 'font-lock-preprocessor-face)) ; date
-	   '(:eval (propertize (format-time-string " - %H:%M:%S") 'face 'font-lock-constant-face)) ; time
-	   '(:eval (propertize (emacs-uptime " - Up:%hh%mm") 'face 'font-lock-function-name-face)) ; uptime
-	   " --"
-	   minor-mode-alist					; minor modes
-	   " %e%-"				 ; fill with '-'
-	       ))
-
-
-; this is not vi(m)
+										; this is not vi(m)
 (defconst wq "You mean C-x C-c ?")
 (defconst qq "You mean C-x C-c ?")
 (defconst w "You mean C-x C-s ?")
