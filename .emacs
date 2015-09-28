@@ -28,7 +28,7 @@
 
 (load "myfunctions.el")					; my defined function
 (load "myconfig.el")					; vanilla config
-;; (load "mode-line.el")					; nicer mode-line
+(load "mode-line.el")					; nicer mode-line
 
 ;; load 42 files
 (load "42config.el")					; C-style indentation
