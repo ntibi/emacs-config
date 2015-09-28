@@ -3,13 +3,14 @@
 ;;; code:
 
 
-(when (>= emacs-major-version 24)
-  (require 'package)
-  (package-initialize)
-  (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
-  (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
-  (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/") t)
-  )
+;; (when (>= emacs-major-version 24)
+;;   (require 'package)
+;;   (package-initialize)
+;;   (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
+;;   (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
+;;   (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/") t)
+;;   )
+(package-initialize)
 
 (add-to-list 'load-path "~/.emacs.d/lisp/")    ;; my config files path
 (add-to-list 'load-path "~/.emacs.d/lisp/42/") ;; 42 config files path
@@ -27,7 +28,7 @@
 
 (load "myfunctions.el")					; my defined function
 (load "myconfig.el")					; vanilla config
-(load "mode-line.el")					; nicer mode-line
+;; (load "mode-line.el")					; nicer mode-line
 
 ;; load 42 files
 (load "42config.el")					; C-style indentation

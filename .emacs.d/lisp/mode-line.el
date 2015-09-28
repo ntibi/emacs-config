@@ -3,8 +3,8 @@
 ;;; Defines a nicer mode-line format
 ;;; code:
 
-(defvar user (getenv "USER"))
-(defvar host (getenv "HOSTNAME"))
+(defconst user (getenv "USER"))
+;; (defconst host (if (t) (getenv "HOSTNAME") (getenv "HOST")))
 
 (setq mode-line-format					; better mod line
 	  (list
@@ -14,8 +14,8 @@
 	   '(:eval (if buffer-read-only (propertize "R" 'face 'font-lock-preprocessor-face) (propertize "W" 'face 'font-lock-constant-face)))
 	   "] "
 	   (propertize user 'face 'font-lock-preprocessor-face)
-	   "@"
-	   (propertize host 'face 'font-lock-preprocessor-face)
+	   ;; "@"
+	   ;; (propertize host 'face 'font-lock-preprocessor-face)
 	   ":<"
 	   '(:eval (propertize "%b" 'face 'font-lock-function-name-face)) ; buffer name
 	   "> "
