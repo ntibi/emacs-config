@@ -12,6 +12,7 @@
 (setq auto-save-list-file-prefix
       emacs-tmp-dir)
 
+(defconst user user-real-login-name)
 
 (menu-bar-mode -1)						; No menu bar
 (tool-bar-mode -1)						; nor toolbar
@@ -33,6 +34,7 @@
 
 (global-auto-revert-mode t)				; auto update changed files
 
+(add-hook 'buffer-list-update-hook 'set-mode-line) ; set my mode line in the new buffers
 (add-hook 'python-mode-hook
 		  (function (lambda ()
                       (setq indent-tabs-mode t
