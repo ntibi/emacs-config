@@ -34,7 +34,9 @@
 
 (global-auto-revert-mode t)				; auto update changed files
 
-(add-hook 'buffer-list-update-hook 'set-mode-line) ; set my mode line in the new buffers
+;; need for a better hook (buffer-list causes lags)
+;; (add-hook 'buffer-list-update-hook 'set-mode-line) ; set my mode line in the new buffers
+(set-mode-line)
 (add-hook 'python-mode-hook
 		  (function (lambda ()
                       (setq indent-tabs-mode t
@@ -82,6 +84,8 @@
 
 (global-set-key (kbd "C-c C-t") 'term) ; start terminal
 (global-set-key (kbd "C-c C-s") 'eshell) ; start shell
+
+(global-set-key (kbd "C-c /") 'temp-buffer) ; switch between current buffer and *scratch* buffer
 
 (global-set-key (kbd "M-i") (lambda () "insert tab" (interactive) (insert-tab)))
 
