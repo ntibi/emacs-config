@@ -34,8 +34,7 @@
 
 (global-auto-revert-mode t)				; auto update changed files
 
-;; need for a better hook (buffer-list causes lags)
-;; (add-hook 'buffer-list-update-hook 'set-mode-line) ; set my mode line in the new buffers
+(add-hook 'prog-mode-hook 'set-mode-line) ; set my mode line in the new programming buffers
 (set-mode-line)
 (add-hook 'python-mode-hook
 		  (function (lambda ()
@@ -104,6 +103,8 @@
 
 (global-set-key (kbd "M-m") 'mark-sexp)	; mark balanced expression
 (global-set-key (kbd "M-k") 'kill-sexp)	; kill balanced expression
+
+(global-set-key (kbd "M-r") 'isearch-forward-regexp)
 
 (global-set-key (kbd "<f12>") (lambda() (interactive) (switch-to-buffer (get-buffer-create "*scratch*")))) ; go to scratch buffer
 
