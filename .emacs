@@ -3,14 +3,13 @@
 ;;; code:
 
 
-;; (when (>= emacs-major-version 24)
-;;   (require 'package)
-;;   (package-initialize)
-;;   (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
-;;   (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
-;;   (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/") t)
-;;   )
-(package-initialize)
+(when (>= emacs-major-version 24)
+  (require 'package)
+  (package-initialize)
+  (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
+  (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
+  (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/") t)
+  )
 
 (add-to-list 'load-path "~/.emacs.d/lisp/")    ;; my config files path
 (add-to-list 'load-path "~/.emacs.d/lisp/42/") ;; 42 config files path
