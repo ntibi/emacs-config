@@ -47,6 +47,13 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(company-c-headers-path-system
+   (quote
+	("/data/include/" "/usr/include/" "/usr/local/include/" "/usr/include/c++/4.9/")))
+ '(company-c-headers-path-user
+   (quote
+	("./" "./includes/" "../includes/" "./include/" "../include/")))
+ '(company-clang-arguments nil)
  '(custom-safe-themes
    (quote
 	("a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" "f782ed87369a7d568cee28d14922aa6d639f49dd676124d817dd82c8208985d0" "3dafeadb813a33031848dfebfa0928e37e7a3c18efefa10f3e9f48d1993598d3" "18a33cdb764e4baf99b23dcd5abdbf1249670d412c6d3a8092ae1a7b211613d5" "90edd91338ebfdfcd52ecd4025f1c7f731aced4c9c49ed28cfbebb3a3654840b" "1db337246ebc9c083be0d728f8d20913a0f46edc0a00277746ba411c149d7fe5" default)))
@@ -54,9 +61,11 @@
  '(flycheck-clang-args (quote ("-std=c++11")))
  '(flycheck-clang-include-path
    (quote
-	("./" "./includes/" "../includes/" "./include/" "../include/" "/nfs/zfs-student-5/users/2014/ntibi/.brew/Cellar/boost/1.58.0/include/" "/data/include/")))
+	("/data/include/" "./" "./include" "./includes" "../include" "../includes")))
+ '(flycheck-clang-includes (quote ("/data/include/" "./" "./include" "./includes" "../include" "../includes")))
  '(flycheck-clang-language-standard "c++11")
  '(flycheck-cppcheck-include-path (quote ("/data/include/")))
+ '(flycheck-gcc-definitions ("./" "./includes/" "../includes/" "./include/" "../include/"))
  '(flycheck-gcc-includes nil)
  '(helm-buffers-fuzzy-matching t)
  '(history-delete-duplicates t)
