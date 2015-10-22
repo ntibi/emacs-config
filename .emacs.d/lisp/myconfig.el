@@ -72,6 +72,9 @@
 
 (global-set-key (kbd "C-c g") 'search-google) ; preform a google search of region/input
 
+(global-set-key (kbd "C-c i") '(lambda () "" (interactive) (incrementation-mode 'increment-number-at-point))) ; increment or decrement number
+(global-set-key (kbd "C-c u") '(lambda () "" (interactive) (incrementation-mode 'decrement-number-at-point)))
+
 ;; keybinds to emacs functions
 (global-set-key (kbd "C-c C-g") 'keyboard-quit) ; quit when misstyped beggining of command
 (global-set-key (kbd "C-x C-g") 'keyboard-quit)

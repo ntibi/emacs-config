@@ -17,6 +17,34 @@
 	)
   )
 
+
+(defun increment-number-at-point ()
+  (interactive)
+  (skip-chars-backward "0123456789")
+  (or (looking-at "[0123456789]+")
+	  (error "No number at point"))
+        (replace-match (number-to-string (1+ (string-to-number (match-string 0))))))
+
+(defun decrement-number-at-point ()
+  (interactive)
+  (skip-chars-backward "0123456789")
+  (or (looking-at "[0123456789]+")
+	  (error "No number at point"))
+  (replace-match (number-to-string (1- (string-to-number (match-string 0))))))
+
+(defun incrementation-mode (cmd)			; increment and decrement numbers
+  (interactive)
+  (funcall cmd)
+  (set-temporary-overlay-map
+   (let ((map (make-sparse-keymap)))
+	 (define-key map (kbd "i") '(lambda () "" (interactive) (incrementation-mode 'increment-number-at-point)))
+	 (define-key map (kbd "u") '(lambda () "" (interactive) (incrementation-mode 'decrement-number-at-point)))
+	 (define-key map (kbd "q") 'keyboard-quit)
+	 (define-key map (kbd "SPC") 'keyboard-quit)
+	 (define-key map (kbd "RET") 'keyboard-quit)
+	 map)))
+
+
 (defun set-mode-line ()
   (interactive)
   (progn
