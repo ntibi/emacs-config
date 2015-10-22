@@ -58,6 +58,7 @@
  '(flycheck-clang-language-standard "c++11")
  '(flycheck-cppcheck-include-path (quote ("/data/include/")))
  '(flycheck-gcc-includes nil)
+ '(helm-buffers-fuzzy-matching t)
  '(history-delete-duplicates t)
  '(hl-paren-background-colors nil)
  '(hl-paren-delay 0.01)
