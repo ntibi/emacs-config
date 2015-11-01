@@ -145,7 +145,8 @@
 (global-semantic-idle-scheduler-mode 1)	; update DB wen idle
 (semantic-add-system-include "/nfs/zfs-student-5/users/2014/ntibi/.brew/Cellar/boost/1.58.0/include/")
 (global-set-key (kbd "C-x j") 'semantic-complete-jump) ; jump to local symbol
-(global-set-key (kbd "C-c j") 'senator-go-to-up-reference) ; jump to definition
+(global-set-key (kbd "C-c j") 'senator-go-to-up-reference) ; jump to definitionf
+(global-set-key (kbd "C-c f") 'semantic-symref)
 (global-semantic-show-parser-state-mode)
 ;; (global-semantic-highlight-edits-mode)
 (global-semantic-mru-bookmark-mode)
