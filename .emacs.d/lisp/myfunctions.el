@@ -301,5 +301,15 @@ and so on."
   (interactive "*p")
   (move-text (- arg)))
 
+(defun zone-choose (pgm)
+  "choose a pgm to run for `zone'."
+  (interactive
+   (list
+	(completing-read
+	 "program: "
+	 (mapcar 'symbol-name zone-programs))))
+  (let ((zone-programs (list (intern pgm))))
+	(zone)))
+
 (provide 'myfunctions)
 ;;; myfunctions.el ends here
