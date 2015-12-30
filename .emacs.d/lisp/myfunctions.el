@@ -76,8 +76,8 @@
 		   minor-mode-alist					; minor modes
 		   " %e%-"				 ; fill with '-'
 		   ))
-	(face-remap-add-relative 'mode-line '((:foreground "color-234" :background "color-236") mode-line))
-	(face-remap-add-relative 'mode-line-inactive '((:foreground "color-234" :background "Color-234") mode-line))
+	(face-remap-add-relative 'mode-line '((:foreground "color-234" :background "color-237") mode-line))
+	(face-remap-add-relative 'mode-line-inactive '((:foreground "color-234" :background "color-234") mode-line))
 	)
   )
 

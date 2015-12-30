@@ -61,21 +61,26 @@
  '(flycheck-clang-args (quote ("-std=c++11")))
  '(flycheck-clang-include-path
    (quote
-	("/data/include/" "./" "./include" "./includes" "../include" "../includes")))
- '(flycheck-clang-includes (quote ("/data/include/" "./" "./include" "./includes" "../include" "../includes")))
+	("/usr/include/" "/usr/local/include/" "/usr/include/c++/4.9/" "/data/include/" "./" "./include" "./includes" "../include" "../includes")))
  '(flycheck-clang-language-standard "c++11")
- '(flycheck-cppcheck-include-path (quote ("/data/include/")))
- '(flycheck-gcc-definitions ("./" "./includes/" "../includes/" "./include/" "../include/"))
+ '(flycheck-cppcheck-include-path (quote ("/usr/include/" "/usr/local/include/" "/usr/include/c++/4.9/" "/data/include/" "./" "./include" "./includes" "../include" "../includes")))
+ '(flycheck-gcc-definitions
+   ("./" "./includes/" "../includes/" "./include/" "../include/"))
  '(flycheck-gcc-includes nil)
+ '(flycheck-temp-prefix ".flycheck")
  '(history-delete-duplicates t)
  '(hl-paren-background-colors nil)
  '(hl-paren-delay 0.01)
- '(hl-sexp-background-colors (quote ("color-235")))
+ '(hl-sexp-background-colors (quote ("color-22")))
  '(initial-buffer-choice nil)
  '(rainbow-identifiers-face-count 15)
  '(safe-local-variable-values
    (quote
-	((semantic-add-system-include "/nfs/zfs-student-5/users/2014/ntibi/.brew/include/")
+	(semantic-add-system-include "/nfs/zfs-student-5/users/2014/ntibi/.brew/include/")
+	(semantic-add-system-include "/data/include/")
+	(semantic-add-system-include "/usr/include/")
+	(semantic-add-system-include "/usr/local/include/")
+	(semantic-add-system-include "/usr/include/c++/4.9/")
 	 (eval when
 		   (fboundp
 			(quote aggressive-indent-mode))
@@ -83,9 +88,10 @@
 	 (eval when
 		   (fboundp
 			(quote rainbow-mode))
-		   (rainbow-mode 1))
-	 (company-clang-arguments "-I/nfs/zfs-student-5/users/2014/ntibi/.brew/Cellar/boost/1.58.0/include/")
-	 (company-clang-arguments "-I/nfs/zfs-student-5/users/2014/ntibi/.brew/include/boost"))))
+		   (rainbow-mode 1))))
+ '(semantic-default-c-path
+   (quote
+	("./" "../include" "../includes" "./include" "./includes")))
  '(tabbar-separator (quote (0.5)))
  '(vc-annotate-background "#3b3b3b")
  '(vc-annotate-color-map

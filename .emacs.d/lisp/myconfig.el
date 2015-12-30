@@ -113,11 +113,15 @@
 
 (global-set-key (kbd "<f12>") (lambda() (interactive) (switch-to-buffer (get-buffer-create "*scratch*")))) ; go to scratch buffer
 
+(global-set-key (kbd "C-M-j") (lambda() (interactive) (set-mark-command 1))) ; jump to the last marked point
+
 (global-set-key (kbd "C-f") 'repeat)	; repeat command faster
+
+(global-set-key (kbd "C-p") 'scroll-down-command) ; scroll-up Oo
+(global-set-key (kbd "C-n") 'scroll-up-command)	  ; scroll down oO
 
 (global-set-key (kbd "C-<up>") 'scroll-down-line)
 (global-set-key (kbd "C-<down>") 'scroll-up-line)
-
 
 (global-set-key (kbd "<C-right>") 'right-word)
 (global-set-key (kbd "<C-left>") 'left-word)
