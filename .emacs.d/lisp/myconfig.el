@@ -75,6 +75,8 @@
 (global-set-key (kbd "C-c i") '(lambda () "" (interactive) (incrementation-mode 'increment-number-at-point))) ; increment or decrement number
 (global-set-key (kbd "C-c u") '(lambda () "" (interactive) (incrementation-mode 'decrement-number-at-point)))
 
+(global-set-key (kbd "M-z") '(lambda () "" (interactive) (zone-choose (zone-pgm-putz-with-case))))
+
 ;; keybinds to emacs functions
 (global-set-key (kbd "C-c C-g") 'keyboard-quit) ; quit when misstyped beggining of command
 (global-set-key (kbd "C-x C-g") 'keyboard-quit)
@@ -111,11 +113,15 @@
 
 (global-set-key (kbd "<f12>") (lambda() (interactive) (switch-to-buffer (get-buffer-create "*scratch*")))) ; go to scratch buffer
 
+(global-set-key (kbd "C-M-j") (lambda() (interactive) (set-mark-command 1))) ; jump to the last marked point
+
 (global-set-key (kbd "C-f") 'repeat)	; repeat command faster
+
+(global-set-key (kbd "C-p") 'scroll-down-command) ; scroll-up Oo
+(global-set-key (kbd "C-n") 'scroll-up-command)	  ; scroll down oO
 
 (global-set-key (kbd "C-<up>") 'scroll-down-line)
 (global-set-key (kbd "C-<down>") 'scroll-up-line)
-
 
 (global-set-key (kbd "<C-right>") 'right-word)
 (global-set-key (kbd "<C-left>") 'left-word)

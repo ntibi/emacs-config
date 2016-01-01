@@ -76,8 +76,8 @@
 		   minor-mode-alist					; minor modes
 		   " %e%-"				 ; fill with '-'
 		   ))
-	(face-remap-add-relative 'mode-line '((:foreground "color-234" :background "color-236") mode-line))
-	(face-remap-add-relative 'mode-line-inactive '((:foreground "color-234" :background "Color-234") mode-line))
+	(face-remap-add-relative 'mode-line '((:foreground "color-234" :background "color-237") mode-line))
+	(face-remap-add-relative 'mode-line-inactive '((:foreground "color-234" :background "color-234") mode-line))
 	)
   )
 
@@ -300,6 +300,16 @@ and so on."
   arg lines up."
   (interactive "*p")
   (move-text (- arg)))
+
+(defun zone-choose (pgm)
+  "choose a pgm to run for `zone'."
+  (interactive
+   (list
+	(completing-read
+	 "program: "
+	 (mapcar 'symbol-name zone-programs))))
+  (let ((zone-programs (list (intern pgm))))
+	(zone)))
 
 (provide 'myfunctions)
 ;;; myfunctions.el ends here
