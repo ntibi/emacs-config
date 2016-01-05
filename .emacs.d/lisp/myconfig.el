@@ -44,6 +44,7 @@
 (add-to-list 'auto-mode-alist '("\\.cpp\\'" . c++-mode))
 (add-to-list 'auto-mode-alist '("\\.hpp\\'" . c++-mode))
 (add-to-list 'auto-mode-alist '("\\.tpp\\'" . c++-mode))
+(add-to-list 'auto-mode-alist '("\\.ipp\\'" . c++-mode))
 
 (add-to-list 'auto-mode-alist '("\\.c\\'" . c-mode))
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c-mode))
@@ -149,7 +150,6 @@
 (semantic-mode 1)						 ;
 (global-semanticdb-minor-mode 1)
 (global-semantic-idle-scheduler-mode 1)	; update DB wen idle
-(semantic-add-system-include "/nfs/zfs-student-5/users/2014/ntibi/.brew/Cellar/boost/1.58.0/include/")
 (global-set-key (kbd "C-x j") 'semantic-complete-jump) ; jump to local symbol
 (global-set-key (kbd "C-c j") 'senator-go-to-up-reference) ; jump to definitionf
 (global-set-key (kbd "C-c f") 'semantic-symref)
@@ -157,6 +157,7 @@
 ;; (global-semantic-highlight-edits-mode)
 (global-semantic-mru-bookmark-mode)
 (global-semantic-highlight-func-mode)
+(semantic-add-system-include "/data/include" 'c++-mode)
 
 (require 'linum)						; get line number
 (add-hook 'prog-mode-hook 'linum-mode)

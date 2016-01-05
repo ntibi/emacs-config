@@ -57,7 +57,7 @@
 		   "] "
 		   (propertize user 'face 'font-lock-preprocessor-face)
 		   ":<"
-		   '(:eval (propertize default-directory 'face 'font-lock-function-name-face)) ; buffer name
+		   '(:eval (propertize (abbreviate-file-name default-directory) 'face 'font-lock-function-name-face)) ; get file path
 		   '(:eval (propertize "%b" 'face 'font-lock-type-face)) ; buffer name
 		   "> "
 		   " ("
