@@ -67,6 +67,7 @@
  '(flycheck-gcc-definitions
    ("./" "./includes/" "../includes/" "./include/" "../include/"))
  '(flycheck-gcc-includes nil)
+ '(helm-buffers-fuzzy-matching t)
  '(flycheck-temp-prefix ".flycheck")
  '(history-delete-duplicates t)
  '(hl-paren-background-colors nil)
