@@ -57,7 +57,8 @@
 		   "] "
 		   (propertize user 'face 'font-lock-preprocessor-face)
 		   ":<"
-		   '(:eval (propertize "%b" 'face 'font-lock-function-name-face)) ; buffer name
+		   '(:eval (propertize default-directory 'face 'font-lock-function-name-face)) ; buffer name
+		   '(:eval (propertize "%b" 'face 'font-lock-type-face)) ; buffer name
 		   "> "
 		   " ("
 		   (propertize "%03l" 'face 'font-lock-type-face) "," ; line and column
@@ -72,9 +73,9 @@
 		   '(:eval (propertize (format-time-string "%a %b %d") 'face 'font-lock-preprocessor-face)) ; date
 		   '(:eval (propertize (format-time-string " - %H:%M:%S") 'face 'font-lock-constant-face)) ; time
 		   '(:eval (propertize (emacs-uptime " - Up:%hh%mm") 'face 'font-lock-function-name-face)) ; uptime
-		   " -- "
+		   "  -- "
 		   minor-mode-alist					; minor modes
-		   " %e%-"				 ; fill with '-'
+		   " %-"				 ; fill with '-'
 		   ))
 	(face-remap-add-relative 'mode-line '((:foreground "color-234" :background "color-237") mode-line))
 	(face-remap-add-relative 'mode-line-inactive '((:foreground "color-234" :background "color-234") mode-line))
