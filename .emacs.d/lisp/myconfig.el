@@ -90,9 +90,12 @@
 (global-set-key (kbd "C-c C-t") 'term) ; start terminal
 (global-set-key (kbd "C-c C-s") 'eshell) ; start shell
 
+(global-set-key (kbd "C-x k") 'kill-this-buffer)
+
 (global-set-key (kbd "C-c /") 'temp-buffer) ; switch between current buffer and *scratch* buffer
 
 (global-set-key (kbd "M-i") (lambda () "insert tab" (interactive) (insert-tab)))
+(global-set-key (kbd "<backtab>") (lambda () "insert tab" (interactive) (insert-tab)))
 
 (global-set-key (kbd "C-x g") 'goto-line) ; goto specified line
 (global-set-key (kbd "M-,") 'beginning-of-buffer) ; faster than "M-<"
@@ -115,8 +118,9 @@
 (global-set-key (kbd "<f12>") (lambda() (interactive) (switch-to-buffer (get-buffer-create "*scratch*")))) ; go to scratch buffer
 
 (global-set-key (kbd "C-M-j") (lambda() (interactive) (set-mark-command 1))) ; jump to the last marked point
+(global-set-key (kbd "C-j") (lambda() (interactive) (progn (move-end-of-line 1) (newline-and-indent)))) ; newline even in the middle of a line
 
-(global-set-key (kbd "C-f") 'repeat)	; repeat command faster
+(global-set-key (kbd "M-'") 'repeat)	; repeat command faster
 
 (global-set-key (kbd "C-p") 'scroll-down-command) ; scroll-up Oo
 (global-set-key (kbd "C-n") 'scroll-up-command)	  ; scroll down oO
@@ -133,6 +137,10 @@
 (global-set-key (kbd "<M-up>") 'move-text-up)
 (global-set-key (kbd "<M-down>") 'move-text-down)
 
+(global-set-key (kbd "M-h") 'left-char)	; vi like moves
+(global-set-key (kbd "M-l") 'right-char)
+(global-set-key (kbd "M-j") 'next-line)
+(global-set-key (kbd "M-k") 'previous-line)
 
 ;; resize hotkeys
 
