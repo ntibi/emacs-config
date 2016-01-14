@@ -4,4 +4,4 @@
 # a bit too intrusive now still, not always I want to do this
 # --
 try { $0 }
-catch (${1:type}) { }
+catch (const ${1:std::exception} &${2:e}) { ${3:std::cerr << e.what() << std::endl;} }

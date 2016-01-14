@@ -1,5 +1,5 @@
 # -*- mode: snippet -*-
 # name: string
-# key: istring
+# key: string
 # --
-#include <string.h>
+std::string

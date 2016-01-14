@@ -2,4 +2,4 @@
 # name: vector
 # key: vector
 # --
-std::vector<${1:Class}> ${2:var}${3:(${4:10}, $1($5))};
+std::vector<${1:type}> ${2:name}${3:(${4:10}, $1($5))};

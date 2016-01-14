@@ -3,4 +3,4 @@
 # key: private
 # --
 private:
-        $0
+$0

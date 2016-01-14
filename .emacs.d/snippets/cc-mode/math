@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
 # name: math
-# key: math
+# key: imath
 # --
 #include <math.h>
 $0

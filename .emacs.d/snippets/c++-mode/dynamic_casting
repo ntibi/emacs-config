@@ -2,4 +2,4 @@
 # name: dynamic_casting
 # key: cast
 # --
-check_and_cast<${1:Type} *>(${2:msg});
+${1:static}_cast<${2:Type}>(${3:data});
