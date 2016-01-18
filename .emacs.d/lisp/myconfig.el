@@ -36,7 +36,7 @@
 
 (electric-pair-mode)
 
-(add-hook 'c-mode-common-hook '(lambda () "" (interactive) (c-electric-flag t)))
+;; (add-hook 'c-mode-common-hook ')
 
 (add-hook 'c-mode-hook '(lambda () "" (interactive) (c-toggle-auto-newline t)))
 (add-hook 'c++-mode-hook (lambda () "" (interactive) (c-toggle-auto-newline t)))
