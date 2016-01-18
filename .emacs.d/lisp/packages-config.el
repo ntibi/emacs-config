@@ -144,8 +144,12 @@
 
 
 (require 'neotree)						; neo tree
+(setq neo-smart-open t)
 (global-set-key (kbd "C-c a") 'neotree-toggle) ; open neo tree
 (global-set-key [f8] 'neotree-toggle)			; same
+(define-key neotree-mode-map (kbd "<home>") (neotree-make-executor :file-fn 'neo-open-file :dir-fn  'neo-open-dir))
+(define-key neotree-mode-map (kbd "<end>") 'neotree-select-up-node)
+(define-key neotree-mode-map (kbd "C-@") 'neotree-change-root)
 
 (require 'undo-tree)					; undo tree
 (global-undo-tree-mode)					; set undo-tree as default undo (C-x u)

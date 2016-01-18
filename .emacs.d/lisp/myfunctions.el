@@ -302,6 +302,23 @@ and so on."
   (interactive "*p")
   (move-text (- arg)))
 
+(defun save-macro (name)
+ "save a macro. Take a name as argument
+    and save the last defined macro under
+    this name in the .macros.el"
+ (interactive "SName of the macro : ")
+ (kmacro-name-last-macro name)
+ (find-file "~/.emacs.d/lisp/user-macros.el")
+ (goto-char (point-max))
+ (newline)
+ (insert-kbd-macro name)
+ (newline)
+ (save-buffer)
+ ;; (kill-this-buffer)
+ (switch-to-buffer nil))
+
+(defalias 'save-macro-temporaily 'name-last-kbd-macro)
+
 (defun zone-choose (pgm)
   "choose a pgm to run for `zone'."
   (interactive

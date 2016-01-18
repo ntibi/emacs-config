@@ -34,7 +34,15 @@
 
 (global-auto-revert-mode t)				; auto update changed files
 
+(electric-pair-mode)
+
+(add-hook 'c-mode-common-hook '(lambda () "" (interactive) (c-electric-flag t)))
+
+(add-hook 'c-mode-hook '(lambda () "" (interactive) (c-toggle-auto-newline t)))
+(add-hook 'c++-mode-hook (lambda () "" (interactive) (c-toggle-auto-newline t)))
+
 (add-hook 'prog-mode-hook 'set-mode-line) ; set my mode line in the new programming buffers
+
 (set-mode-line)
 (add-hook 'python-mode-hook
 		  (function (lambda ()
@@ -122,8 +130,8 @@
 
 (global-set-key (kbd "M-'") 'repeat)	; repeat command faster
 
-(global-set-key (kbd "C-p") 'scroll-down-command) ; scroll-up Oo
-(global-set-key (kbd "C-n") 'scroll-up-command)	  ; scroll down oO
+(global-set-key (kbd "M-p") 'scroll-down-command) ; scroll-up Oo
+(global-set-key (kbd "M-n") 'scroll-up-command)	  ; scroll down oO
 
 (global-set-key (kbd "C-<up>") 'scroll-down-line)
 (global-set-key (kbd "C-<down>") 'scroll-up-line)
@@ -136,11 +144,6 @@
 
 (global-set-key (kbd "<M-up>") 'move-text-up)
 (global-set-key (kbd "<M-down>") 'move-text-down)
-
-(global-set-key (kbd "M-h") 'left-char)	; vi like moves
-(global-set-key (kbd "M-l") 'right-char)
-(global-set-key (kbd "M-j") 'next-line)
-(global-set-key (kbd "M-k") 'previous-line)
 
 ;; resize hotkeys
 
@@ -166,6 +169,11 @@
 (global-semantic-mru-bookmark-mode)
 (global-semantic-highlight-func-mode)
 (semantic-add-system-include "/data/include" 'c++-mode)
+(semantic-add-system-include "/data/include/" 'c++-mode)
+(semantic-add-system-include "/usr/include/" 'c++-mode)
+(semantic-add-system-include "/usr/local/include/" 'c++-mode)
+(semantic-add-system-include "/usr/include/c++/4.9/" 'c++-mode)
+
 
 (require 'linum)						; get line number
 (add-hook 'prog-mode-hook 'linum-mode)

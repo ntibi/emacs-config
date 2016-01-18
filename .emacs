@@ -28,6 +28,8 @@
 (load "myfunctions.el")					; my defined function
 (load "myconfig.el")					; vanilla config
 
+(load "user-macros.el")					; load previously saved macros
+
 ;; load 42 files
 (load "42config.el")					; C-style indentation
 (load "header.el")						; 42 header
@@ -47,6 +49,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(c-electric-pound-behavior (quote (alignleft)))
  '(company-c-headers-path-system
    (quote
 	("/data/include/" "/usr/include/" "/usr/local/include/" "/usr/include/c++/4.9/")))
@@ -63,12 +66,15 @@
    (quote
 	("/usr/include/" "/usr/local/include/" "/usr/include/c++/4.9/" "/data/include/" "./" "./include" "./includes" "../include" "../includes")))
  '(flycheck-clang-language-standard "c++11")
- '(flycheck-cppcheck-include-path (quote ("/usr/include/" "/usr/local/include/" "/usr/include/c++/4.9/" "/data/include/" "./" "./include" "./includes" "../include" "../includes")))
+ '(flycheck-cppcheck-include-path
+   (quote
+	("/usr/include/" "/usr/local/include/" "/usr/include/c++/4.9/" "/data/include/" "./" "./include" "./includes" "../include" "../includes")))
  '(flycheck-gcc-definitions
-   ("./" "./includes/" "../includes/" "./include/" "../include/"))
+   (quote
+	("./" "./includes/" "../includes/" "./include/" "../include/")))
  '(flycheck-gcc-includes nil)
- '(helm-buffers-fuzzy-matching t)
  '(flycheck-temp-prefix ".flycheck")
+ '(helm-buffers-fuzzy-matching t)
  '(history-delete-duplicates t)
  '(hl-paren-background-colors nil)
  '(hl-paren-delay 0.01)
@@ -77,19 +83,14 @@
  '(rainbow-identifiers-face-count 15)
  '(safe-local-variable-values
    (quote
-	(semantic-add-system-include "/nfs/zfs-student-5/users/2014/ntibi/.brew/include/")
-	(semantic-add-system-include "/data/include/")
-	(semantic-add-system-include "/usr/include/")
-	(semantic-add-system-include "/usr/local/include/")
-	(semantic-add-system-include "/usr/include/c++/4.9/")
-	 (eval when
+	((eval when
 		   (fboundp
 			(quote aggressive-indent-mode))
 		   (aggressive-indent-mode -1))
 	 (eval when
 		   (fboundp
 			(quote rainbow-mode))
-		   (rainbow-mode 1))))
+		   (rainbow-mode 1)))))
  '(semantic-default-c-path
    (quote
 	("./" "../include" "../includes" "./include" "./includes")))
