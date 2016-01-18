@@ -130,6 +130,9 @@
 
 (global-set-key (kbd "M-'") 'repeat)	; repeat command faster
 
+(global-set-key (kbd "C-x SPC") 'rectangle-mark-mode)
+(global-set-key (kbd "C-c C-r") 'string-insert-rectangle)
+
 (global-set-key (kbd "M-p") 'scroll-down-command) ; scroll-up Oo
 (global-set-key (kbd "M-n") 'scroll-up-command)	  ; scroll down oO
 
