@@ -2,4 +2,5 @@
 # name: cerr
 # key: cerr
 # --
-std::cerr << $0${1: << "${2:\n}"};
+std::cerr << $2${1: << std::endl};
+$0

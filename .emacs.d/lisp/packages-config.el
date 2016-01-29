@@ -61,6 +61,8 @@
   ;; undo-tree
   ;; yasnippet
 
+
+
 (require 'flycheck)
 (require 'flycheck-clangcheck)
 (add-hook 'after-init-hook #'global-flycheck-mode) ; flycheck ON
@@ -146,6 +148,7 @@
 (require 'neotree)						; neo tree
 (setq neo-smart-open t)
 (global-set-key (kbd "C-c a") 'neotree-toggle) ; open neo tree
+(global-set-key (kbd "C-c q") 'neotree-find)
 (global-set-key [f8] 'neotree-toggle)			; same
 (define-key neotree-mode-map (kbd "<home>") (neotree-make-executor :file-fn 'neo-open-file :dir-fn  'neo-open-dir))
 (define-key neotree-mode-map (kbd "<end>") 'neotree-select-up-node)
@@ -169,6 +172,10 @@
 ;; (global-set-key (kbd "C-x <right>") (rep 'tabbar-forward-tab))
 ;; (global-set-key (kbd "C-x <down>") (rep 'tabbar-backward-group))
 ;; (global-set-key (kbd "C-x <up>") (rep 'tabbar-forward-group))
+
+(global-set-key (kbd "M-j") 'ace-jump-word-mode) ; quickly jump to a word
+(setq ace-jump-mode-case-fold t)				 ; case insensitive
+(setq ace-jump-mode-move-keys (loop for i from ?a to ?z collect i)) ; use [a-z]
 
 (defun tab-mode (cmd)				; ezly circle between tabs
   (interactive)
