@@ -68,7 +68,11 @@
 (global-set-key (kbd "C-c p") 'region-execute-python)
 (global-set-key (kbd "C-c s") 'region-as-python-string)
 
-(global-set-key (kbd "C-x y") 'xpaste)
+(global-set-key (kbd "C-x y") 'xpaste)	; xclipboard paste
+
+(global-set-key (kbd "C-c n") 'switch-to-new-buffer) ; 
+
+(global-set-key (kbd "C-c /") 'temp-buffer) ; switch between current buffer and *scratch* buffer
 
 (global-set-key (kbd "C-c d") '(lambda () "" (interactive) (text-manip-mode 'duplicate-line-or-region)))
 (global-set-key (kbd "C-c c") '(lambda () "" (interactive) (text-manip-mode 'copy-line)))
@@ -86,6 +90,7 @@
 
 (global-set-key (kbd "M-z") '(lambda () "" (interactive) (zone-choose (zone-pgm-putz-with-case))))
 
+
 ;; keybinds to emacs functions
 (global-set-key (kbd "C-c C-g") 'keyboard-quit) ; quit when misstyped beggining of command
 (global-set-key (kbd "C-x C-g") 'keyboard-quit)
@@ -99,8 +104,6 @@
 (global-set-key (kbd "C-c C-s") 'eshell) ; start shell
 
 (global-set-key (kbd "C-x k") 'kill-this-buffer)
-
-(global-set-key (kbd "C-c /") 'temp-buffer) ; switch between current buffer and *scratch* buffer
 
 (global-set-key (kbd "M-i") (lambda () "insert tab" (interactive) (insert-tab)))
 (global-set-key (kbd "<backtab>") (lambda () "insert tab" (interactive) (insert-tab)))

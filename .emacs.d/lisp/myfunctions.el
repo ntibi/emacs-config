@@ -329,5 +329,12 @@ and so on."
   (let ((zone-programs (list (intern pgm))))
 	(zone)))
 
+(defun switch-to-new-buffer()
+  "ask for a name, create a new buffer, and switch"
+  (interactive)
+  (switch-to-buffer
+   (get-buffer-create
+	(read-string "name: "))))
+
 (provide 'myfunctions)
 ;;; myfunctions.el ends here
