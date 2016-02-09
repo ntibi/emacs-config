@@ -80,6 +80,8 @@
  '(hl-paren-delay 0.01)
  '(hl-sexp-background-colors (quote ("color-22")))
  '(initial-buffer-choice nil)
+ '(jump-char-backward-key "")
+ '(jump-char-forward-key "")
  '(rainbow-identifiers-face-count 15)
  '(safe-local-variable-values
    (quote

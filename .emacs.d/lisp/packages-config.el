@@ -144,7 +144,6 @@
 (require 'rainbow-delimiters)			; parentheses color according to depth
 (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
 
-
 (require 'neotree)						; neo tree
 (setq neo-smart-open t)
 (global-set-key (kbd "C-c a") 'neotree-toggle) ; open neo tree
@@ -176,6 +175,8 @@
 (global-set-key (kbd "M-j") 'ace-jump-word-mode) ; quickly jump to a word
 (setq ace-jump-mode-case-fold t)				 ; case insensitive
 (setq ace-jump-mode-move-keys (loop for i from ?a to ?z collect i)) ; use [a-z]
+
+(global-set-key (kbd "C-]") 'jump-char-forward)
 
 (defun tab-mode (cmd)				; ezly circle between tabs
   (interactive)

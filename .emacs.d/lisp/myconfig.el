@@ -70,7 +70,7 @@
 
 (global-set-key (kbd "C-x y") 'xpaste)	; xclipboard paste
 
-(global-set-key (kbd "C-c n") 'switch-to-new-buffer) ; 
+(global-set-key (kbd "C-x n") 'switch-to-new-buffer) ; 
 
 (global-set-key (kbd "C-c /") 'temp-buffer) ; switch between current buffer and *scratch* buffer
 
@@ -78,6 +78,8 @@
 (global-set-key (kbd "C-c c") '(lambda () "" (interactive) (text-manip-mode 'copy-line)))
 (global-set-key (kbd "C-c k") '(lambda () "" (interactive) (text-manip-mode 'kill-whole-line)))
 (global-set-key (kbd "C-c ;") '(lambda () "" (interactive) (text-manip-mode 'comment-or-uncomment-region-or-line)))
+(global-set-key (kbd "C-c n") '(lambda () "" (interactive) (text-manip-mode 'next-line)))
+(global-set-key (kbd "C-c p") '(lambda () "" (interactive) (text-manip-mode 'previous-line)))
 
 (global-set-key (kbd "C-c t") '(lambda () "DOCSTRING" (interactive) (scroll-mode 'scroll-up)))
 
@@ -151,6 +153,9 @@
 (global-set-key (kbd "<M-up>") 'move-text-up)
 (global-set-key (kbd "<M-down>") 'move-text-down)
 
+(global-set-key (kbd "C-v") 'quoted-insert) ; like in the shell
+
+
 ;; resize hotkeys
 
 (global-set-key (kbd "C-c <right>") '(lambda () "" (interactive) (progn (setq move-n 1) (setq old-resize-call 1) (dynamic-resize-mode 'enlarge-window-horizontally))))
@@ -192,7 +197,7 @@
 (global-set-key [f5] 'hs-hide-all)
 (global-set-key [f6] 'hs-show-all)
 (global-set-key (kbd "C-x x") 'hs-toggle-hiding)
-(global-set-key (kbd "C-v") 'hs-toggle-hiding)
+(global-set-key (kbd "M-v") 'hs-toggle-hiding)
 
 
 (require 'paren)						; show matching parenthese

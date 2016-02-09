@@ -92,6 +92,8 @@
 	 (define-key map (kbd "k") '(lambda () "kill line" (interactive) (text-manip-mode 'kill-whole-line)))
 	 (define-key map (kbd ";") '(lambda () "(un)comment line/region" (interactive) (text-manip-mode 'comment-or-uncomment-region-or-line)))
 	 (define-key map (kbd "y") '(lambda () "yank" (interactive) (text-manip-mode 'yank)))
+	 (define-key map (kbd "n") '(lambda () "next-line" (interactive) (text-manip-mode 'next-line)))
+	 (define-key map (kbd "p") '(lambda () "previous-line" (interactive) (text-manip-mode 'previous-line)))
 	 (define-key map (kbd "q") 'keyboard-quit)
 	 (define-key map (kbd "SPC") 'keyboard-quit)
 	 (define-key map (kbd "RET") 'keyboard-quit)
