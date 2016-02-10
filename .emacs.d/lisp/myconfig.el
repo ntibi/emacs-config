@@ -65,7 +65,7 @@
 (defalias 'yes-or-no-p 'y-or-n-p)		; always (y or n) instead of (yes or no)
 
 ;; keybinds to functions from myfunctions.el
-(global-set-key (kbd "C-c p") 'region-execute-python)
+(global-set-key (kbd "C-c C-e") 'region-execute-python)
 (global-set-key (kbd "C-c s") 'region-as-python-string)
 
 (global-set-key (kbd "C-x y") 'xpaste)	; xclipboard paste
