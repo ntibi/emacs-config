@@ -65,6 +65,9 @@
 (defalias 'yes-or-no-p 'y-or-n-p)		; always (y or n) instead of (yes or no)
 
 ;; keybinds to functions from myfunctions.el
+
+(global-set-key (kbd "C-c C-s") 'sudo-save)
+
 (global-set-key (kbd "C-c C-e") 'region-execute-python)
 (global-set-key (kbd "C-c s") 'region-as-python-string)
 
@@ -94,16 +97,24 @@
 
 
 ;; keybinds to emacs functions
+
+;; (global-set-key (kbd "M-h") 'left-char)
+;; (global-set-key (kbd "M-l") 'right-char)
+;; (global-set-key (kbd "M-j") 'previous-line)
+;; (global-set-key (kbd "M-k") 'next-line)
+
 (global-set-key (kbd "C-c C-g") 'keyboard-quit) ; quit when misstyped beggining of command
 (global-set-key (kbd "C-x C-g") 'keyboard-quit)
+
+(global-set-key (kbd "C-l") 'recenter)	; less messy than recenter-top-bottom
 
 (global-set-key (kbd "C-o") 'other-window) ; faster windows switching
 (global-set-key (kbd "C-x o") (rep 'other-window)) ; activate rep on default window switching
 
 (global-set-key (kbd "C-x C-d") (lambda() "open dired ." (interactive) (dired "."))) ; emacs . for file navigation
 
-(global-set-key (kbd "C-c C-t") 'term) ; start terminal
-(global-set-key (kbd "C-c C-s") 'eshell) ; start shell
+(global-set-key (kbd "C-x 5 t") 'term) ; start terminal
+(global-set-key (kbd "C-x 5 s") 'eshell) ; start elisp shell
 
 (global-set-key (kbd "C-x k") 'kill-this-buffer)
 

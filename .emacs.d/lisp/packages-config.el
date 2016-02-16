@@ -172,7 +172,7 @@
 ;; (global-set-key (kbd "C-x <down>") (rep 'tabbar-backward-group))
 ;; (global-set-key (kbd "C-x <up>") (rep 'tabbar-forward-group))
 
-(global-set-key (kbd "M-j") 'ace-jump-word-mode) ; quickly jump to a word
+(global-set-key (kbd "M-f") 'ace-jump-word-mode) ; quickly jump to a word
 (setq ace-jump-mode-case-fold t)				 ; case insensitive
 (setq ace-jump-mode-move-keys (loop for i from ?a to ?z collect i)) ; use [a-z]
 

@@ -338,5 +338,26 @@ and so on."
    (get-buffer-create
 	(read-string "name: "))))
 
+(defun sudo-save ()
+  "Save a write protected file by connecting in ssh with root on the localhost"
+  (interactive)
+  (if (not buffer-file-name)
+      (write-file (concat "/sudo:root@localhost:" (ido-read-file-name "File : ")))
+    (write-file (concat "/sudo:root@localhost:" buffer-file-name))))
+
+(defun replace-region-by-shell-output ()
+  "Replace region or line by shell command output."
+  (interactive)
+  (let ((s (buffer-substring (smart-beginning) (smart-end))))
+	(let ((out (shell-command-to-string (concat "echo -n " (shell-quote-argument s ) " | " (read-string "> ")))))
+	  (progn
+		(kill-region (smart-beginning) (smart-end))
+		(insert out)
+		))))
+
+;; todo: a function to replace words according to a regex or a list of regex
+;; like: ("true": "false") ("false": "true")
+;; or: ("\\([A-Z]\\)": "_\1")
+
 (provide 'myfunctions)
 ;;; myfunctions.el ends here
