@@ -2,4 +2,4 @@
 # name: std
 # key: std
 # --
-using namespace std;
+std::

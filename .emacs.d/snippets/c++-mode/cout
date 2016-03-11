@@ -3,5 +3,4 @@
 # name: cout
 # key: cout
 # --
-std::cout << $2${1: << std::endl};
-$0
+std::cout << $2$0${1: << std::endl};
