@@ -64,7 +64,6 @@
  '(flycheck-clang-include-path
    (quote
 	("/usr/include/" "/usr/local/include/" "/usr/include/c++/4.9/" "/data/include/" "./" "./include" "./includes" "../include" "../includes")))
- '(flycheck-clang-language-standard "c++11")
  '(flycheck-cppcheck-include-path
    (quote
 	("/usr/include/" "/usr/local/include/" "/usr/include/c++/4.9/" "/data/include/" "./" "./include" "./includes" "../include" "../includes")))
