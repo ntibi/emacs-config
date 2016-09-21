@@ -67,7 +67,7 @@
   :defer 1
   :config
   (require 'flycheck-clangcheck)
-  (add-hook 'after-init-hook #'global-flycheck-mode) ; flycheck ON
+  (global-flycheck-mode) ; flycheck ON
   (setq flycheck-clangcheck-analyze t)
   (setq flycheck-check-syntax-automatically '(mode-enabled save)) ; check at save
   (add-hook 'c++-mode-hook (lambda () (setq flycheck-clang-language-standard "c++11"))) ; --std=c++11
