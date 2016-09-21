@@ -15,7 +15,6 @@
 (defconst user user-real-login-name)
 
 (menu-bar-mode -1)						; No menu bar
-(tool-bar-mode -1)						; nor toolbar
 (setq inhibit-startup-message t)		; no startup message
 (setq initial-scratch-message ";; Scratch buffer\n") ; Scratch buffer message
 

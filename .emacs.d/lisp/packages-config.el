@@ -2,71 +2,11 @@
 ;;; commentary:
 ;;; code:
 
-; installed packages
-  ;; anaconda-mode
-  ;; async
-  ;; auto-complete
-  ;; auto-complete-c...
-  ;; company
-  ;; company-anaconda
-  ;; company-c-headers
-  ;; concurrent
-  ;; ctable
-  ;; cyberpunk-theme
-  ;; dash
-  ;; deferred
-  ;; elpy
-  ;; epc
-  ;; epl
-  ;; f
-  ;; find-file-in-pr...
-  ;; flycheck
-  ;; flycheck-clangc...
-  ;; flycheck-ocaml
-  ;; flycheck-pos-tip
-  ;; flycheck-tip
-  ;; flymake-easy
-  ;; flymake-python-...
-  ;; flymake-shell
-  ;; function-args
-  ;; fuzzy
-  ;; helm
-  ;; helm-company
-  ;; helm-core
-  ;; highlight-inden...
-  ;; highlight-paren...
-  ;; highlight-thing
-  ;; json-rpc
-  ;; let-alist          1.
-  ;; linum-relative
-  ;; merlin
-  ;; monokai-theme
-  ;; mouse+
-  ;; multiple-cursors
-  ;; neotree
-  ;; pastels-on-dark...
-  ;; pkg-info
-  ;; popup
-  ;; pyenv-mode
-  ;; python-environment
-  ;; pyvenv
-  ;; rainbow-delimiters
-  ;; rainbow-identif...
-  ;; rainbow-mode
-  ;; s
-  ;; strings
-  ;; swiper
-  ;; tab-group
-  ;; tabbar
-  ;; undo-tree
-  ;; yasnippet
-
-
-
 (use-package flycheck
+  :ensure t
   :defer 1
   :config
-  (require 'flycheck-clangcheck)
+  (use-package flycheck-clangcheck :defer t)
   (global-flycheck-mode) ; flycheck ON
   (setq flycheck-clangcheck-analyze t)
   (setq flycheck-check-syntax-automatically '(mode-enabled save)) ; check at save
@@ -74,6 +14,7 @@
   )
 
 (use-package company					; company auto complete
+  :ensure t
   :bind (("M-/" . company-complete))
   :config
   (add-hook 'after-init-hook 'global-company-mode) ; company auto-compete ON
@@ -99,6 +40,7 @@
 (add-hook 'python-mode-hook (lambda () "" (interactive) (pyenv-mode)))
 
 (use-package yasnippet							 ; yet another snippet
+  :ensure t
   :defer 1
   :config
   (yas-global-mode 1) ; enable yas
@@ -130,12 +72,14 @@
 
 
 (use-package find-file-in-project		; find a file anywhere in the project
+  :ensure t
   :bind (("C-x f" . find-file-in-project))
   :config (setq ffip-project-file ".git")
   )
 
 
 (use-package highlight-thing			; highlight current line/word
+  :ensure t
   :init
   (add-hook 'prog-mode-hook 'highlight-thing-mode)
   :config
@@ -166,6 +110,7 @@
   )
 
 (use-package neotree						; neo tree
+  :ensure t
   :bind (
 		 ("C-c a"	.	neotree-toggle)
 		 ([f8]		.	neotree-toggle)
@@ -211,6 +156,7 @@
 
 
 (use-package multiple-cursors			; multiple cursors
+  :ensure t
   :bind (
 		 ("<C-down-mouse-1>" . mc/add-cursor-on-click) ; ctrl clic to add cursor
 		 ("C-x m" . mc/edit-lines)		; spawn a cursor on each line
