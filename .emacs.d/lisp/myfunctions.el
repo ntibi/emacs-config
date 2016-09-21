@@ -5,7 +5,50 @@
 ;;; code:
 
 
-(setq llast "*scratch*")				; useful vars
+(defmacro new-onekey (name starter onekeys)
+  "GENERATE A MINOR-MODE FOR FASTER AND MORE ACCESSIBLE SHORTCUTS.
+NAME: onekey-mode name.
+STARTER: keybind to start this mode
+ONEKEYS: one key keybinds to use in this mode"
+  (let ((fname (intern (format "onekey-%s-mode" name))))
+	`(progn
+	   (define-minor-mode ,fname
+		 ""
+		 :lighter ,name
+		 :keymap (append (mapcar (lambda (e) (interactive) (cons (kbd (car e)) (cdr e))) ,onekeys)
+						 '(
+						   ("q"			.	(lambda () (interactive) (call-interactively ',fname)))
+						   ((kbd "C-g")	.	(lambda () (interactive) (call-interactively ',fname)))
+						   ("9"			.	digit-argument)
+						   ("8"			.	digit-argument)
+						   ("7"			.	digit-argument)
+						   ("6"			.	digit-argument)
+						   ("5"			.	digit-argument)
+						   ("4"			.	digit-argument)
+						   ("3"			.	digit-argument)
+						   ("2"			.	digit-argument)
+						   ("1"			.	digit-argument)
+						   ("0"			.	digit-argument)
+						   ("-"			.	digit-argument)
+						   )
+						 )
+		 :after-hook (if ,fname (call-interactively (key-binding (byte-to-string (aref (recent-keys) (- (length (recent-keys)) 1)))))) ; re send key used to complete mode activation
+		 )
+	   (mapcar							; bind all keys minor onekey mode activation
+		#'(lambda (e)
+			(global-set-key (kbd (concat ,starter " " (car e))) ',fname))
+		;; (global-set-key (kbd (concat ,starter " " (car e))) ',fname))
+		,onekeys
+		)
+	   )
+	)
+  )
+
+(defun yank-pop-forward (arg)
+  (interactive "p")
+  (yank-pop (- arg)))
+
+(setq llast "*scratch*")				; useful vars for scratch
 (setq last "*scratch*")
 
 (defun temp-buffer()
@@ -16,34 +59,6 @@
 	(progn (setq last (buffer-name (current-buffer))) (switch-to-buffer (get-buffer-create "*scratch*")))
 	)
   )
-
-
-(defun increment-number-at-point ()
-  (interactive)
-  (skip-chars-backward "0123456789")
-  (or (looking-at "[0123456789]+")
-	  (error "No number at point"))
-        (replace-match (number-to-string (1+ (string-to-number (match-string 0))))))
-
-(defun decrement-number-at-point ()
-  (interactive)
-  (skip-chars-backward "0123456789")
-  (or (looking-at "[0123456789]+")
-	  (error "No number at point"))
-  (replace-match (number-to-string (1- (string-to-number (match-string 0))))))
-
-(defun incrementation-mode (cmd)			; increment and decrement numbers
-  (interactive)
-  (funcall cmd)
-  (set-temporary-overlay-map
-   (let ((map (make-sparse-keymap)))
-	 (define-key map (kbd "i") '(lambda () "" (interactive) (incrementation-mode 'increment-number-at-point)))
-	 (define-key map (kbd "u") '(lambda () "" (interactive) (incrementation-mode 'decrement-number-at-point)))
-	 (define-key map (kbd "q") 'keyboard-quit)
-	 (define-key map (kbd "SPC") 'keyboard-quit)
-	 (define-key map (kbd "RET") 'keyboard-quit)
-	 map)))
-
 
 (defun set-mode-line ()
   (interactive)
@@ -82,40 +97,12 @@
 	)
   )
 
-(defun text-manip-mode (cmd)			; copy cut paste
-  (interactive)
-  (funcall cmd 1)
-  (set-temporary-overlay-map
-   (let ((map (make-sparse-keymap)))
-	 (define-key map (kbd "d") '(lambda () "duplicate line or region" (interactive) (text-manip-mode 'duplicate-line-or-region)))
-	 (define-key map (kbd "c") '(lambda () "copy line" (interactive) (text-manip-mode 'copy-line)))
-	 (define-key map (kbd "k") '(lambda () "kill line" (interactive) (text-manip-mode 'kill-whole-line)))
-	 (define-key map (kbd ";") '(lambda () "(un)comment line/region" (interactive) (text-manip-mode 'comment-or-uncomment-region-or-line)))
-	 (define-key map (kbd "y") '(lambda () "yank" (interactive) (text-manip-mode 'yank)))
-	 (define-key map (kbd "n") '(lambda () "next-line" (interactive) (text-manip-mode 'next-line)))
-	 (define-key map (kbd "p") '(lambda () "previous-line" (interactive) (text-manip-mode 'previous-line)))
-	 (define-key map (kbd "q") 'keyboard-quit)
-	 (define-key map (kbd "SPC") 'keyboard-quit)
-	 (define-key map (kbd "RET") 'keyboard-quit)
-	 map)))
-
-(defun scroll-mode (cmd)			; smooth scroll with arrow keys
-  (interactive)
-  (funcall cmd 1)
-  (set-temporary-overlay-map
-   (let ((map (make-sparse-keymap)))
-	 (define-key map (kbd "<up>") '(lambda () "scroll up" (interactive) (scroll-mode 'scroll-down)))
-	 (define-key map (kbd "<down>") '(lambda () "scroll down" (interactive) (scroll-mode 'scroll-up)))
-	 (define-key map (kbd "<left>") '(lambda () "scroll left" (interactive) (scroll-mode 'scroll-right)))
-	 (define-key map (kbd "<right>") '(lambda () "scroll right" (interactive) (scroll-mode 'scroll-left)))
-	 (define-key map (kbd "q") 'keyboard-quit)
-	 (define-key map (kbd "SPC") 'keyboard-quit)
-	 (define-key map (kbd "RET") 'keyboard-quit)
-	 map)))
-
 
 (setq move-n 1)							; resize variables for dynamic resize
 (setq old-resize-call nil)
+
+(defmacro dynamic-resize-mode ()
+  )
 
 (defun dynamic-resize-mode (cmd)
   (interactive)
@@ -132,8 +119,8 @@
    (let ((map (make-sparse-keymap)))
 	 (define-key map (kbd "<right>") '(lambda () "right" (interactive) (dynamic-resize-mode 'enlarge-window-horizontally)))
 	 (define-key map (kbd "<left>") '(lambda () "left" (interactive) (dynamic-resize-mode 'shrink-window-horizontally)))
-	 (define-key map (kbd "<up>") '(lambda () "right" (interactive) (dynamic-resize-mode 'shrink-window)))
-	 (define-key map (kbd "<down>") '(lambda () "left" (interactive) (dynamic-resize-mode 'enlarge-window)))
+	 (define-key map (kbd "<up>") '(lambda () "up" (interactive) (dynamic-resize-mode 'shrink-window)))
+	 (define-key map (kbd "<down>") '(lambda () "down" (interactive) (dynamic-resize-mode 'enlarge-window)))
 	 (define-key map (kbd "q") 'keyboard-quit)
 	 (define-key map (kbd "SPC") 'keyboard-quit)
 	 (define-key map (kbd "RET") 'keyboard-quit)

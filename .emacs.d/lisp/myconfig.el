@@ -50,6 +50,7 @@
                             tab-width 4))))
 
 (add-to-list 'auto-mode-alist '("\\.cpp\\'" . c++-mode))
+(add-to-list 'auto-mode-alist '("\\.cc\\'" . c++-mode))
 (add-to-list 'auto-mode-alist '("\\.hpp\\'" . c++-mode))
 (add-to-list 'auto-mode-alist '("\\.tpp\\'" . c++-mode))
 (add-to-list 'auto-mode-alist '("\\.ipp\\'" . c++-mode))
@@ -58,6 +59,7 @@
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c-mode))
 
 (add-to-list 'auto-mode-alist '("\\.sh\\'" . sh-mode))
+(add-to-list 'auto-mode-alist '("\\.bash\\'" . sh-mode))
 (add-to-list 'auto-mode-alist '("\\.zsh\\'" . sh-mode))
 (add-to-list 'auto-mode-alist '("\\.zshrc\\'" . sh-mode))
 (add-to-list 'auto-mode-alist '("\\.myzshrc\\'" . sh-mode))
@@ -77,33 +79,79 @@
 
 (global-set-key (kbd "C-c /") 'temp-buffer) ; switch between current buffer and *scratch* buffer
 
-(global-set-key (kbd "C-c d") '(lambda () "" (interactive) (text-manip-mode 'duplicate-line-or-region)))
-(global-set-key (kbd "C-c c") '(lambda () "" (interactive) (text-manip-mode 'copy-line)))
-(global-set-key (kbd "C-c k") '(lambda () "" (interactive) (text-manip-mode 'kill-whole-line)))
-(global-set-key (kbd "C-c ;") '(lambda () "" (interactive) (text-manip-mode 'comment-or-uncomment-region-or-line)))
-(global-set-key (kbd "C-c n") '(lambda () "" (interactive) (text-manip-mode 'next-line)))
-(global-set-key (kbd "C-c p") '(lambda () "" (interactive) (text-manip-mode 'previous-line)))
-
-(global-set-key (kbd "C-c t") '(lambda () "DOCSTRING" (interactive) (scroll-mode 'scroll-up)))
 
 (global-set-key (kbd "C-c r") 'reload-dotemacs-file) ; reload emacs config
 
 (global-set-key (kbd "C-c g") 'search-google) ; preform a google search of region/input
 
-(global-set-key (kbd "C-c i") '(lambda () "" (interactive) (incrementation-mode 'increment-number-at-point))) ; increment or decrement number
-(global-set-key (kbd "C-c u") '(lambda () "" (interactive) (incrementation-mode 'decrement-number-at-point)))
-
 (global-set-key (kbd "M-z") '(lambda () "" (interactive) (zone-choose (zone-pgm-putz-with-case))))
 
+(global-set-key (kbd "M-Y") 'yank-pop-forward)
+
+(global-set-key (kbd "C-?") 'helm-semantic-or-imenu)
 
 
 
 ;;;; keybinds to emacs functions
 
-;; (global-set-key (kbd "M-h") 'left-char)
-;; (global-set-key (kbd "M-l") 'right-char)
-;; (global-set-key (kbd "M-j") 'previous-line)
-;; (global-set-key (kbd "M-k") 'next-line)
+
+(global-unset-key (kbd "C-j"))
+(new-onekey
+ "textmanip"
+ "C-j"
+ '(
+	("h" .	left-char)
+	("H" .	left-word)
+	 
+	("j" .	next-line)
+	 
+	("k" .	previous-line)
+	 
+	("l" .	right-char)
+	("L" .	right-word)
+	 
+	("a" .	move-beginning-of-line)
+	("A" .	backward-sexp)
+	 
+	("e" .	move-end-of-line)
+	("E" .	forward-sexp)
+	 
+	("D" .	kill-sexp)
+	("d" .	kill-whole-line)
+	 
+	("y" .	yank)
+	("Y" .	yank-pop)
+	 
+	("u" .	undo-tree-undo)
+	("U" .	undo-tree-redo)
+
+	("f" .	ace-jump-word-mode)
+
+	("w" .	kill-ring-save)
+	("W" .	kill-region)
+
+	(";" . comment-or-uncomment-region-or-line)
+
+	("n" .	move-text-down)
+	("p" .	move-text-up)
+	 
+	("SPC"	.	set-mark-command)
+   )
+ )
+
+(new-onekey
+ "toggle"
+ "C-x t"
+ '(
+   ("l" . linum-mode)
+   ("t" . toggle-truncate-lines)
+   ("i" . c-toggle-electric-state)
+   ("n" . c-toggle-auto-newline)
+   ("r" . read-only-mode)
+   ("w" . whitespace-mode)
+   ("x" . xterm-mouse-mode)
+   ("f" . flycheck-mode)
+   ))
 
 (global-set-key (kbd "C-c C-g") 'keyboard-quit) ; quit when misstyped beggining of command
 (global-set-key (kbd "C-x C-g") 'keyboard-quit)
@@ -129,12 +177,7 @@
 
 (global-set-key (kbd "C-c m") 'compile)
 
-(global-set-key (kbd "C-x C-l") 'read-only-mode) ; toggle read only
-
-(global-set-key (kbd "C-c e") 'whitespace-mode) ; 'cat -e' like
 (global-set-key (kbd "C-c w") 'whitespace-cleanup-region) ; remove trailing whitespaces in region
-
-(global-set-key (kbd "C-c x") 'xterm-mouse-mode) ; toggle mouse
 
 (global-set-key (kbd "M-m") 'mark-sexp)	; mark balanced expression
 (global-set-key (kbd "M-k") 'kill-sexp)	; kill balanced expression
@@ -145,7 +188,6 @@
 
 (global-set-key (kbd "C-M-j") (lambda() (interactive) (set-mark-command 1))) ; jump to the last marked point
 (global-set-key (kbd "M-RET") (lambda() (interactive) (set-mark-command 1))) ; jump to the last marked point
-(global-set-key (kbd "C-j") (lambda() (interactive) (progn (move-end-of-line 1) (newline-and-indent)))) ; newline even in the middle of a line
 
 (global-set-key (kbd "M-'") 'repeat)	; repeat command faster
 
@@ -207,8 +249,6 @@
 (require 'linum)						; get line number
 (add-hook 'prog-mode-hook 'linum-mode)
 (setq linum-format "%4d \u2502 ")
-(global-set-key (kbd "C-c l") (rep 'linum-mode)) ; toggle line numbers
-
 
 (require 'hideshow)						; factorize functions {...}
 (add-hook 'prog-mode-hook 'hs-minor-mode)
