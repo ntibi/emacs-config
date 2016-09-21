@@ -148,7 +148,8 @@
 
 	("t"	.	transpose-chars)
 
-	("c"	.	select-line)
+	("l"	.	select-line)
+	("L"	.	duplicate-line-or-region)
 	
 	("SPC"	.	set-mark-command)
 
@@ -156,6 +157,12 @@
 	(">" . end-of-buffer)
 
 	("`" . next-error)
+
+	("o" . other-window)
+	("O" . previous-window)
+
+	("s" . save-buffer)
+	("S" . save-some-buffers)
    )
  )
 
@@ -268,9 +275,11 @@
   (semantic-add-system-include "/usr/include/c++/4.9/" 'c++-mode)
   )
 
-(require 'linum)						; get line number
-(add-hook 'prog-mode-hook 'linum-mode)
-(setq linum-format "%4d \u2502 ")
+(use-package linum						; get line number
+  :config
+  (add-hook 'prog-mode-hook 'linum-mode)
+  (setq linum-format "%4d \u2502 ")
+  )
 
 (use-package hideshow					; factorize functions {...}
   :bind (
@@ -290,13 +299,14 @@
   (setq show-paren-delay 0)		; delay
   )
 
-(require 'mouse)
-(xterm-mouse-mode t)					; mouse on mofo
-(global-set-key (kbd "<mouse-2>") 'nil)
-(global-set-key (kbd "<mouse-3>") 'xpaste) ; right clic to paste from xclipboard
-(global-set-key (kbd "<mouse-4>") 'scroll-down-line)
-(global-set-key (kbd "<mouse-5>") 'scroll-up-line)
-
+(use-package mouse
+  :config
+  (xterm-mouse-mode t)					; mouse on mofo
+  (global-set-key (kbd "<mouse-2>") 'nil)
+  (global-set-key (kbd "<mouse-3>") 'xpaste) ; right clic to paste from xclipboard
+  (global-set-key (kbd "<mouse-4>") 'scroll-down-line)
+  (global-set-key (kbd "<mouse-5>") 'scroll-up-line)
+  )
 
 ;; (require 'zone)							; kind of screen saver
 ;; (zone-when-idle 60)						; after 60s

@@ -86,13 +86,12 @@
   (add-to-list 'completion-styles 'initials)		  ; initials auto complete
   (add-to-list 'completion-styles 'semantic)
   (add-to-list 'company-backends 'company-c-headers)	  ; headers auto completion
+  (set 'company-clang-arguments (list (concat "-I" (file-name-directory load-file-name) "./") (concat "-I" (file-name-directory load-file-name) "/includes/") (concat "-I" (file-name-directory load-file-name) "../includes/")))
   )
 
-(require 'company-clang)
-(set 'company-clang-arguments (list (concat "-I" (file-name-directory load-file-name) "./") (concat "-I" (file-name-directory load-file-name) "/includes/") (concat "-I" (file-name-directory load-file-name) "../includes/")))
-
-(require 'company-c-headers)
-
+(use-package company-c-headers
+  :ensure t
+  )
 
 (add-hook 'python-mode-hook 'anaconda-mode)
 (add-hook 'python-mode-hook 'eldoc-mode)
@@ -145,14 +144,26 @@
   (custom-set-faces '(hi-yellow ((t (:underline t)))))
 )
 
-(require 'rainbow-mode)					; colorize hex codes
-(add-hook 'prog-mode-hook 'rainbow-mode)
-(require 'rainbow-identifiers)			; different variables color
-(add-hook 'prog-mode-hook 'rainbow-identifiers-mode)
-(require 'highlight-parentheses)		; highlight surrounding parentheses
-(add-hook 'prog-mode-hook 'highlight-parentheses-mode)
-(require 'rainbow-delimiters)			; parentheses color according to depth
-(add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
+(use-package rainbow-mode					; colorize hex codes
+  :ensure t
+  :config
+  (add-hook 'prog-mode-hook 'rainbow-mode)
+  )
+(use-package rainbow-identifiers			; different variables color
+  :ensure t
+  :config
+  (add-hook 'prog-mode-hook 'rainbow-identifiers-mode)
+  )
+(use-package highlight-parentheses		; highlight surrounding parentheses
+  :ensure t
+  :config
+  (add-hook 'prog-mode-hook 'highlight-parentheses-mode)
+  )
+(use-package rainbow-delimiters			; parentheses color according to depth
+  :ensure t
+  :config
+  (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
+  )
 
 (use-package neotree						; neo tree
   :bind (
@@ -166,34 +177,38 @@
   (define-key neotree-mode-map (kbd "C-@") 'neotree-change-root)
   )
 
-(require 'undo-tree)					; undo tree
-(global-undo-tree-mode)					; set undo-tree as default undo (C-x u)
-(define-key undo-tree-map (kbd "C-x u") 'undo-tree-visualize) ; undo with the fancy tree
-(define-key undo-tree-map (kbd "C--") 'undo-tree-undo) ; normal undo
+(use-package undo-tree					; undo tree
+  :ensure t
+  :config
+  (global-undo-tree-mode)					; set undo-tree as default undo (C-x u)
+  (define-key undo-tree-map (kbd "C-x u") 'undo-tree-visualize) ; undo with the fancy tree
+  (define-key undo-tree-map (kbd "C--") 'undo-tree-undo) ; normal undo
+  )
 
-(require 'tabbar)						; tabbar mode
-(require 'tab-group)					; organize tabs in groups
-(tabbar-mode t)							; ON
-(load "tabbar-tweek.el")				; nice tabbar config
-(global-set-key (kbd "<end>") 'tabbar-backward-tab)
-(global-set-key (kbd "<home>") 'tabbar-forward-tab)
-(global-set-key (kbd "C-<end>") 'tabbar-backward-group)
-(global-set-key (kbd "C-<home>") 'tabbar-forward-group)
+(use-package tabbar						; tabbar mode
+  :ensure t
+  :config
+  (use-package tab-group					; organize tabs in groups
+	:ensure t
+	)
+  (tabbar-mode t)							; ON
+  (load "tabbar-tweek.el")				; nice tabbar config
+  (global-set-key (kbd "<end>") 'tabbar-backward-tab)
+  (global-set-key (kbd "<home>") 'tabbar-forward-tab)
+  (global-set-key (kbd "C-<end>") 'tabbar-backward-group)
+  (global-set-key (kbd "C-<home>") 'tabbar-forward-group)
+  (setq tabbar-use-images nil)			; faster ?
+  )
 
+(use-package ace-jump-mode
+  :ensure t
+  :config
+  (global-set-key (kbd "M-f") 'ace-jump-word-mode) ; quickly jump to a word
+  (global-set-key (kbd "C-]") 'jump-char-forward)
+  (setq ace-jump-mode-case-fold t)				 ; case insensitive
+  (setq ace-jump-mode-move-keys (cl-loop for i from ?a to ?z collect i)) ; use [a-z]
+  )
 
-(global-set-key (kbd "M-f") 'ace-jump-word-mode) ; quickly jump to a word
-(setq ace-jump-mode-case-fold t)				 ; case insensitive
-(setq ace-jump-mode-move-keys (cl-loop for i from ?a to ?z collect i)) ; use [a-z]
-
-(global-set-key (kbd "C-]") 'jump-char-forward)
-
-
-(global-set-key (kbd "C-x <right>") '(lambda () "DOCSTRING" (interactive) (tab-mode 'tabbar-forward-tab)))
-(global-set-key (kbd "C-x <left>") '(lambda () "DOCSTRING" (interactive) (tab-mode 'tabbar-backward-tab)))
-(global-set-key (kbd "C-x <up>") '(lambda () "DOCSTRING" (interactive) (tab-mode 'tabbar-forward-group)))
-(global-set-key (kbd "C-x <down>") '(lambda () "DOCSTRING" (interactive) (tab-mode 'tabbar-backward-group)))
-
-(setq tabbar-use-images nil)			; faster ?
 
 (use-package multiple-cursors			; multiple cursors
   :bind (

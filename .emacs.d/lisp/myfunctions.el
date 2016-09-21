@@ -70,6 +70,10 @@ ONEKEYS: one key keybinds to use in this mode"
   (interactive "p")
   (yank-pop (- arg)))
 
+(defun previous-window (arg)
+  (interactive "p")
+  (other-window (- arg)))
+
 (setq llast "*scratch*")				; useful vars for scratch
 (setq last "*scratch*")
 
