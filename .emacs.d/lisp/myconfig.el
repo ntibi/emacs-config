@@ -66,7 +66,7 @@
 
 (defalias 'yes-or-no-p 'y-or-n-p)		; always (y or n) instead of (yes or no)
 
-;; keybinds to functions from myfunctions.el
+;;;; keybinds to functions from myfunctions.el
 
 (global-set-key (kbd "C-c C-s") 'sudo-save)
 
@@ -90,7 +90,9 @@
 
 (global-set-key (kbd "C-?") 'helm-semantic-or-imenu)
 
-;; keybinds to emacs functions
+
+
+;;;; keybinds to emacs functions
 
 
 (global-unset-key (kbd "C-j"))
@@ -214,7 +216,7 @@
 (global-set-key (kbd "C-v") 'quoted-insert) ; like in the shell
 
 
-;; resize hotkeys
+;;;; resize hotkeys
 
 (global-set-key (kbd "C-c <right>") '(lambda () "" (interactive) (progn (setq move-n 1) (setq old-resize-call 1) (dynamic-resize-mode 'enlarge-window-horizontally))))
 (global-set-key (kbd "C-c <left>") '(lambda () "" (interactive) (progn (setq move-n 1) (setq old-resize-call 1) (dynamic-resize-mode 'shrink-window-horizontally))))

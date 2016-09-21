@@ -3,13 +3,17 @@
 ;;; code:
 
 
-(when (>= emacs-major-version 24)
-  (require 'package)
-  (package-initialize)
-  (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
-  (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
-  (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/") t)
+(require 'package)
+(package-initialize)
+(add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
+(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
+(add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/") t)
+
+(unless (package-installed-p 'use-package) ; ensure use-package is installed
+  (package-refresh-contents)
+  (package-install 'use-package)
   )
+
 
 (add-to-list 'load-path "~/.emacs.d/lisp/")    ;; my config files path
 (add-to-list 'load-path "~/.emacs.d/lisp/42/") ;; 42 config files path
@@ -19,10 +23,8 @@
 ;; (benchmark-init/activate)				; uncomment to benchmark emacs startup
 
 
-;; load config files
-(when (>= emacs-major-version 24)
-  (load "packages-config.el")				; packages config
-)
+;;;; load config files
+(load "packages-config.el")				; packages config
 
 
 (load "myfunctions.el")					; my defined function
@@ -39,10 +41,10 @@
 ;(load "string.el")						; string function
 ;(load "comments.el")					; comments functions
 
-(when (>= emacs-major-version 24)
-  (load "monokai-theme.el")				; load monokai theme
-)
-;; auto-set config variables:
+(load "monokai-theme.el")				; load monokai theme
+
+
+;;;; auto-set config variables:
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -80,6 +82,9 @@
  '(initial-buffer-choice nil)
  '(jump-char-backward-key "")
  '(jump-char-forward-key "")
+ '(package-selected-packages
+   (quote
+	(use-package zenburn-theme yasnippet undo-tree tabbar-ruler tab-group strings rainbow-mode rainbow-identifiers rainbow-delimiters pyenv-mode popup-complete neotree multiple-cursors mouse+ mode-icons linum-relative highlight-thing highlight-parentheses helm-company git-commit fuzzy function-args flymake-shell flymake-python-pyflakes flycheck-clangcheck find-file-in-project diff-hl company-c-headers company-anaconda benchmark-init ace-jump-mode)))
  '(rainbow-identifiers-face-count 15)
  '(safe-local-variable-values
    (quote
