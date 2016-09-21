@@ -63,26 +63,30 @@
 
 
 
-(require 'flycheck)
-(require 'flycheck-clangcheck)
-(add-hook 'after-init-hook #'global-flycheck-mode) ; flycheck ON
-(setq flycheck-clangcheck-analyze t)
-(setq flycheck-check-syntax-automatically '(mode-enabled save)) ; check at save
-(add-hook 'c++-mode-hook (lambda () (setq flycheck-clang-language-standard "c++11"))) ; --std=c++11
-;; (add-hook 'c-mode-common-hook  (lambda () DO STUFF ))
+(use-package flycheck
+  :defer 1
+  :config
+  (require 'flycheck-clangcheck)
+  (add-hook 'after-init-hook #'global-flycheck-mode) ; flycheck ON
+  (setq flycheck-clangcheck-analyze t)
+  (setq flycheck-check-syntax-automatically '(mode-enabled save)) ; check at save
+  (add-hook 'c++-mode-hook (lambda () (setq flycheck-clang-language-standard "c++11"))) ; --std=c++11
+  )
 
-(require 'company)						; company auto complete
-(add-hook 'after-init-hook 'global-company-mode) ; company auto-compete ON
-(global-company-mode)
-(company-semantic 1)							 ; company with semantic backend
-(global-set-key (kbd "M-/") 'company-complete)	  ; launch ac
-(define-key company-active-map (kbd "M-.") 'company-show-doc-buffer) ; show doc
-(define-key company-active-map (kbd "M-,") 'company-show-location) ; show source
-(add-to-list 'completion-styles 'emacs22)			  ; completion from buffer(before point) words
-(add-to-list 'completion-styles 'substring)
-(add-to-list 'completion-styles 'initials)		  ; initials auto complete
-(add-to-list 'completion-styles 'semantic)
-(add-to-list 'company-backends 'company-c-headers)	  ; headers auto completion
+(use-package company					; company auto complete
+  :bind (("M-/" . company-complete))
+  :config
+  (add-hook 'after-init-hook 'global-company-mode) ; company auto-compete ON
+  (global-company-mode)
+  (company-semantic 1)							 ; company with semantic backend
+  (define-key company-active-map (kbd "M-.") 'company-show-doc-buffer) ; show doc
+  (define-key company-active-map (kbd "M-,") 'company-show-location) ; show source
+  (add-to-list 'completion-styles 'emacs22)			  ; completion from buffer(before point) words
+  (add-to-list 'completion-styles 'substring)
+  (add-to-list 'completion-styles 'initials)		  ; initials auto complete
+  (add-to-list 'completion-styles 'semantic)
+  (add-to-list 'company-backends 'company-c-headers)	  ; headers auto completion
+  )
 
 (require 'company-clang)
 (set 'company-clang-arguments (list (concat "-I" (file-name-directory load-file-name) "./") (concat "-I" (file-name-directory load-file-name) "/includes/") (concat "-I" (file-name-directory load-file-name) "../includes/")))
@@ -95,45 +99,51 @@
 (add-hook 'python-mode-hook (lambda () "" (interactive) (add-to-list 'company-backends 'company-anaconda)))
 (add-hook 'python-mode-hook (lambda () "" (interactive) (pyenv-mode)))
 
-(require 'yasnippet)							 ; yet another snippet
-(setq yas-snippet-dirs '("~/.emacs.d/snippets")) ; snippets path
-(add-hook 'after-init-hook (lambda () "" (interactive) (yas-global-mode 1))) ; enable yas
-(defvar company-mode/enable-yas t)				 ; snippets completion in company
-(defun company-mode/backend-with-yas (backend)
-  (if (or (not company-mode/enable-yas) (and (listp backend) (member 'company-yasnippet backend)))
-	  backend
-	(append (if (consp backend) backend (list backend))
-			'(:with company-yasnippet))))
-;; (setq company-backends (mapcar #'company-mode/backend-with-yas company-backends)) ; i don't want yasnippet suggestions
+(use-package yasnippet							 ; yet another snippet
+  :defer 1
+  :config
+  (yas-global-mode 1) ; enable yas
+  (setq yas-snippet-dirs '("~/.emacs.d/snippets")) ; snippets path
+  (defvar company-mode/enable-yas t)				 ; snippets completion in company
+  (defun company-mode/backend-with-yas (backend)
+	(if (or (not company-mode/enable-yas) (and (listp backend) (member 'company-yasnippet backend)))
+		backend
+	  (append (if (consp backend) backend (list backend))
+			  '(:with company-yasnippet))))
+  ;; (setq company-backends (mapcar #'company-mode/backend-with-yas company-backends)) ; i don't want yasnippet suggestions
+  )
+
+(use-package helm
+  :defer 2
+  :ensure t
+  :bind (
+		 ("M-x"				.	helm-M-x)
+		 ([remap find-file]			.	helm-find-files)
+		 ([remap occur]				.	helm-occur)
+		 ([remap list-buffers]		.	helm-buffers-list)
+		 ([remap dabbrev-expand]	.	helm-dabbrev)
+		 )
+  :init ()
+  :config
+  (helm-mode 1)
+  (helm-autoresize-mode 1)				; shrink minibuffer if possible
+  )
 
 
-(require 'helm)
-(require 'helm-company)
-(helm-mode 1)
-(eval-after-load 'company
-  '(progn
-	 (define-key company-mode-map (kbd "C-/") 'helm-company)
-		  (define-key company-active-map (kbd "C-/") 'helm-company)))
-(define-key global-map [remap find-file] 'helm-find-files) ; helm custom find-file
-(define-key global-map [remap occur] 'helm-occur) ; use helm occur (dunno what occur is)
-(define-key global-map [remap list-buffers] 'helm-buffers-list) ; use helm buffer-list
-(define-key global-map [remap dabbrev-expand] 'helm-dabbrev) ; use helm dabbrev
-(global-set-key (kbd "M-x") 'helm-M-x)	; use custom minibuffer
-(helm-autoresize-mode 1)				; shrink minibuffer if possible
-(global-set-key (kbd "C-c C-f") 'helm-complete-file-name-at-point) ; complete filename
+(use-package find-file-in-project		; find a file anywhere in the project
+  :bind (("C-x f" . find-file-in-project))
+  :config (setq ffip-project-file ".git")
+  )
 
 
-(require 'find-file-in-project)
-(setq ffip-project-file ".git")
-(global-set-key (kbd "C-x f") 'find-file-in-project) ; find file anywhere in the project
-
-
-(require 'highlight-thing)				; highlight current line/word
-(add-hook 'prog-mode-hook 'highlight-thing-mode)
-(setq highlight-thing-what-thing 'word)	; underline word
-(setq highlight-thing-delay-seconds 0.1)
-(custom-set-faces '(hi-yellow ((t (:underline t)))))
-
+(use-package highlight-thing			; highlight current line/word
+  :init
+  (add-hook 'prog-mode-hook 'highlight-thing-mode)
+  :config
+  (setq highlight-thing-what-thing 'word)	; underline word
+  (setq highlight-thing-delay-seconds 0.1)
+  (custom-set-faces '(hi-yellow ((t (:underline t)))))
+)
 
 (require 'rainbow-mode)					; colorize hex codes
 (add-hook 'prog-mode-hook 'rainbow-mode)
@@ -144,14 +154,17 @@
 (require 'rainbow-delimiters)			; parentheses color according to depth
 (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
 
-(require 'neotree)						; neo tree
-(setq neo-smart-open t)
-(global-set-key (kbd "C-c a") 'neotree-toggle) ; open neo tree
-(global-set-key (kbd "C-c q") 'neotree-find)
-(global-set-key [f8] 'neotree-toggle)			; same
-(define-key neotree-mode-map (kbd "<home>") (neotree-make-executor :file-fn 'neo-open-file :dir-fn  'neo-open-dir))
-(define-key neotree-mode-map (kbd "<end>") 'neotree-select-up-node)
-(define-key neotree-mode-map (kbd "C-@") 'neotree-change-root)
+(use-package neotree						; neo tree
+  :bind (
+		 ("C-c a"	.	neotree-toggle)
+		 ([f8]		.	neotree-toggle)
+		 )
+  :config
+  (setq neo-smart-open t)
+  (define-key neotree-mode-map (kbd "<home>") (neotree-make-executor :file-fn 'neo-open-file :dir-fn  'neo-open-dir))
+  (define-key neotree-mode-map (kbd "<end>") 'neotree-select-up-node)
+  (define-key neotree-mode-map (kbd "C-@") 'neotree-change-root)
+  )
 
 (require 'undo-tree)					; undo tree
 (global-undo-tree-mode)					; set undo-tree as default undo (C-x u)
@@ -167,32 +180,13 @@
 (global-set-key (kbd "C-<end>") 'tabbar-backward-group)
 (global-set-key (kbd "C-<home>") 'tabbar-forward-group)
 
-;; (global-set-key (kbd "C-x <left>") (rep 'tabbar-backward-tab))
-;; (global-set-key (kbd "C-x <right>") (rep 'tabbar-forward-tab))
-;; (global-set-key (kbd "C-x <down>") (rep 'tabbar-backward-group))
-;; (global-set-key (kbd "C-x <up>") (rep 'tabbar-forward-group))
 
 (global-set-key (kbd "M-f") 'ace-jump-word-mode) ; quickly jump to a word
 (setq ace-jump-mode-case-fold t)				 ; case insensitive
-(setq ace-jump-mode-move-keys (loop for i from ?a to ?z collect i)) ; use [a-z]
+(setq ace-jump-mode-move-keys (cl-loop for i from ?a to ?z collect i)) ; use [a-z]
 
 (global-set-key (kbd "C-]") 'jump-char-forward)
 
-(defun tab-mode (cmd)				; ezly circle between tabs
-  (interactive)
-  (funcall cmd)
-  (set-temporary-overlay-map
-   (let ((map (make-sparse-keymap)))
-	 (define-key map (kbd "<right>") '(lambda () "DOCSTRING" (interactive) (tab-mode 'tabbar-forward-tab)))
-	 (define-key map (kbd "<left>") '(lambda () "DOCSTRING" (interactive) (tab-mode 'tabbar-backward-tab)))
-	 (define-key map (kbd "<up>") '(lambda () "DOCSTRING" (interactive) (tab-mode 'tabbar-forward-group)))
-	 (define-key map (kbd "<down>") '(lambda () "DOCSTRING" (interactive) (tab-mode 'tabbar-backward-group)))
-	 (define-key map (kbd "k") '(lambda () "DOCSTRING" (interactive) (tab-mode 'kill-buffer)))
-	 (define-key map (kbd "x") '(lambda () "DOCSTRING" (interactive) (tab-mode 'kill-buffer)))
-	 (define-key map (kbd "q") 'keyboard-quit)
-	 (define-key map (kbd "SPC") 'keyboard-quit)
-	 (define-key map (kbd "RET") 'keyboard-quit)
-	 map)))
 
 (global-set-key (kbd "C-x <right>") '(lambda () "DOCSTRING" (interactive) (tab-mode 'tabbar-forward-tab)))
 (global-set-key (kbd "C-x <left>") '(lambda () "DOCSTRING" (interactive) (tab-mode 'tabbar-backward-tab)))
@@ -201,8 +195,12 @@
 
 (setq tabbar-use-images nil)			; faster ?
 
-(require 'multiple-cursors)				; multiple cursors
-(global-set-key (kbd "<C-down-mouse-1>") 'mc/add-cursor-on-click) ; ctrl clic to add cursor
+(use-package multiple-cursors			; multiple cursors
+  :bind (
+		 ("<C-down-mouse-1>" . mc/add-cursor-on-click) ; ctrl clic to add cursor
+		 ("C-x m" . mc/edit-lines)		; spawn a cursor on each line
+		 )
+  )
 
 (provide 'myconfig)
 ;;; packages-config.el ends here

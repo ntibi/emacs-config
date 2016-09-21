@@ -51,6 +51,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(ad-redefinition-action (quote accept))
  '(c-electric-pound-behavior (quote (alignleft)))
  '(company-c-headers-path-system
    (quote
@@ -100,6 +101,7 @@
    (quote
 	("./" "../include" "../includes" "./include" "./includes")))
  '(tabbar-separator (quote (0.5)))
+ '(use-dialog-box nil)
  '(vc-annotate-background "#3b3b3b")
  '(vc-annotate-color-map
    (quote

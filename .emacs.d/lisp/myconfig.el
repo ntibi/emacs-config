@@ -95,47 +95,67 @@
 ;;;; keybinds to emacs functions
 
 
-(global-unset-key (kbd "C-j"))
+(global-unset-key (kbd "C-@"))
 (new-onekey
  "textmanip"
- "C-j"
+ "C-@"
  '(
-	("h" .	left-char)
-	("H" .	left-word)
+	("h"	.	left-char)
+	("H"	.	left-word)
 	 
-	("j" .	next-line)
+	("j"	.	next-line)
+	("J"	.	scroll-up)
 	 
-	("k" .	previous-line)
+	("k"	.	previous-line)
+	("K"	.	scroll-down)
 	 
-	("l" .	right-char)
-	("L" .	right-word)
+	("l"	.	right-char)
+	("L"	.	right-word)
 	 
-	("a" .	move-beginning-of-line)
-	("A" .	backward-sexp)
+	("a"	.	move-beginning-of-line)
+	("A"	.	backward-sexp)
 	 
-	("e" .	move-end-of-line)
-	("E" .	forward-sexp)
+	("e"	.	move-end-of-line)
+	("E"	.	forward-sexp)
 	 
-	("D" .	kill-sexp)
-	("d" .	kill-whole-line)
+	("D"	.	kill-sexp)
+	("d"	.	kill-whole-line)
 	 
-	("y" .	yank)
-	("Y" .	yank-pop)
+	("y"	.	yank)
+	("Y"	.	yank-pop)
 	 
-	("u" .	undo-tree-undo)
-	("U" .	undo-tree-redo)
+	("u"	.	undo-tree-undo)
+	("U"	.	undo-tree-redo)
 
-	("f" .	ace-jump-word-mode)
+	("f"	.	ace-jump-word-mode)
 
-	("w" .	kill-ring-save)
-	("W" .	kill-region)
+	("w"	.	kill-ring-save)
+	("W"	.	kill-region)
 
 	(";" . comment-or-uncomment-region-or-line)
 
-	("n" .	move-text-down)
-	("p" .	move-text-up)
-	 
+	("n"	.	move-text-down)
+	("p"	.	move-text-up)
+
+	("<right>"	.	tabbar-forward-tab)
+	("<left>"	.	tabbar-backward-tab)
+	("<up>"		.	tabbar-forward-group)
+	("<down>"	.	tabbar-backward-group)
+
+	("g"	.	goto-line)
+	
+	("x"	.	kill-buffer)
+
+	("t"	.	transpose-chars)
+
+	("c"	.	select-line)
+	
 	("SPC"	.	set-mark-command)
+
+	("<" . beginning-of-buffer)
+	(">" . end-of-buffer)
+
+	("`" . next-error)
    )
  )
 
@@ -152,6 +172,7 @@
    ("x" . xterm-mouse-mode)
    ("f" . flycheck-mode)
    ))
+
 
 (global-set-key (kbd "C-c C-g") 'keyboard-quit) ; quit when misstyped beggining of command
 (global-set-key (kbd "C-x C-g") 'keyboard-quit)
@@ -225,43 +246,49 @@
 
 
 ;; configs and keybinds from modes
-(require 'cc-mode)
-(require 'semantic)
-(require 'semantic/ia)
-(global-ede-mode 1)                      ; Enable the Project management system
-(semantic-mode 1)						 ;
-(global-semanticdb-minor-mode 1)
-(global-semantic-idle-scheduler-mode 1)	; update DB wen idle
-(global-set-key (kbd "C-x j") 'semantic-complete-jump) ; jump to local symbol
-(global-set-key (kbd "C-c j") 'senator-go-to-up-reference) ; jump to definitionf
-(global-set-key (kbd "C-c f") 'semantic-symref)
-(global-semantic-show-parser-state-mode)
-;; (global-semantic-highlight-edits-mode)
-(global-semantic-mru-bookmark-mode)
-(global-semantic-highlight-func-mode)
-(semantic-add-system-include "/data/include" 'c++-mode)
-(semantic-add-system-include "/data/include/" 'c++-mode)
-(semantic-add-system-include "/usr/include/" 'c++-mode)
-(semantic-add-system-include "/usr/local/include/" 'c++-mode)
-(semantic-add-system-include "/usr/include/c++/4.9/" 'c++-mode)
-
+(use-package semantic
+  :defer 3
+  :config
+  (require 'cc-mode)
+  (require 'semantic/ia)
+  (global-ede-mode 1)                      ; Enable the Project management system
+  (semantic-mode 1)						 ;
+  (global-semanticdb-minor-mode 1)
+  (global-semantic-idle-scheduler-mode 1)	; update DB wen idle
+  (global-set-key (kbd "C-x j") 'semantic-complete-jump) ; jump to local symbol
+  (global-set-key (kbd "C-c j") 'senator-go-to-up-reference) ; jump to definitionf
+  (global-set-key (kbd "C-c f") 'semantic-symref)
+  (global-semantic-show-parser-state-mode)
+  (global-semantic-mru-bookmark-mode)
+  (global-semantic-highlight-func-mode)
+  (semantic-add-system-include "/data/include" 'c++-mode)
+  (semantic-add-system-include "/data/include/" 'c++-mode)
+  (semantic-add-system-include "/usr/include/" 'c++-mode)
+  (semantic-add-system-include "/usr/local/include/" 'c++-mode)
+  (semantic-add-system-include "/usr/include/c++/4.9/" 'c++-mode)
+  )
 
 (require 'linum)						; get line number
 (add-hook 'prog-mode-hook 'linum-mode)
 (setq linum-format "%4d \u2502 ")
 
-(require 'hideshow)						; factorize functions {...}
-(add-hook 'prog-mode-hook 'hs-minor-mode)
-(global-set-key [f5] 'hs-hide-all)
-(global-set-key [f6] 'hs-show-all)
-(global-set-key (kbd "C-x x") 'hs-toggle-hiding)
-(global-set-key (kbd "M-v") 'hs-toggle-hiding)
+(use-package hideshow					; factorize functions {...}
+  :bind (
+		 ([f5] . hs-hide-all)
+		 ([f6] . hs-show-all)
+		 ("C-x x" . hs-toggle-hiding)
+		 ("M-v" . hs-toggle-hiding)
+		 )
+  :init
+  (add-hook 'prog-mode-hook 'hs-minor-mode)
+)
 
-
-(require 'paren)						; show matching parenthese
-(show-paren-mode 1)						; ON
-(setq show-paren-delay 0)				; delay
-
+(use-package paren						; show matching parenthese
+  :defer 2
+  :config
+  (show-paren-mode 1)			; ON
+  (setq show-paren-delay 0)		; delay
+  )
 
 (require 'mouse)
 (xterm-mouse-mode t)					; mouse on mofo

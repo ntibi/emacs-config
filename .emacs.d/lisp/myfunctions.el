@@ -5,17 +5,25 @@
 ;;; code:
 
 
+(defun select-line ()
+  "Select the current line"
+  (interactive)
+  (end-of-line) ; move to end of line
+  (set-mark (line-beginning-position)))
+
+
 (defmacro new-onekey (name starter onekeys)
   "GENERATE A MINOR-MODE FOR FASTER AND MORE ACCESSIBLE SHORTCUTS.
 NAME: onekey-mode name.
 STARTER: keybind to start this mode
 ONEKEYS: one key keybinds to use in this mode"
   (let ((fname (intern (format "onekey-%s-mode" name))))
-	`(progn
-	   (define-minor-mode ,fname
+    `(progn
+       (define-minor-mode ,fname
 		 ""
+		 :global t
 		 :lighter ,name
-		 :keymap (append (mapcar (lambda (e) (interactive) (cons (kbd (car e)) (cdr e))) ,onekeys)
+		 :keymap  (append (mapcar (lambda (e) (interactive) (cons (kbd (car e)) (cdr e))) ,onekeys)
 						 '(
 						   ("q"			.	(lambda () (interactive) (call-interactively ',fname)))
 						   ((kbd "C-g")	.	(lambda () (interactive) (call-interactively ',fname)))
@@ -32,16 +40,30 @@ ONEKEYS: one key keybinds to use in this mode"
 						   ("-"			.	digit-argument)
 						   )
 						 )
-		 :after-hook (if ,fname (call-interactively (key-binding (byte-to-string (aref (recent-keys) (- (length (recent-keys)) 1)))))) ; re send key used to complete mode activation
 		 )
-	   (mapcar							; bind all keys minor onekey mode activation
-		#'(lambda (e)
-			(global-set-key (kbd (concat ,starter " " (car e))) ',fname))
-		;; (global-set-key (kbd (concat ,starter " " (car e))) ',fname))
-		,onekeys
-		)
-	   )
-	)
+       (mapcar							; bind all keys minor onekey mode activation + right command exectuion
+	   	#'(lambda (e)
+	   		(let (
+	   			  (onekey-starter (intern (format "onekey-%s-mode/%s" ,name (car e))))
+	   			  (starter ,starter)
+	   			  (fname ',fname)
+	   			  )
+	   		  (eval
+	   		   `(progn
+	   			  (defun ,onekey-starter ()
+	   				(interactive)
+	   				(,(cdr e))
+	   				(,fname)
+	   				)
+	   			  (global-set-key (kbd (concat ,starter " " ,(car e))) ',onekey-starter)
+	   			  )
+	   		   )
+	   		  )
+	   		)
+	   	,onekeys
+	   	)
+       )
+    )
   )
 
 (defun yank-pop-forward (arg)
@@ -52,7 +74,7 @@ ONEKEYS: one key keybinds to use in this mode"
 (setq last "*scratch*")
 
 (defun temp-buffer()
-  "Go to scratch buffer, or go back to the last buffer if already in scratchA"
+  "Go to scratch buffer, or go back to the last buffer if already in scratch"
   (interactive)
   (if (string= (buffer-name (current-buffer)) "*scratch*")
 	(progn (setq llast (buffer-name (last-buffer))) (switch-to-buffer last) (setq last llast))
@@ -100,9 +122,6 @@ ONEKEYS: one key keybinds to use in this mode"
 
 (setq move-n 1)							; resize variables for dynamic resize
 (setq old-resize-call nil)
-
-(defmacro dynamic-resize-mode ()
-  )
 
 (defun dynamic-resize-mode (cmd)
   (interactive)
