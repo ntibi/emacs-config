@@ -310,6 +310,9 @@
   (global-set-key (kbd "<mouse-5>") 'scroll-up-line)
   )
 
+(use-package org-mode
+  )
+
 ;; (require 'zone)							; kind of screen saver
 ;; (zone-when-idle 60)						; after 60s
 

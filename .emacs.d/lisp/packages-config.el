@@ -15,10 +15,12 @@
 
 (use-package company					; company auto complete
   :ensure t
-  :bind (("M-/" . company-complete))
+  :defer t
+  :bind (
+		 ("M-/" . company-complete)
+		 )
   :config
   (use-package company-c-headers :defer t :ensure t)
-  (add-hook 'after-init-hook 'global-company-mode) ; company auto-compete ON
   (global-company-mode)
   (company-semantic 1)							 ; company with semantic backend
   (define-key company-active-map (kbd "M-.") 'company-show-doc-buffer) ; show doc
@@ -28,7 +30,14 @@
   (add-to-list 'completion-styles 'initials)		  ; initials auto complete
   (add-to-list 'completion-styles 'semantic)
   (add-to-list 'company-backends 'company-c-headers)	  ; headers auto completion
-  (set 'company-clang-arguments (list (concat "-I" (file-name-directory load-file-name) "./") (concat "-I" (file-name-directory load-file-name) "/includes/") (concat "-I" (file-name-directory load-file-name) "../includes/")))
+  ;; (set
+   ;; 'company-clang-arguments
+   ;; (list
+	;; (concat "-I" (file-name-directory load-file-name) "./")
+	;; (concat "-I" (file-name-directory load-file-name) "./includes/")
+	;; (concat "-I" (file-name-directory load-file-name) "../includes/")
+	;; )
+   ;; )
   )
 
 (add-hook 'python-mode-hook 'anaconda-mode)

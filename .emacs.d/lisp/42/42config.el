@@ -2,11 +2,8 @@
 ;;; commentary:
 ;;; code:
 
-(setq-default font-lock-global-modes nil)
 (setq-default tab-width 4)
 (setq-default indent-tabs-mode t)
-(global-set-key (kbd "DEL") 'backward-delete-char)
-(setq-default c-backspace-function 'backward-delete-char)
 (setq-default c-basic-offset 4)
 (setq-default c-default-style "linux")
 (setq-default tab-stop-list '(4 8 12 16 20 24 28 32 36 40 44 48 52 56 60
