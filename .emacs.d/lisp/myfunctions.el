@@ -9,7 +9,9 @@
   "Select the current line"
   (interactive)
   (end-of-line) ; move to end of line
-  (set-mark (line-beginning-position)))
+  (set-mark (line-beginning-position))
+  (forward-line -1)
+  )
 
 
 (defmacro new-onekey (name starter onekeys)
@@ -52,7 +54,7 @@ ONEKEYS: one key keybinds to use in this mode"
 	   		   `(progn
 	   			  (defun ,onekey-starter ()
 	   				(interactive)
-	   				(,(cdr e))
+	   				(call-interactively ',(cdr e))
 	   				(,fname)
 	   				)
 	   			  (global-set-key (kbd (concat ,starter " " ,(car e))) ',onekey-starter)
@@ -66,13 +68,11 @@ ONEKEYS: one key keybinds to use in this mode"
     )
   )
 
-(defun yank-pop-forward (arg)
+
+(defun yank-pop-forward (&optional arg)
   (interactive "p")
   (yank-pop (- arg)))
 
-(defun previous-window (arg)
-  (interactive "p")
-  (other-window (- arg)))
 
 (setq llast "*scratch*")				; useful vars for scratch
 (setq last "*scratch*")
@@ -251,35 +251,29 @@ With negative N, comment out original line and use the absolute value."
 	(comment-or-uncomment-region beg end)
 	(next-line)))
 
-(defun move-text (arg)
-  (cond
-   ((and mark-active transient-mark-mode)
-    (if (> (point) (mark))
-        (exchange-point-and-mark))
-    (let ((column (current-column))
-          (text (delete-and-extract-region (point) (mark))))
-      (forward-line arg)
-      (move-to-column column t)
-      (set-mark (point))
-      (insert text)
-      (exchange-point-and-mark)
-      (setq deactivate-mark nil)))
-   (t
-    (let ((column (current-column)))
-      (beginning-of-line)
-      (when (or (> arg 0) (not (bobp)))
-        (forward-line)
-        (when (or (< arg 0) (not (eobp)))
-          (transpose-lines arg)
-          (when (and (eval-when-compile
-                       '(and (>= emacs-major-version 24)
-                             (>= emacs-minor-version 3)))
-                     (< arg 0))
-            (forward-line -1)))
-        (forward-line -1))
-      (move-to-column column t)))))
 
-(defun move-text-down (arg)
+(defun move-text (arg)
+   (cond
+    ((and mark-active transient-mark-mode)
+     (if (> (point) (mark))
+            (exchange-point-and-mark))
+     (let ((column (current-column))
+              (text (delete-and-extract-region (point) (mark))))
+       (forward-line arg)
+       (move-to-column column t)
+       (set-mark (point))
+       (insert text)
+       (exchange-point-and-mark)
+       (setq deactivate-mark nil)))
+    (t
+     (beginning-of-line)
+     (when (or (> arg 0) (not (bobp)))
+       (forward-line)
+       (when (or (< arg 0) (not (eobp)))
+            (transpose-lines arg))
+       (forward-line -1)))))
+
+(cl-defun move-text-down (&optional (arg 1))
   "Move region (transient-mark-mode active) or current line
   arg lines down."
   (interactive "*p")
@@ -308,7 +302,7 @@ and so on."
 			 (repeat nil)))
 	(intern (concat (symbol-name cmd) "-repeat")))
 
-(defun move-text-up (arg)
+(cl-defun move-text-up (&optional (arg 1))
   "Move region (transient-mark-mode active) or current line
   arg lines up."
   (interactive "*p")

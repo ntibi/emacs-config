@@ -142,7 +142,7 @@
 	("g"	.	goto-line)
 	
 	("x"	.	kill-buffer)
-
+	
 	("t"	.	transpose-chars)
 
 	("c"	.	select-line)
@@ -156,7 +156,7 @@
 	("`" . next-error)
 
 	("o" . other-window)
-	("O" . previous-window)
+	("O" . previous-multiframe-window)
 
 	("s" . save-buffer)
 	("S" . save-some-buffers)
