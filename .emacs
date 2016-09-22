@@ -2,6 +2,7 @@
 ;;; commentary:
 ;;; code:
 
+;; (benchmark-init/activate)				; uncomment to benchmark emacs startup
 
 (require 'package)
 (package-initialize)
@@ -19,9 +20,6 @@
 (add-to-list 'load-path "~/.emacs.d/lisp/42/") ;; 42 config files path
 (add-to-list 'load-path "~/.emacs.d/lisp/themes/")     ;; themes path
 (add-to-list 'load-path "~/.emacs.d/lisp/additional/") ;; additional files
-
-;; (benchmark-init/activate)				; uncomment to benchmark emacs startup
-
 
 ;;;; load config files
 (load "packages-config.el")				; packages config

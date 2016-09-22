@@ -4,7 +4,7 @@
 
 (use-package flycheck
   :ensure t
-  :defer 1
+  :defer 2
   :config
   (use-package flycheck-clangcheck :ensure t :defer t)
   (global-flycheck-mode) ; flycheck ON
@@ -15,7 +15,7 @@
 
 (use-package company					; company auto complete
   :ensure t
-  :defer t
+  :defer 3
   :bind (
 		 ("M-/" . company-complete)
 		 )
@@ -166,6 +166,10 @@
 		 ("<C-down-mouse-1>" . mc/add-cursor-on-click) ; ctrl clic to add cursor
 		 ("C-x m" . mc/edit-lines)		; spawn a cursor on each line
 		 )
+  )
+
+(use-package magit
+  :ensure t
   )
 
 (provide 'myconfig)
