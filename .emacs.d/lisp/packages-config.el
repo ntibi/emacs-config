@@ -60,7 +60,7 @@
   ;; (setq company-backends (mapcar #'company-mode/backend-with-yas company-backends)) ; i don't want yasnippet suggestions
   )
 
-(use-package helm
+(use-package helm						; better minibuffer selection
   :defer 2
   :ensure t
   :bind (
@@ -114,7 +114,7 @@
   (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
   )
 
-(use-package neotree						; neo tree
+(use-package neotree						; neo tree (files browsing tree)
   :ensure t
   :bind (
 		 ("C-c a"	.	neotree-toggle)
@@ -135,7 +135,7 @@
   (define-key undo-tree-map (kbd "C--") 'undo-tree-undo) ; normal undo
   )
 
-(use-package tabbar						; tabbar mode
+(use-package tabbar						; tabbar mode (tabs navigation)
   :ensure t
   :config
   (use-package tab-group					; organize tabs in groups
@@ -162,16 +162,31 @@
 
 (use-package multiple-cursors			; multiple cursors
   :ensure t
+  :defer t
   :bind (
 		 ("<C-down-mouse-1>" . mc/add-cursor-on-click) ; ctrl clic to add cursor
 		 ("C-x m" . mc/edit-lines)		; spawn a cursor on each line
 		 )
   )
 
-(use-package magit
+(use-package magit						; magic git (git client)
   :ensure t
-  :defer 5
+  :defer t
   :bind (("C-x v s" . magit-status))
+  )
+
+(use-package git-gutter					; get git diff-like characters in the margin
+  :ensure t
+  :defer t
+  :bind (("C-x v g" . git-gutter-mode))
+  :config
+  (git-gutter:linum-setup)				; linum compatibility
+  (set-face-background 'git-gutter:added nil)
+  (set-face-background 'git-gutter:modified nil)
+  (set-face-background 'git-gutter:deleted nil)
+  (set-face-foreground 'git-gutter:added "green")
+  (set-face-foreground 'git-gutter:modified "yellow")
+  (set-face-foreground 'git-gutter:deleted "red")
   )
 
 (provide 'myconfig)

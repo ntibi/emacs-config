@@ -82,7 +82,7 @@
  '(jump-char-forward-key "")
  '(package-selected-packages
    (quote
-	(company-clang use-package zenburn-theme yasnippet undo-tree tabbar-ruler tab-group strings rainbow-mode rainbow-identifiers rainbow-delimiters pyenv-mode popup-complete neotree multiple-cursors mouse+ mode-icons linum-relative highlight-thing highlight-parentheses helm-company git-commit fuzzy function-args flymake-shell flymake-python-pyflakes flycheck-clangcheck find-file-in-project diff-hl company-c-headers company-anaconda benchmark-init ace-jump-mode)))
+	(company-clang use-package zenburn-theme yasnippet undo-tree tabbar-ruler tab-group strings rainbow-mode rainbow-identifiers rainbow-delimiters pyenv-mode popup-complete neotree multiple-cursors mouse+ mode-icons linum-relative highlight-thing highlight-parentheses helm-company git-commit fuzzy function-args flymake-shell flymake-python-pyflakes flycheck-clangcheck find-file-in-project company-c-headers company-anaconda benchmark-init ace-jump-mode)))
  '(rainbow-identifiers-face-count 15)
  '(safe-local-variable-values
    (quote

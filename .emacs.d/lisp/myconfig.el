@@ -148,8 +148,8 @@
 
 	("t"	.	transpose-chars)
 
-	("l"	.	select-line)
-	("L"	.	duplicate-line-or-region)
+	("c"	.	select-line)
+	("S-C"	.	duplicate-line-or-region)
 	
 	("SPC"	.	set-mark-command)
 
