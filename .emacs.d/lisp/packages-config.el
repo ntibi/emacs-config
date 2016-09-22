@@ -170,6 +170,8 @@
 
 (use-package magit
   :ensure t
+  :defer 5
+  :bind (("C-x v s" . magit-status))
   )
 
 (provide 'myconfig)
