@@ -87,9 +87,6 @@
 
 (global-set-key (kbd "M-Y") 'yank-pop-forward)
 
-(global-set-key (kbd "C-?") 'helm-semantic-or-imenu)
-
-
 
 ;;;; keybinds to emacs functions
 

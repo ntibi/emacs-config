@@ -68,6 +68,7 @@
 		 ("C-x C-f"	.	helm-find-files)
 		 ("C-x C-b"	.	helm-buffers-list)
 		 ("C-x p"	.	helm-show-kill-ring)
+		 ("C-?"		.	helm-semantic-or-imenu)
 		 )
   :init ()
   :config

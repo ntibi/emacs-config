@@ -2,13 +2,13 @@
 ;;; commentary:
 ;;; code:
 
-;; (benchmark-init/activate)				; uncomment to benchmark emacs startup
-
 (require 'package)
 (package-initialize)
 (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
 (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/") t)
+
+;; (benchmark-init/activate)				; uncomment to benchmark emacs startup
 
 (unless (package-installed-p 'use-package) ; ensure use-package is installed
   (package-refresh-contents)
