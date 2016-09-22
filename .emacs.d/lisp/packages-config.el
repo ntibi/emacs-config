@@ -117,6 +117,7 @@
 
 (use-package neotree						; neo tree (files browsing tree)
   :ensure t
+  :defer t
   :bind (
 		 ("C-c a"	.	neotree-toggle)
 		 ([f8]		.	neotree-toggle)

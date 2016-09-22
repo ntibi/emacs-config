@@ -1,5 +1,5 @@
 ;;; myfunctions.el --- vanilla emacs config
-;;; Commentary:
+;;; commentary:
 ;;; some homemade functions
 ;;; and some proudly copy-pasted functions
 ;;; code:
