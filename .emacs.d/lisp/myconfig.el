@@ -96,7 +96,7 @@
 
 (global-unset-key (kbd "C-@"))
 (new-onekey
- "textmanip"
+ " fastOK"
  "C-@"
  '(
 	("h"	.	left-char)
@@ -121,7 +121,8 @@
 	("d"	.	kill-whole-line)
 	 
 	("y"	.	yank)
-	("Y"	.	yank-pop)
+	("r"	.	yank-pop)
+	("R"	.	yank-pop-forward)
 	 
 	("u"	.	undo-tree-undo)
 	("U"	.	undo-tree-redo)
@@ -166,7 +167,7 @@
  )
 
 (new-onekey
- "toggle"
+ " toggle"
  "C-x t"
  '(
    ("l" . linum-mode)
@@ -177,7 +178,8 @@
    ("w" . whitespace-mode)
    ("x" . xterm-mouse-mode)
    ("f" . flycheck-mode)
-   ))
+   )
+ )
 
 
 (global-set-key (kbd "C-c C-g") 'keyboard-quit) ; quit when misstyped beggining of command
@@ -275,6 +277,7 @@
   )
 
 (use-package linum						; get line number
+  :ensure t
   :config
   (add-hook 'prog-mode-hook 'linum-mode)
   (setq linum-format "%4d \u2502 ")

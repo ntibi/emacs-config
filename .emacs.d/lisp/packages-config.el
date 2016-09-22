@@ -6,7 +6,7 @@
   :ensure t
   :defer 1
   :config
-  (use-package flycheck-clangcheck :defer t)
+  (use-package flycheck-clangcheck :ensure t :defer t)
   (global-flycheck-mode) ; flycheck ON
   (setq flycheck-clangcheck-analyze t)
   (setq flycheck-check-syntax-automatically '(mode-enabled save)) ; check at save
@@ -17,6 +17,7 @@
   :ensure t
   :bind (("M-/" . company-complete))
   :config
+  (use-package company-c-headers :defer t :ensure t)
   (add-hook 'after-init-hook 'global-company-mode) ; company auto-compete ON
   (global-company-mode)
   (company-semantic 1)							 ; company with semantic backend
@@ -28,10 +29,6 @@
   (add-to-list 'completion-styles 'semantic)
   (add-to-list 'company-backends 'company-c-headers)	  ; headers auto completion
   (set 'company-clang-arguments (list (concat "-I" (file-name-directory load-file-name) "./") (concat "-I" (file-name-directory load-file-name) "/includes/") (concat "-I" (file-name-directory load-file-name) "../includes/")))
-  )
-
-(use-package company-c-headers
-  :ensure t
   )
 
 (add-hook 'python-mode-hook 'anaconda-mode)
@@ -58,11 +55,10 @@
   :defer 2
   :ensure t
   :bind (
-		 ("M-x"				.	helm-M-x)
-		 ([remap find-file]			.	helm-find-files)
-		 ([remap occur]				.	helm-occur)
-		 ([remap list-buffers]		.	helm-buffers-list)
-		 ([remap dabbrev-expand]	.	helm-dabbrev)
+		 ("M-x"		.	helm-M-x)
+		 ("C-x C-f"	.	helm-find-files)
+		 ("C-x C-b"	.	helm-buffers-list)
+		 ("C-x p"	.	helm-show-kill-ring)
 		 )
   :init ()
   :config

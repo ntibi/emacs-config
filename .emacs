@@ -43,7 +43,6 @@
 
 (load "monokai-theme.el")				; load monokai theme
 
-
 ;;;; auto-set config variables:
 
 (custom-set-variables
