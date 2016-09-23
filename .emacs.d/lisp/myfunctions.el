@@ -8,9 +8,11 @@
 (defun select-line ()
   "Select the current line"
   (interactive)
-  (end-of-line) ; move to end of line
-  (set-mark (line-beginning-position))
-  (forward-line -1)
+  (progn
+	(end-of-line) ; move to end of line
+	(set-mark (line-beginning-position))
+	(next-line)
+	)
   )
 
 

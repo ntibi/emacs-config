@@ -144,9 +144,9 @@
 	("x"	.	kill-buffer)
 	
 	("t"	.	transpose-chars)
+	("T"	.	transpose-words)
 
 	("c"	.	select-line)
-	("S-C"	.	duplicate-line-or-region)
 	
 	("SPC"	.	set-mark-command)
 
@@ -160,6 +160,18 @@
 
 	("s" . save-buffer)
 	("S" . save-some-buffers)
+
+	("%" . split-window-below)
+	("|" . split-window-right)
+
+	("!" . shell-command)
+
+	("." . recenter)
+
+	("/" . helm-find-files)
+
+	("'" . delete-window)
+	("\"" . delete-other-windows)
    )
  )
 
