@@ -243,16 +243,6 @@ With negative N, comment out original line and use the absolute value."
 	  (beginning-of-line (or (and arg (1+ arg)) 2))
 	  (if (and arg (not (= 1 arg))) (message "%d lines copied" arg)))
 
-(defun comment-or-uncomment-region-or-line (&optional n) ; unused n arg for now
-  "Comments or uncomments the region or the current line if there's no active region."
-  (interactive)
-  (let (beg end)
-	(if (region-active-p)
-		(setq beg (region-beginning) end (region-end))
-	  (setq beg (line-beginning-position) end (line-end-position)))
-	(comment-or-uncomment-region beg end)
-	(next-line)))
-
 
 (defun move-text (arg)
    (cond

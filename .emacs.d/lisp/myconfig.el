@@ -129,7 +129,7 @@
 	("w"	.	kill-ring-save)
 	("W"	.	kill-region)
 
-	(";" . comment-or-uncomment-region-or-line)
+	(";" . comment-line)
 
 	(":"	.	comment-dwim)
 
