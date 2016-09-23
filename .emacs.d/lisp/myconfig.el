@@ -131,6 +131,8 @@
 
 	(";" . comment-or-uncomment-region-or-line)
 
+	(":"	.	comment-dwim)
+
 	("n"	.	move-text-down)
 	("p"	.	move-text-up)
 
@@ -150,28 +152,28 @@
 	
 	("SPC"	.	set-mark-command)
 
-	("<" . beginning-of-buffer)
-	(">" . end-of-buffer)
+	("<"	.	beginning-of-buffer)
+	(">"	.	end-of-buffer)
 
-	("`" . next-error)
+	("`"	.	next-error)
 
-	("o" . other-window)
-	("O" . previous-multiframe-window)
+	("o"	.	other-window)
+	("O"	.	previous-multiframe-window)
 
-	("s" . save-buffer)
-	("S" . save-some-buffers)
+	("s"	.	save-buffer)
+	("S"	.	save-some-buffers)
 
-	("%" . split-window-below)
-	("|" . split-window-right)
+	("%"	.	split-window-below)
+	("|"	.	split-window-right)
 
-	("!" . shell-command)
+	("!"	.	shell-command)
 
-	("." . recenter)
+	("."	.	recenter)
 
-	("/" . helm-find-files)
+	("/"	.	helm-find-files)
 
-	("'" . delete-window)
-	("\"" . delete-other-windows)
+	("'"	.	delete-window)
+	("\""	.	delete-other-windows)
    )
  )
 

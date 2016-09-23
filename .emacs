@@ -8,7 +8,8 @@
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
 (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/") t)
 
-;; (benchmark-init/activate)				; uncomment to benchmark emacs startup
+;; (benchmark-init/activate)										; uncomment to benchmark emacs startup
+;; (add-hook 'after-init-hook 'benchmark-init/show-durations-tree) ; uncomment to startup summary
 
 (unless (package-installed-p 'use-package) ; ensure use-package is installed
   (package-refresh-contents)
