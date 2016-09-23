@@ -171,6 +171,7 @@
 	("."	.	recenter)
 
 	("/"	.	helm-find-files)
+	("m"	.	helm-semantic)
 
 	("'"	.	delete-window)
 	("\""	.	delete-other-windows)
@@ -267,16 +268,18 @@
 ;; configs and keybinds from modes
 (use-package semantic
   :defer 3
+  :bind (
+		 ("C-x j" . semantic-complete-jump) ; jump to local symbol
+		 ("C-c j" . senator-go-to-up-reference) ; jump to definitionf
+		 ("C-c f" . semantic-symref)
+		 )
   :config
-  (require 'cc-mode)
-  (require 'semantic/ia)
+  (use-package cc-mode)
+  (use-package semantic/ia)
   (global-ede-mode 1)                      ; Enable the Project management system
   (semantic-mode 1)						 ;
   (global-semanticdb-minor-mode 1)
   (global-semantic-idle-scheduler-mode 1)	; update DB wen idle
-  (global-set-key (kbd "C-x j") 'semantic-complete-jump) ; jump to local symbol
-  (global-set-key (kbd "C-c j") 'senator-go-to-up-reference) ; jump to definitionf
-  (global-set-key (kbd "C-c f") 'semantic-symref)
   (global-semantic-show-parser-state-mode)
   (global-semantic-mru-bookmark-mode)
   (global-semantic-highlight-func-mode)
