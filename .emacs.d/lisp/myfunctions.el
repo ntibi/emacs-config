@@ -15,7 +15,7 @@
 	)
   )
 
-(defmacro new-onekey (name starter onekeys)
+(cl-defmacro new-onekey (name starter onekeys &optional (doc ""))
   "GENERATE A MINOR-MODE FOR FASTER AND MORE ACCESSIBLE SHORTCUTS.
 NAME: onekey-mode name.
 STARTER: keybind to start this mode
@@ -24,14 +24,14 @@ ONEKEYS: one key keybinds to use in this mode"
     `(progn
 	   (defun ,help-function ()
 		 (interactive)
-		 (with-help-window "okok" (with-current-buffer "" (insert
+		 (with-help-window ,(symbol-name help-function) (with-current-buffer ,(symbol-name help-function) (insert
 		  (mapconcat 'identity
 					 (mapcar '(lambda (e)
-								(format "%10s: %s" (car e) (symbol-name (cdr e))))
+								(format "\"%s\": %s" (propertize (car e) 'font-lock-face 'font-lock-string-face) (propertize (symbol-name (cdr e)) 'font-lock-face 'italic)))
 							 ,onekeys)
 					 "\n")))))
        (define-minor-mode ,fname
-		 ""
+		 ,doc
 		 :global t
 		 :lighter ,(concat " " name)
 		 :keymap  (append (mapcar (lambda (e) (interactive) (cons (kbd (car e)) (cdr e))) ,onekeys)
@@ -57,10 +57,12 @@ ONEKEYS: one key keybinds to use in this mode"
 	   			  (onekey-starter (intern (format "onekey-%s-mode/%s" ,name (car e))))
 	   			  (starter ,starter)
 	   			  (fname ',fname)
-	   			  )
+				  (doc (format "%s\n%s calls %s" ,doc (car e) (symbol-name (cdr e))))
+				  )
 	   		  (eval
 	   		   `(progn
 	   			  (defun ,onekey-starter ()
+					,doc
 	   				(interactive)
 	   				(call-interactively ',(cdr e))
 	   				(,fname)

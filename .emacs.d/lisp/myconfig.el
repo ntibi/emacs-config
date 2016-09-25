@@ -42,7 +42,6 @@
 
 (add-hook 'prog-mode-hook 'set-mode-line) ; set my mode line in the new programming buffers
 
-(set-mode-line)
 (add-hook 'python-mode-hook
 		  (function (lambda ()
                       (setq indent-tabs-mode t
@@ -66,6 +65,8 @@
 (defalias 'yes-or-no-p 'y-or-n-p)		; always (y or n) instead of (yes or no)
 
 ;;;; keybinds to functions from myfunctions.el
+
+(set-mode-line)
 
 (global-set-key (kbd "C-c C-s") 'sudo-save)
 
@@ -175,7 +176,8 @@
 
 	("'"	.	delete-window)
 	("\""	.	delete-other-windows)
-   )
+	)
+ "common editor functions bound to fast and comfortable keys"
  )
 
 (new-onekey
@@ -191,6 +193,7 @@
    ("x" . xterm-mouse-mode)
    ("f" . flycheck-mode)
    )
+ "toggle stuff"
  )
 
 
@@ -325,6 +328,7 @@
   )
 
 (use-package org-mode
+  :defer t
   )
 
 ;; (require 'zone)							; kind of screen saver
