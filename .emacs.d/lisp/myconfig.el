@@ -66,7 +66,6 @@
 
 ;;;; keybinds to functions from myfunctions.el
 
-(set-mode-line)
 
 (global-set-key (kbd "C-c C-s") 'sudo-save)
 
