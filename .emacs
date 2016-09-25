@@ -1,6 +1,7 @@
-;;; .emacs --- my .emacs
+t;;; .emacs --- my .emacs
 ;;; commentary:
 ;;; code:
+
 
 (require 'package)
 (package-initialize)
@@ -22,27 +23,25 @@
 (add-to-list 'load-path "~/.emacs.d/lisp/themes/")     ;; themes path
 (add-to-list 'load-path "~/.emacs.d/lisp/additional/") ;; additional files
 
+
+
 ;;;; load config files
-(load "packages-config.el")				; packages config
 
 
-(load "myfunctions.el")					; my defined function
-(load "myconfig.el")					; vanilla config
+(mapcar #'(lambda (f) (ignore-errors (load f)))
+		(list
+		 "packages-config.el"			; packages config
+		 "myfunctions.el"				; user defined functions
+		 "myconfig.el"					; vanilla config
+		 "user-macros.el"				; load macro saved from other sessions
+		 "42config.el"					; c norme
+		 "header.el"					; 42 header
+		 "monokai-theme.el"				; dank theme
+		 ))
 
-(load "user-macros.el")					; load previously saved macros
-
-;; load 42 files
-(load "42config.el")					; C-style indentation
-(load "header.el")						; 42 header
-
-;; additional files
-;(load "list.el")						; list functions
-;(load "string.el")						; string function
-;(load "comments.el")					; comments functions
-
-(load "monokai-theme.el")				; load monokai theme
 
 ;;;; auto-set config variables:
+
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
