@@ -5,8 +5,9 @@
 (use-package flycheck
   :ensure t
   :defer 2
-  :config
+  :init
   (use-package flycheck-clangcheck :ensure t :defer t)
+  :config
   (global-flycheck-mode) ; flycheck ON
   (setq flycheck-clangcheck-analyze t)
   (setq flycheck-check-syntax-automatically '(mode-enabled save)) ; check at save
@@ -19,8 +20,9 @@
   :bind (
 		 ("M-/" . company-complete)
 		 )
-  :config
+  :init
   (use-package company-c-headers :defer t :ensure t)
+  :config
   (global-company-mode)
   (company-semantic 1)							 ; company with semantic backend
   (define-key company-active-map (kbd "M-.") 'company-show-doc-buffer) ; show doc
@@ -70,10 +72,16 @@
 		 ("C-x p"	.	helm-show-kill-ring)
 		 ("C-?"		.	helm-semantic-or-imenu)
 		 )
-  :init ()
+  :init
   :config
   (helm-mode 1)
   (helm-autoresize-mode 1)				; shrink minibuffer if possible
+  )
+
+(use-package helm-swoop
+  :defer t
+  :ensure t
+  :bind (("C-M-s" . helm-swoop))
   )
 
 
@@ -139,10 +147,10 @@
 
 (use-package tabbar						; tabbar mode (tabs navigation)
   :ensure t
-  :config
+  :init
   (use-package tab-group					; organize tabs in groups
-	:ensure t
-	)
+	:ensure t)
+  :config
   (tabbar-mode t)							; ON
   (load "tabbar-tweek.el")				; nice tabbar config
   (global-set-key (kbd "<end>") 'tabbar-backward-tab)
@@ -154,6 +162,7 @@
 
 (use-package ace-jump-mode
   :ensure t
+  :defer t
   :config
   (global-set-key (kbd "M-f") 'ace-jump-word-mode) ; quickly jump to a word
   (global-set-key (kbd "C-]") 'jump-char-forward)

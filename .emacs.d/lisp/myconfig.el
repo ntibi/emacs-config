@@ -83,8 +83,6 @@
 
 (global-set-key (kbd "C-c g") 'search-google) ; preform a google search of region/input
 
-(global-set-key (kbd "M-z") '(lambda () "" (interactive) (zone-choose (zone-pgm-putz-with-case))))
-
 (global-set-key (kbd "M-Y") 'yank-pop-forward)
 
 
