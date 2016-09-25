@@ -93,7 +93,7 @@
 
 (global-unset-key (kbd "C-@"))
 (new-onekey
- " fastOK"
+ "fast"
  "C-@"
  '(
 	("h"	.	left-char)
@@ -179,7 +179,7 @@
  )
 
 (new-onekey
- " toggle"
+ "toggle"
  "C-x t"
  '(
    ("l" . linum-mode)

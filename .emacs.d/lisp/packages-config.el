@@ -96,22 +96,22 @@
 
 (use-package rainbow-mode					; colorize hex codes
   :ensure t
-  :config
+  :init
   (add-hook 'prog-mode-hook 'rainbow-mode)
   )
 (use-package rainbow-identifiers			; different variables color
   :ensure t
-  :config
+  :init
   (add-hook 'prog-mode-hook 'rainbow-identifiers-mode)
   )
 (use-package highlight-parentheses		; highlight surrounding parentheses
   :ensure t
-  :config
+  :init
   (add-hook 'prog-mode-hook 'highlight-parentheses-mode)
   )
 (use-package rainbow-delimiters			; parentheses color according to depth
   :ensure t
-  :config
+  :init
   (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
   )
 

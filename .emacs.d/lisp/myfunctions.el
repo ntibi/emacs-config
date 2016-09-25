@@ -15,36 +15,42 @@
 	)
   )
 
-
 (defmacro new-onekey (name starter onekeys)
   "GENERATE A MINOR-MODE FOR FASTER AND MORE ACCESSIBLE SHORTCUTS.
 NAME: onekey-mode name.
 STARTER: keybind to start this mode
 ONEKEYS: one key keybinds to use in this mode"
-  (let ((fname (intern (format "onekey-%s-mode" name))))
+  (let ((fname (intern (format "onekey-%s-mode" name))) (help-function (intern (format "onekey-%s-mode-help" name))))
     `(progn
+	   (defun ,help-function ()
+		 (interactive)
+		 (with-help-window "okok" (with-current-buffer "" (insert
+		  (mapconcat 'identity
+					 (mapcar '(lambda (e)
+								(format "%10s: %s" (car e) (symbol-name (cdr e))))
+							 ,onekeys)
+					 "\n")))))
        (define-minor-mode ,fname
 		 ""
 		 :global t
-		 :lighter ,name
+		 :lighter ,(concat " " name)
 		 :keymap  (append (mapcar (lambda (e) (interactive) (cons (kbd (car e)) (cdr e))) ,onekeys)
-						 '(
-						   ("q"			.	(lambda () (interactive) (call-interactively ',fname)))
-						   ((kbd "C-g")	.	(lambda () (interactive) (call-interactively ',fname)))
-						   ("9"			.	digit-argument)
-						   ("8"			.	digit-argument)
-						   ("7"			.	digit-argument)
-						   ("6"			.	digit-argument)
-						   ("5"			.	digit-argument)
-						   ("4"			.	digit-argument)
-						   ("3"			.	digit-argument)
-						   ("2"			.	digit-argument)
-						   ("1"			.	digit-argument)
-						   ("0"			.	digit-argument)
-						   ("-"			.	digit-argument)
-						   )
-						 )
-		 )
+						  '(
+							("q"			.	(lambda () (interactive) (call-interactively ',fname)))
+							((kbd "C-g")	.	(lambda () (interactive) (call-interactively ',fname)))
+							("?"			.	,help-function)
+							("9"			.	digit-argument)
+							("8"			.	digit-argument)
+							("7"			.	digit-argument)
+							("6"			.	digit-argument)
+							("5"			.	digit-argument)
+							("4"			.	digit-argument)
+							("3"			.	digit-argument)
+							("2"			.	digit-argument)
+							("1"			.	digit-argument)
+							("0"			.	digit-argument)
+							("-"			.	digit-argument)
+							)))
        (mapcar							; bind all keys minor onekey mode activation + right command exectuion
 	   	#'(lambda (e)
 	   		(let (
@@ -59,16 +65,8 @@ ONEKEYS: one key keybinds to use in this mode"
 	   				(call-interactively ',(cdr e))
 	   				(,fname)
 	   				)
-	   			  (global-set-key (kbd (concat ,starter " " ,(car e))) ',onekey-starter)
-	   			  )
-	   		   )
-	   		  )
-	   		)
-	   	,onekeys
-	   	)
-       )
-    )
-  )
+	   			  (global-set-key (kbd (concat ,starter " " ,(car e))) ',onekey-starter)))))
+	   	,onekeys))))
 
 
 (defun yank-pop-forward (&optional arg)
