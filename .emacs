@@ -1,4 +1,4 @@
-t;;; .emacs --- my .emacs
+;;; .emacs --- my .emacs
 ;;; commentary:
 ;;; code:
 
