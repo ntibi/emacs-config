@@ -163,9 +163,11 @@
 (use-package ace-jump-mode
   :ensure t
   :defer t
+  :bind (
+		 ("M-f" . ace-jump-word-mode)
+		 ("C-]" . jump-char-forward)
+		 )
   :config
-  (global-set-key (kbd "M-f") 'ace-jump-word-mode) ; quickly jump to a word
-  (global-set-key (kbd "C-]") 'jump-char-forward)
   (setq ace-jump-mode-case-fold t)				 ; case insensitive
   (setq ace-jump-mode-move-keys (cl-loop for i from ?a to ?z collect i)) ; use [a-z]
   )
