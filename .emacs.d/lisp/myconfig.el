@@ -37,6 +37,8 @@
 
 ;; (add-hook 'c-mode-common-hook ')
 
+(global-set-key (kbd "DEL") 'backward-delete-char)
+
 (add-hook 'c-mode-hook '(lambda () "" (interactive) (c-toggle-auto-newline t)))
 (add-hook 'c++-mode-hook (lambda () "" (interactive) (c-toggle-auto-newline t)))
 
@@ -270,7 +272,7 @@
   :defer 3
   :bind (
 		 ("C-x j" . semantic-complete-jump) ; jump to local symbol
-		 ("C-c j" . senator-go-to-up-reference) ; jump to definitionf
+		 ("C-c j" . senator-go-to-up-reference) ; jump to definition
 		 ("C-c f" . semantic-symref)
 		 )
   :config
