@@ -28,7 +28,8 @@
 ;;;; load config files
 
 
-(mapcar #'(lambda (f) (ignore-errors (load f)))
+;; (mapcar #'(lambda (f) (ignore-errors (load f)))
+(mapcar #'(lambda (f) (load f))			; TODO: activate a 'safe mode' on error
 		(list
 		 "packages-config.el"			; packages config
 		 "myfunctions.el"				; user defined functions
