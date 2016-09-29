@@ -37,8 +37,6 @@
 
 ;; (add-hook 'c-mode-common-hook ')
 
-(global-set-key (kbd "DEL") 'backward-delete-char)
-
 (add-hook 'c-mode-hook '(lambda () "" (interactive) (c-toggle-auto-newline t)))
 (add-hook 'c++-mode-hook (lambda () "" (interactive) (c-toggle-auto-newline t)))
 

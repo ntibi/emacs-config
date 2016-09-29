@@ -49,6 +49,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(ad-redefinition-action (quote accept))
+ '(c-backspace-function (quote backward-delete-char))
  '(c-electric-pound-behavior (quote (alignleft)))
  '(company-c-headers-path-system
    (quote
