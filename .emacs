@@ -7,7 +7,6 @@
 (package-initialize)
 (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
-(add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/") t)
 
 ;; (benchmark-init/activate)										; uncomment to benchmark emacs startup
 ;; (add-hook 'after-init-hook 'benchmark-init/show-durations-tree) ; uncomment to startup summary
@@ -24,6 +23,8 @@
 (add-to-list 'load-path "~/.emacs.d/lisp/additional/") ;; additional files
 
 
+;; set backup dir (/tmp/emacs{uid})
+(defconst emacs-tmp-dir (format "%s/%s%s/" temporary-file-directory "emacs" (user-uid)))
 
 ;;;; load config files
 

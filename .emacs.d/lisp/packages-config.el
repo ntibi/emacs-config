@@ -140,9 +140,11 @@
 (use-package undo-tree					; undo tree
   :ensure t
   :config
-  (global-undo-tree-mode)					; set undo-tree as default undo (C-x u)
+  (setq undo-tree-auto-save-history t)
+  (setq undo-tree-history-directory-alist `((".*" . ,emacs-tmp-dir)))
   (define-key undo-tree-map (kbd "C-x u") 'undo-tree-visualize) ; undo with the fancy tree
   (define-key undo-tree-map (kbd "C--") 'undo-tree-undo) ; normal undo
+  (global-undo-tree-mode)
   )
 
 (use-package tabbar						; tabbar mode (tabs navigation)
