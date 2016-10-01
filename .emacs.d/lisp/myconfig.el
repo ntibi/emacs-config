@@ -141,7 +141,7 @@
 
 	("g"	.	goto-line)
 	
-	("x"	.	kill-buffer)
+	("x"	.	kill-this-buffer)
 	
 	("t"	.	transpose-chars)
 	("T"	.	transpose-words)
