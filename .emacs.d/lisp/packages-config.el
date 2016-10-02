@@ -12,11 +12,17 @@
 	:defer t
 	:config
 	(setq flycheck-clangcheck-analyze t)
-	  (add-hook 'c++-mode-hook (lambda () (setq flycheck-clang-language-standard "c++11"))) ; --std=c++11
+	(add-hook 'c++-mode-hook (lambda () (setq flycheck-clang-language-standard "c++11"))) ; --std=c++11
 	)
   :config
   (global-flycheck-mode) ; flycheck ON
-  (setq flycheck-check-syntax-automatically '(mode-enabled save)) ; check at save
+  (setq flycheck-clang-include-path
+		(quote ("/usr/include/" "/usr/local/include/" "/usr/include/c++/4.9/" "/data/include/" "./" "./include" "./includes" "../include" "../includes")))
+  (setq flycheck-cppcheck-include-path
+		(quote ("/usr/include/" "/usr/local/include/" "/usr/include/c++/4.9/" "/data/include/" "./" "./include" "./includes" "../include" "../includes")))
+  (setq flycheck-gcc-definitions
+		(quote ("./" "./includes/" "../includes/" "./include/" "../include/")))
+  (setq flycheck-temp-prefix ".flycheck")
   )
 
 (use-package company					; company auto complete
@@ -24,7 +30,15 @@
   :defer t
   :bind (("M-/" . company-complete))
   :init
-  (use-package company-c-headers :defer t :ensure t)
+  (use-package company-c-headers
+	:defer t
+	:ensure t
+	:config
+	(setq company-c-headers-path-system
+		  (quote ("/data/include/" "/usr/include/" "/usr/local/include/" "/usr/include/c++/4.9/")))
+	(setq company-c-headers-path-user
+		  (quote ("./" "./includes/" "../includes/" "./include/" "../include/")))
+	)
   :config
   (global-company-mode)
   (company-semantic 1)							 ; company with semantic backend
@@ -85,6 +99,7 @@
   :config
   (helm-mode 1)
   (helm-autoresize-mode 1)				; shrink minibuffer if possible
+  (setq helm-buffers-fuzzy-matching t)
   )
 
 (use-package helm-swoop
@@ -116,20 +131,27 @@
   :init
   (add-hook 'prog-mode-hook 'rainbow-mode)
   )
+
 (use-package rainbow-identifiers			; different variables color
   :ensure t
   :init
   (add-hook 'prog-mode-hook 'rainbow-identifiers-mode)
   )
+
 (use-package highlight-parentheses		; highlight surrounding parentheses
   :ensure t
   :init
   (add-hook 'prog-mode-hook 'highlight-parentheses-mode)
+  :config
+  (setq hl-paren-background-colors nil)
+  (setq hl-paren-delay 0.01)
   )
+
 (use-package rainbow-delimiters			; parentheses color according to depth
   :ensure t
   :init
   (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
+  (setq rainbow-identifiers-face-count 15)
   )
 
 (use-package neotree						; neo tree (files browsing tree)
@@ -169,6 +191,7 @@
   (global-set-key (kbd "C-<end>") 'tabbar-backward-group)
   (global-set-key (kbd "C-<home>") 'tabbar-forward-group)
   (setq tabbar-use-images nil)			; faster ?
+  (setq tabbar-separator (quote (0.5)))
   )
 
 (use-package ace-jump-mode

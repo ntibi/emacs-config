@@ -26,7 +26,7 @@ ONEKEYS: one key keybinds to use in this mode"
 		 (interactive)
 		 (with-help-window ,(symbol-name help-function) (with-current-buffer ,(symbol-name help-function) (insert
 		  (mapconcat 'identity
-					 (mapcar '(lambda (e)
+					 (mapcar #'(lambda (e)
 								(format "\"%s\": %s" (propertize (car e) 'font-lock-face 'font-lock-string-face) (propertize (symbol-name (cdr e)) 'font-lock-face 'italic)))
 							 ,onekeys)
 					 "\n")))))

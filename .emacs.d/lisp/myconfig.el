@@ -15,11 +15,19 @@
 
 (defconst user user-real-login-name)
 
+(setq use-dialog-box nil)
+
 (menu-bar-mode -1)						; No menu bar
 (setq inhibit-startup-message t)		; no startup message
 (setq initial-scratch-message ";; Scratch buffer\n") ; Scratch buffer message
 
+(setq enable-recursive-minibuffers nil)
+
 (setq shift-select-mode t)				; handy selection with shift
+
+(setq history-delete-duplicates t)
+
+(setq ad-redefinition-action (quote accept))
 
 (column-number-mode t)					; print column number
 (line-number-mode t)					; print line number
@@ -35,12 +43,14 @@
 (global-auto-revert-mode t)				; auto update changed files
 
 
-;; (electric-pair-mode)					; autopair "" {} () ...
+(electric-pair-mode)					; autopair "" {} () ...
 
 (use-package cc-mode					; common c mode (c/c++/...)
   :defer t
   :init
   (add-hook 'c-mode-common-hook '(lambda () (progn
+											  (setq c-backspace-function 'backward-delete-char)
+											  (setq c-electric-pound-behavior (quote (alignleft)))
 											  (c-toggle-electric-state t)			; electric characters
 											  (c-toggle-syntactic-indentation t)	; automatic indentation
 											  (c-toggle-auto-newline t)				; automatic newlines after ';', '}',...
@@ -300,6 +310,8 @@
   (semantic-add-system-include "/usr/include/" 'c++-mode)
   (semantic-add-system-include "/usr/local/include/" 'c++-mode)
   (semantic-add-system-include "/usr/include/c++/4.9/" 'c++-mode)
+  (setq semantic-default-c-path
+   (quote ("./" "../include" "../includes" "./include" "./includes")))
   )
 
 (use-package linum						; get line number
