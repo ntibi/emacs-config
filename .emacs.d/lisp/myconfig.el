@@ -128,7 +128,7 @@
 	("w"	.	kill-ring-save)
 	("W"	.	kill-region)
 
-	(";" . comment-line)
+	(";"	.	comment-line)
 
 	(":"	.	comment-dwim)
 
@@ -185,9 +185,10 @@
  "C-x t"
  '(
    ("l" . linum-mode)
-   ("t" . toggle-truncate-lines)
    ("i" . c-toggle-electric-state)
    ("n" . c-toggle-auto-newline)
+   ("h" . c-toggle-hungry-state)
+   ("t" . toggle-truncate-lines)
    ("r" . read-only-mode)
    ("w" . whitespace-mode)
    ("x" . xterm-mouse-mode)
