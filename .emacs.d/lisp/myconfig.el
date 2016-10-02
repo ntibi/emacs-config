@@ -34,12 +34,20 @@
 
 (global-auto-revert-mode t)				; auto update changed files
 
-(electric-pair-mode)
 
-;; (add-hook 'c-mode-common-hook ')
+(electric-pair-mode)					; autopair "" {} () ...
 
-(add-hook 'c-mode-hook '(lambda () "" (interactive) (c-toggle-auto-newline t)))
-(add-hook 'c++-mode-hook (lambda () "" (interactive) (c-toggle-auto-newline t)))
+(use-package cc-mode					; common c mode (c/c++/...)
+  :init
+  (add-hook 'c-mode-common-hook '(lambda () (progn
+											  (c-toggle-electric-state t)			; electric characters
+											  (c-toggle-syntactic-indentation t)	; automatic indentation
+											  (c-toggle-auto-newline t)				; automatic newlines after ';', '}',...
+											  (c-toggle-hungry-state t)				; hungry backspaces
+											  )))
+  )
+
+(add-hook 'prog-mode-hook 'c-toggle-electric-state)
 
 (add-hook 'prog-mode-hook 'set-mode-line) ; set my mode line in the new programming buffers
 
