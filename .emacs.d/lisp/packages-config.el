@@ -5,21 +5,24 @@
 (use-package flycheck
   :ensure t
   :defer 2
+  :bind (("C-x `" . flycheck-next-error))
   :init
-  (use-package flycheck-clangcheck :ensure t :defer t)
+  (use-package flycheck-clangcheck
+	:ensure t
+	:defer t
+	:config
+	(setq flycheck-clangcheck-analyze t)
+	  (add-hook 'c++-mode-hook (lambda () (setq flycheck-clang-language-standard "c++11"))) ; --std=c++11
+	)
   :config
   (global-flycheck-mode) ; flycheck ON
-  (setq flycheck-clangcheck-analyze t)
   (setq flycheck-check-syntax-automatically '(mode-enabled save)) ; check at save
-  (add-hook 'c++-mode-hook (lambda () (setq flycheck-clang-language-standard "c++11"))) ; --std=c++11
   )
 
 (use-package company					; company auto complete
   :ensure t
-  :defer 3
-  :bind (
-		 ("M-/" . company-complete)
-		 )
+  :defer t
+  :bind (("M-/" . company-complete))
   :init
   (use-package company-c-headers :defer t :ensure t)
   :config
@@ -49,10 +52,11 @@
 
 (use-package yasnippet							 ; yet another snippet
   :ensure t
-  :defer 1
+  :defer t
+  :bind (("C-c TAB" . yas-expand))
   :config
-  (yas-global-mode 1) ; enable yas
   (setq yas-snippet-dirs '("~/.emacs.d/snippets")) ; snippets path
+  (yas-global-mode t)
   (defvar company-mode/enable-yas t)				 ; snippets completion in company
   (defun company-mode/backend-with-yas (backend)
 	(if (or (not company-mode/enable-yas) (and (listp backend) (member 'company-yasnippet backend)))
@@ -141,7 +145,7 @@
   :ensure t
   :config
   (setq undo-tree-auto-save-history t)
-  (setq undo-tree-history-directory-alist `((".*" . ,emacs-tmp-dir)))
+  (setq undo-tree-history-directory-alist `((".*" . ,temporary-file-directory)))
   (define-key undo-tree-map (kbd "C-x u") 'undo-tree-visualize) ; undo with the fancy tree
   (define-key undo-tree-map (kbd "C--") 'undo-tree-undo) ; normal undo
   (global-undo-tree-mode)
