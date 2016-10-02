@@ -150,10 +150,10 @@
 	("n"	.	move-text-down)
 	("p"	.	move-text-up)
 
-	("<right>"	.	tabbar-forward-tab)
-	("<left>"	.	tabbar-backward-tab)
-	("<up>"		.	tabbar-forward-group)
-	("<down>"	.	tabbar-backward-group)
+	("]"	.	tabbar-forward-tab)
+	("["	.	tabbar-backward-tab)
+	("{"	.	tabbar-forward-group)
+	("}"	.	tabbar-backward-group)
 
 	("g"	.	goto-line)
 	
