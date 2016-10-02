@@ -45,10 +45,15 @@
    ;; )
   )
 
-(add-hook 'python-mode-hook 'anaconda-mode)
-(add-hook 'python-mode-hook 'eldoc-mode)
-(add-hook 'python-mode-hook (lambda () "" (interactive) (add-to-list 'company-backends 'company-anaconda)))
-(add-hook 'python-mode-hook (lambda () "" (interactive) (pyenv-mode)))
+(use-package anaconda-mode
+  :ensure t
+  :defer t
+  :init
+  (add-hook 'python-mode-hook 'anaconda-mode)
+  :config
+  (add-to-list 'company-backends 'company-anaconda)
+  )
+
 
 (use-package yasnippet							 ; yet another snippet
   :ensure t
