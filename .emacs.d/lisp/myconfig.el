@@ -3,6 +3,9 @@
 ;;; keybinds and modes available on default emacs >= 24
 ;;; code:
 
+;; set backup dir (/tmp/emacs{uid})
+(defconst emacs-tmp-dir (format "%s/%s%s/" temporary-file-directory "emacs" (user-uid)))
+
 (setq backup-directory-alist
       `((".*" . ,emacs-tmp-dir)))
 (setq auto-save-file-name-transforms
@@ -328,8 +331,6 @@
   :defer t
   )
 
-;; (require 'zone)							; kind of screen saver
-;; (zone-when-idle 60)						; after 60s
 
 ;; this is not vi(m)
 (defconst wq "You mean C-x C-c ?")
