@@ -17,42 +17,44 @@
 
 (cl-defmacro new-onekey (name starter onekeys &optional (doc ""))
   "GENERATE A MINOR-MODE FOR FASTER AND MORE ACCESSIBLE SHORTCUTS.
-NAME: onekey-mode name.
+NAME: onekey-mode name
 STARTER: keybind to start this mode
-ONEKEYS: one key keybinds to use in this mode"
-  (let ((fname (intern (format "onekey-%s-mode" name)))
-		(gname (intern (format "global-onekey-%s-mode" name)))
-		(help-function (intern (format "onekey-%s-mode-help" name))))
+ONEKEYS: one key keybinds to use in this mode
+DOC: describes the mode
+"
+  (let ((fname (intern (format "onekey-%s-mode" name)))	  ; minor mode
+		(gname (intern (format "global-onekey-%s-mode" name))) ; global minor mode
+		(help-function (intern (format "onekey-%s-mode-help" name)))) ; nice help
     `(progn
-	   (defun ,help-function ()
+	   (defun ,help-function ()										 ; format a nice help
 		 (interactive)
 		 (with-help-window ,(symbol-name help-function) (with-current-buffer ,(symbol-name help-function) (insert
 		  (mapconcat 'identity
 					 (mapcar #'(lambda (e)
-								(format "\"%s\": %s" (propertize (car e) 'font-lock-face 'font-lock-string-face) (propertize (symbol-name (cdr e)) 'font-lock-face 'italic)))
+								 (format "\"%s\": %s" (propertize (car e) 'font-lock-face 'font-lock-string-face) (propertize (symbol-name (cdr e)) 'font-lock-face 'italic)))
 							 ,onekeys)
 					 "\n")))))
        (define-minor-mode ,fname
 		 ,doc
 		 :lighter ,(concat " " name)
-		 :keymap  (append (mapcar (lambda (e) (interactive) (cons (kbd (car e)) (cdr e))) ,onekeys)
-						  '(
-							("q"			.	(lambda () (interactive) (call-interactively ',gname)))
-							((kbd "C-g")	.	(lambda () (interactive) (call-interactively ',gname)))
-							("?"			.	,help-function)
-							("9"			.	digit-argument)
-							("8"			.	digit-argument)
-							("7"			.	digit-argument)
-							("6"			.	digit-argument)
-							("5"			.	digit-argument)
-							("4"			.	digit-argument)
-							("3"			.	digit-argument)
-							("2"			.	digit-argument)
-							("1"			.	digit-argument)
-							("0"			.	digit-argument)
-							("-"			.	digit-argument)
-							)))
-	   (define-globalized-minor-mode ,gname ,fname (lambda () (unless (minibufferp) (,fname 1))))
+		 :keymap  (mapcar (lambda (e) (interactive) (cons (kbd (car e)) (cdr e))) ; apply kbd to all keybinds (keybind . function)
+						  (append ,onekeys '(
+											 ("q"			.	(lambda () (interactive) (call-interactively ',gname)))
+											 ("C-g"			.	(lambda () (interactive) (call-interactively ',gname)))
+											 ("?"			.	,help-function)
+											 ("9"			.	digit-argument)
+											 ("8"			.	digit-argument)
+											 ("7"			.	digit-argument)
+											 ("6"			.	digit-argument)
+											 ("5"			.	digit-argument)
+											 ("4"			.	digit-argument)
+											 ("3"			.	digit-argument)
+											 ("2"			.	digit-argument)
+											 ("1"			.	digit-argument)
+											 ("0"			.	digit-argument)
+											 ("-"			.	digit-argument)
+											 ))))
+	   (define-globalized-minor-mode ,gname ,fname (lambda () (unless (minibufferp) (,fname 1)))) ; create the global minor mode (only if not in minibuffer)
        (mapcar							; bind all keys minor onekey mode activation + right command exectuion
 	   	#'(lambda (e)
 	   		(let (
@@ -66,9 +68,7 @@ ONEKEYS: one key keybinds to use in this mode"
 	   			  (defun ,onekey-starter ()
 					,doc
 	   				(interactive)
-	   				(call-interactively ',(cdr e))
-	   				(,gname)
-	   				)
+	   				(when (,gname) (call-interactively ',(cdr e)))) ; start the mode + execute the command
 	   			  (global-set-key (kbd (concat ,starter " " ,(car e))) ',onekey-starter)))))
 	   	,onekeys))))
 
