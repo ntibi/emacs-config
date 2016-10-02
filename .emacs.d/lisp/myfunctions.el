@@ -20,7 +20,9 @@
 NAME: onekey-mode name.
 STARTER: keybind to start this mode
 ONEKEYS: one key keybinds to use in this mode"
-  (let ((fname (intern (format "onekey-%s-mode" name))) (help-function (intern (format "onekey-%s-mode-help" name))))
+  (let ((fname (intern (format "onekey-%s-mode" name)))
+		(gname (intern (format "global-onekey-%s-mode" name)))
+		(help-function (intern (format "onekey-%s-mode-help" name))))
     `(progn
 	   (defun ,help-function ()
 		 (interactive)
@@ -32,12 +34,11 @@ ONEKEYS: one key keybinds to use in this mode"
 					 "\n")))))
        (define-minor-mode ,fname
 		 ,doc
-		 :global t
 		 :lighter ,(concat " " name)
 		 :keymap  (append (mapcar (lambda (e) (interactive) (cons (kbd (car e)) (cdr e))) ,onekeys)
 						  '(
-							("q"			.	(lambda () (interactive) (call-interactively ',fname)))
-							((kbd "C-g")	.	(lambda () (interactive) (call-interactively ',fname)))
+							("q"			.	(lambda () (interactive) (call-interactively ',gname)))
+							((kbd "C-g")	.	(lambda () (interactive) (call-interactively ',gname)))
 							("?"			.	,help-function)
 							("9"			.	digit-argument)
 							("8"			.	digit-argument)
@@ -51,12 +52,13 @@ ONEKEYS: one key keybinds to use in this mode"
 							("0"			.	digit-argument)
 							("-"			.	digit-argument)
 							)))
+	   (define-globalized-minor-mode ,gname ,fname (lambda () (unless (minibufferp) (,fname 1))))
        (mapcar							; bind all keys minor onekey mode activation + right command exectuion
 	   	#'(lambda (e)
 	   		(let (
 	   			  (onekey-starter (intern (format "onekey-%s-mode/%s" ,name (car e))))
 	   			  (starter ,starter)
-	   			  (fname ',fname)
+	   			  (gname ',gname)
 				  (doc (format "%s\n%s calls %s" ,doc (car e) (symbol-name (cdr e))))
 				  )
 	   		  (eval
@@ -65,7 +67,7 @@ ONEKEYS: one key keybinds to use in this mode"
 					,doc
 	   				(interactive)
 	   				(call-interactively ',(cdr e))
-	   				(,fname)
+	   				(,gname)
 	   				)
 	   			  (global-set-key (kbd (concat ,starter " " ,(car e))) ',onekey-starter)))))
 	   	,onekeys))))

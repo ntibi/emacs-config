@@ -171,8 +171,8 @@
 (use-package undo-tree					; undo tree
   :ensure t
   :config
-  (setq undo-tree-auto-save-history t)
-  (setq undo-tree-history-directory-alist `((".*" . ,(concat emacs-tmp-dir "undo"))))
+  ;; (setq undo-tree-auto-save-history t)
+  ;; (setq undo-tree-history-directory-alist `((".*" . ,(concat emacs-tmp-dir "undo"))))
   (define-key undo-tree-map (kbd "C-x u") 'undo-tree-visualize) ; undo with the fancy tree
   (define-key undo-tree-map (kbd "C--") 'undo-tree-undo) ; normal undo
   (global-undo-tree-mode)
@@ -181,10 +181,9 @@
 (use-package tabbar						; tabbar mode (tabs navigation)
   :ensure t
   :init
-  (use-package tab-group					; organize tabs in groups
-	:ensure t
-	:defer t)
   :config
+  (use-package tab-group					; organize tabs in groups
+	:ensure t)
   (tabbar-mode t)							; ON
   (global-set-key (kbd "<end>") 'tabbar-backward-tab)
   (global-set-key (kbd "<home>") 'tabbar-forward-tab)
