@@ -35,9 +35,10 @@
 (global-auto-revert-mode t)				; auto update changed files
 
 
-(electric-pair-mode)					; autopair "" {} () ...
+;; (electric-pair-mode)					; autopair "" {} () ...
 
 (use-package cc-mode					; common c mode (c/c++/...)
+  :defer t
   :init
   (add-hook 'c-mode-common-hook '(lambda () (progn
 											  (c-toggle-electric-state t)			; electric characters
@@ -47,8 +48,7 @@
 											  )))
   )
 
-(add-hook 'prog-mode-hook 'c-toggle-electric-state)
-
+;; TODO: delay modeline loading
 (add-hook 'prog-mode-hook 'set-mode-line) ; set my mode line in the new programming buffers
 
 (add-hook 'python-mode-hook
