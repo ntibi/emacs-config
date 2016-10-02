@@ -23,6 +23,9 @@
 (add-to-list 'load-path "~/.emacs.d/lisp/additional/") ;; additional files
 
 
+(defconst emacs-tmp-dir (format "%s/%s%s/" temporary-file-directory "emacs" (user-uid))) ; set backup dir (/tmp/emacs{uid})
+
+
 ;;;; load config files
 
 
