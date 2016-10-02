@@ -9,7 +9,7 @@
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
 
 ;; (benchmark-init/activate)										; uncomment to benchmark emacs startup
-;; (add-hook 'after-init-hook 'benchmark-init/show-durations-tree) ; uncomment to startup summary
+;; (add-hook 'after-init-hook 'benchmark-init/show-durations-tree) ; uncomment to get a startup summary
 
 (unless (package-installed-p 'use-package) ; ensure use-package is installed
   (package-refresh-contents)
@@ -29,19 +29,20 @@
 ;; (mapcar #'(lambda (f) (ignore-errors (load f)))
 (mapcar #'(lambda (f) (load f))			; TODO: activate a 'safe mode' on error
 		(list
+		 "monokai-theme.el"				; dank theme
 		 "packages-config.el"			; packages config
 		 "myfunctions.el"				; user defined functions
 		 "myconfig.el"					; vanilla config
 		 "user-macros.el"				; load macro saved from other sessions
 		 "42config.el"					; c norme
 		 "header.el"					; 42 header
-		 "monokai-theme.el"				; dank theme
 		 ))
 
 
 ;;;; auto-set config variables:
 
 
+;; TODO: set these variables in their respective use-packages
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
