@@ -289,12 +289,11 @@
   :defer 3
   :bind (
 		 ("C-x j" . semantic-complete-jump) ; jump to local symbol
-		 ("C-c j" . senator-go-to-up-reference) ; jump to definition
 		 ("C-c f" . semantic-symref)
 		 )
   :config
-  (use-package cc-mode)
   (use-package semantic/ia)
+  (use-package semantic/senator :bind (("C-c j" . senator-go-to-up-reference)))
   (global-ede-mode 1)                      ; Enable the Project management system
   (semantic-mode 1)						 ;
   (global-semanticdb-minor-mode 1)
