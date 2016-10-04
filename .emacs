@@ -52,8 +52,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-	(helm-swoop company-clang use-package zenburn-theme yasnippet undo-tree tabbar-ruler tab-group strings rainbow-mode rainbow-identifiers rainbow-delimiters pyenv-mode popup-complete neotree multiple-cursors mouse+ mode-icons linum-relative highlight-thing highlight-parentheses helm-company git-commit fuzzy function-args flymake-shell flymake-python-pyflakes flycheck-clangcheck find-file-in-project company-c-headers company-anaconda benchmark-init ace-jump-mode)))
- )
+	(helm-swoop company-clang use-package zenburn-theme yasnippet undo-tree tabbar-ruler tab-group strings rainbow-mode rainbow-identifiers rainbow-delimiters pyenv-mode popup-complete neotree multiple-cursors mouse+ mode-icons linum-relative highlight-thing highlight-parentheses helm-company git-commit fuzzy function-args flymake-shell flymake-python-pyflakes flycheck-clangcheck find-file-in-project company-c-headers company-anaconda benchmark-init ace-jump-mode))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;; Auto set vars :
 (custom-set-faces

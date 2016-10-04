@@ -2,7 +2,7 @@
 # name: main
 # key: main
 # --
-int main(${1:$$(yas-choose-value '("void" "int argc, char **argv" "int argc, char **argv, char **envp"))})
+int main(${1:$$(yas-choose-value '("void" "int ac, char **av" "int ac, char **av, char **env"))})
 {
     $0
     return (0);
