@@ -2,6 +2,87 @@
 ;;; commentary:
 ;;; code:
 
+
+(use-package semantic
+  :defer 2
+  :bind (
+		 ("C-x j" . semantic-complete-jump) ; jump to local symbol
+		 ("C-c f" . semantic-symref)
+		 )
+  :config
+  (use-package function-args			; get function args when idle
+	:ensure t
+	:defer t
+	:init
+	(add-hook 'prog-mode-hook 'function-args-mode)
+	:config
+	(fa-config-default)
+	)
+  (use-package semantic/ia)
+  (use-package semantic/senator :bind (("C-c j" . senator-go-to-up-reference)))
+  (global-ede-mode 1)                      ; Enable the Project management system
+  (semantic-mode 1)						 ;
+  (global-semanticdb-minor-mode 1)
+  (global-semantic-idle-scheduler-mode 1)	; update DB wen idle
+  (global-semantic-show-parser-state-mode)
+  (global-semantic-mru-bookmark-mode)
+  (global-semantic-highlight-func-mode)
+  (global-semantic-idle-summary-mode 1)	; get info on thing at point when idle
+  (semantic-add-system-include "/data/include" 'c++-mode)
+  (semantic-add-system-include "/data/include/" 'c++-mode)
+  (semantic-add-system-include "/usr/include/" 'c++-mode)
+  (semantic-add-system-include "/usr/local/include/" 'c++-mode)
+  (semantic-add-system-include "/usr/include/c++/4.9/" 'c++-mode)
+  ;; (setq semantic-default-c-path
+  ;; (quote ("./" "../include" "../includes" "./include" "./includes")))
+  ;; (setq semantic-default-c-path
+		;; (list
+		 ;; (concat emacs-wd "./")
+		 ;; (concat emacs-wd "./include/")
+		 ;; (concat emacs-wd "./includes/")
+		 ;; (concat emacs-wd "../include/")
+		 ;; (concat emacs-wd "../includes/")
+		 ;; ))
+  )
+
+(use-package linum						; get line number
+  :ensure t
+  :config
+  (add-hook 'prog-mode-hook 'linum-mode)
+  (setq linum-format "%4d \u2502 ")
+  )
+
+(use-package hideshow					; factorize functions {...}
+  :bind (
+		 ([f5] . hs-hide-all)
+		 ([f6] . hs-show-all)
+		 ("C-x x" . hs-toggle-hiding)
+		 ("M-v" . hs-toggle-hiding)
+		 )
+  :init
+  (add-hook 'prog-mode-hook 'hs-minor-mode)
+)
+
+(use-package paren						; show matching parenthese
+  :defer 2
+  :config
+  (show-paren-mode 1)			; ON
+  (setq show-paren-delay 0)		; delay
+  )
+
+(use-package mouse
+  :config
+  (xterm-mouse-mode t)					; mouse on mofo
+  (global-set-key (kbd "<mouse-2>") 'nil)
+  (global-set-key (kbd "<mouse-3>") 'xpaste) ; right clic to paste from xclipboard
+  (global-set-key (kbd "<mouse-4>") 'scroll-down-line)
+  (global-set-key (kbd "<mouse-5>") 'scroll-up-line)
+  )
+
+(use-package org-mode
+  :defer t
+  )
+
 (use-package flycheck
   :ensure t
   :defer 2
@@ -41,22 +122,26 @@
 	)
   :config
   (global-company-mode)
-  (company-semantic 1)							 ; company with semantic backend
+  ;; (company-semantic 1)							 ; company with semantic backend
+  (set
+   'company-clang-arguments
+   (list
+	(concat "-I" default-directory "./")
+	(concat "-I" default-directory "./include/")
+	(concat "-I" default-directory "./includes/")
+	(concat "-I" default-directory "../include/")
+	(concat "-I" default-directory "../includes/")
+	)
+   )
   (define-key company-active-map (kbd "M-.") 'company-show-doc-buffer) ; show doc
   (define-key company-active-map (kbd "M-,") 'company-show-location) ; show source
   (add-to-list 'completion-styles 'emacs22)			  ; completion from buffer(before point) words
   (add-to-list 'completion-styles 'substring)
   (add-to-list 'completion-styles 'initials)		  ; initials auto complete
   (add-to-list 'completion-styles 'semantic)
+  (setq company-backends (delete 'company-semantic company-backends)) ; semantic conflicts with company
   (add-to-list 'company-backends 'company-c-headers)	  ; headers auto completion
-  ;; (set
-   ;; 'company-clang-arguments
-   ;; (list
-	;; (concat "-I" (file-name-directory load-file-name) "./")
-	;; (concat "-I" (file-name-directory load-file-name) "./includes/")
-	;; (concat "-I" (file-name-directory load-file-name) "../includes/")
-	;; )
-   ;; )
+  (add-to-list 'company-backends 'company-clang)
   )
 
 (use-package anaconda-mode
@@ -231,7 +316,6 @@
   (setq ace-jump-mode-case-fold t)				 ; case insensitive
   (setq ace-jump-mode-move-keys (cl-loop for i from ?a to ?z collect i)) ; use [a-z]
   )
-
 
 (use-package multiple-cursors			; multiple cursors
   :ensure t

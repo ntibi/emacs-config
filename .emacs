@@ -25,6 +25,7 @@
 
 (defconst emacs-tmp-dir (format "%s/%s%s/" temporary-file-directory "emacs" (user-uid))) ; set backup dir (/tmp/emacs{uid})
 
+(defconst emacs-wd default-directory)	; directory where emacs started
 
 ;;;; load config files
 
