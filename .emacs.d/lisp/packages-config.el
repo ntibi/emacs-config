@@ -35,14 +35,14 @@
   (semantic-add-system-include "/usr/include/c++/4.9/" 'c++-mode)
   ;; (setq semantic-default-c-path
   ;; (quote ("./" "../include" "../includes" "./include" "./includes")))
-  ;; (setq semantic-default-c-path
-		;; (list
-		 ;; (concat emacs-wd "./")
-		 ;; (concat emacs-wd "./include/")
-		 ;; (concat emacs-wd "./includes/")
-		 ;; (concat emacs-wd "../include/")
-		 ;; (concat emacs-wd "../includes/")
-		 ;; ))
+  (setq semantic-default-c-path
+		(list
+		 (concat emacs-wd "./")
+		 (concat emacs-wd "./include/")
+		 (concat emacs-wd "./includes/")
+		 (concat emacs-wd "../include/")
+		 (concat emacs-wd "../includes/")
+		 ))
   )
 
 (use-package linum						; get line number
@@ -126,11 +126,11 @@
   (set
    'company-clang-arguments
    (list
-	(concat "-I" default-directory "./")
-	(concat "-I" default-directory "./include/")
-	(concat "-I" default-directory "./includes/")
-	(concat "-I" default-directory "../include/")
-	(concat "-I" default-directory "../includes/")
+	(concat "-I" emacs-wd "./")
+	(concat "-I" emacs-wd "./include/")
+	(concat "-I" emacs-wd "./includes/")
+	(concat "-I" emacs-wd "../include/")
+	(concat "-I" emacs-wd "../includes/")
 	)
    )
   (define-key company-active-map (kbd "M-.") 'company-show-doc-buffer) ; show doc
