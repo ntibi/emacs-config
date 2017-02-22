@@ -95,7 +95,20 @@ DOC: describes the mode
   (progn
 	(setq mode-line-format					; better mod line
 		  (list
-		   "["
+		   " "
+		   '(:eval (propertize (cond
+					((string= "normal" evil-state)
+					 "N")
+					((string= "insert" evil-state)
+					 "I")
+					((string= "visual" evil-state)
+					 "V")
+					((string= "emacs" evil-state)
+					 "E")
+					((t)
+					 "?"))
+					'face 'font-lock-function-name-face))
+		   " ["
 		   '(:eval (if overwrite-mode (propertize "O" 'face 'font-lock-preprocessor-face) (propertize "I" 'face 'font-lock-constant-face)))
 		   '(:eval (if (buffer-modified-p) (propertize "*" 'face 'font-lock-type-face) (propertize "-" 'face 'font-lock-constant-face)))
 		   '(:eval (if buffer-read-only (propertize "R" 'face 'font-lock-preprocessor-face) (propertize "W" 'face 'font-lock-constant-face)))

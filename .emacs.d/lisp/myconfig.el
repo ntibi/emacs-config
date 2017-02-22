@@ -105,114 +105,6 @@
 ;;;; keybinds to emacs functions
 
 
-(global-unset-key (kbd "C-@"))
-(new-onekey
- "fast"
- "C-@"
- '(
-	("h"	.	left-char)
-	("H"	.	left-word)
-	 
-	("j"	.	next-line)
-	("J"	.	scroll-up)
-	 
-	("k"	.	previous-line)
-	("K"	.	scroll-down)
-	 
-	("l"	.	right-char)
-	("L"	.	right-word)
-	 
-	("a"	.	move-beginning-of-line)
-	("A"	.	backward-sexp)
-	 
-	("e"	.	move-end-of-line)
-	("E"	.	forward-sexp)
-	 
-	("D"	.	kill-sexp)
-	("d"	.	kill-whole-line)
-	 
-	("y"	.	yank)
-	("r"	.	yank-pop)
-	("R"	.	yank-pop-forward)
-	 
-	("u"	.	undo-tree-undo)
-	("U"	.	undo-tree-redo)
-
-	("f"	.	ace-jump-word-mode)
-
-	("w"	.	kill-ring-save)
-	("W"	.	kill-region)
-
-	(";"	.	comment-line)
-
-	(":"	.	comment-dwim)
-
-	("n"	.	move-text-down)
-	("p"	.	move-text-up)
-
-	("]"	.	tabbar-forward-tab)
-	("["	.	tabbar-backward-tab)
-	("{"	.	tabbar-forward-group)
-	("}"	.	tabbar-backward-group)
-
-	("g"	.	goto-line)
-	
-	("x"	.	kill-this-buffer)
-	
-	("t"	.	transpose-chars)
-	("T"	.	transpose-words)
-
-	("c"	.	select-line)
-	
-	("SPC"	.	set-mark-command)
-
-	("<"	.	beginning-of-buffer)
-	(">"	.	end-of-buffer)
-
-	("`"	.	next-error)
-
-	("o"	.	other-window)
-	("O"	.	previous-multiframe-window)
-
-	("s"	.	save-buffer)
-	("S"	.	save-some-buffers)
-
-	("%"	.	split-window-below)
-	("|"	.	split-window-right)
-
-	("!"	.	shell-command)
-
-	("."	.	recenter)
-
-	("v"	.	helm-find-files)
-
-	("/"	.	isearch-forward)
-	("m"	.	helm-semantic)
-
-	("'"	.	delete-window)
-	("\""	.	delete-other-windows)
-	)
- "common editor functions bound to fast and comfortable keys"
- )
-
-(new-onekey
- "toggle"
- "C-x t"
- '(
-   ("l" . linum-mode)
-   ("i" . c-toggle-electric-state)
-   ("n" . c-toggle-auto-newline)
-   ("h" . c-toggle-hungry-state)
-   ("t" . toggle-truncate-lines)
-   ("r" . read-only-mode)
-   ("w" . whitespace-mode)
-   ("x" . xterm-mouse-mode)
-   ("f" . flycheck-mode)
-   )
- "toggle stuff"
- )
-
-
 (global-set-key (kbd "C-c C-g") 'keyboard-quit) ; quit when misstyped beggining of command
 (global-set-key (kbd "C-x C-g") 'keyboard-quit)
 
@@ -282,14 +174,6 @@
 (global-set-key (kbd "C-c <left>") '(lambda () "" (interactive) (progn (setq move-n 1) (setq old-resize-call 1) (dynamic-resize-mode 'shrink-window-horizontally))))
 (global-set-key (kbd "C-c <down>") '(lambda () "" (interactive) (progn (setq move-n 1) (setq old-resize-call 1) (dynamic-resize-mode 'enlarge-window))))
 (global-set-key (kbd "C-c <up>") '(lambda () "" (interactive) (progn (setq move-n 1) (setq old-resize-call 1) (dynamic-resize-mode 'shrink-window))))
-
-;; this is not vi(m)
-(defconst wq "You mean C-x C-c ?")
-(defconst qq "You mean C-x C-c ?")
-(defconst w "You mean C-x C-s ?")
-(defconst q! "You mean C-x C-c ?")
-(defconst wq! "You mean C-x C-c ?")
-(defconst qw! "You mean C-x C-c ?")
 
 (provide 'myconfig)
 ;;; myconfig.el ends here

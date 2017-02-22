@@ -2,6 +2,59 @@
 ;;; commentary:
 ;;; code:
 
+(use-package evil
+  :ensure t
+  :config
+  (evil-mode)
+  (setq evil-move-beyond-eol t)			; allows access to the \n
+  (setq-default evil-cross-lines t)
+
+  (define-key evil-normal-state-map "\C-z" 'suspend-frame)
+  (define-key evil-normal-state-map "u" 'undo-tree-undo)
+  (define-key evil-normal-state-map "U" 'undo-tree-redo)
+  (define-key evil-normal-state-map "\C-U" 'undo-tree-visualize)
+  (define-key evil-normal-state-map "a" 'move-beginning-of-line)
+  (define-key evil-normal-state-map "e" 'move-end-of-line)
+  (define-key evil-normal-state-map "F" 'evil-ace-jump-word-mode)
+  (define-key evil-normal-state-map (kbd "<left>") 'tabbar-backward-tab)
+  (define-key evil-normal-state-map (kbd "<right>") 'tabbar-forward-tab)
+  (define-key evil-normal-state-map (kbd "<up>") 'tabbar-forward-group)
+  (define-key evil-normal-state-map (kbd "<down>") 'tabbar-backward-group)
+
+  (define-key evil-normal-state-map "J" 'tabbar-backward-tab)
+  (define-key evil-normal-state-map "K" 'tabbar-forward-tab)
+  (define-key evil-normal-state-map "gT" 'tabbar-backward-tab)
+  (define-key evil-normal-state-map "gt" 'tabbar-forward-tab)
+  (define-key evil-normal-state-map ";" 'comment-line)
+  (define-key evil-normal-state-map "zf" 'evil-toggle-fold)
+  (define-key evil-normal-state-map "`" 'flycheck-next-error)
+  
+  (define-key evil-visual-state-map "a" 'move-beginning-of-line)
+  (define-key evil-visual-state-map "e" 'move-end-of-line)
+
+  (define-key evil-insert-state-map "\C-a" 'move-beginning-of-line)
+  (define-key evil-insert-state-map "\C-e" 'move-end-of-line)
+
+  (define-key evil-motion-state-map [down-mouse-1] nil)
+
+  (evil-ex-define-cmd "rln" 'nlinum-relative-toggle)
+  (evil-ex-define-cmd "ln" 'nlinum-mode)
+  (evil-ex-define-cmd "ele" 'c-toggle-electric-state)
+  (evil-ex-define-cmd "nl" 'c-toggle-auto-newline)
+  (evil-ex-define-cmd "hun" 'c-toggle-hungry-state)
+  (evil-ex-define-cmd "tr" 'toggle-truncate-lines)
+  (evil-ex-define-cmd "ro" 'read-only-mode)
+  (evil-ex-define-cmd "ws" 'whitespace-mode)
+  (evil-ex-define-cmd "xt" 'xterm-mouse-mode)
+  (evil-ex-define-cmd "fc" 'flycheck-mode)
+
+  )
+
+(use-package vimish-fold
+  :ensure t
+  :config
+  (vimish-fold-mode 1)
+  )
 
 (use-package semantic
   :defer 2
@@ -45,11 +98,15 @@
 		 ))
   )
 
-(use-package linum						; get line number
+(use-package nlinum-relative			; get line number
   :ensure t
   :config
-  (add-hook 'prog-mode-hook 'linum-mode)
-  (setq linum-format "%4d \u2502 ")
+  (nlinum-relative-setup-evil)
+  (add-hook 'prog-mode-hook 'nlinum-relative-mode)
+  (setq nlinum-format "%4d \u2502 ")
+  (setq nlinum-relative-offset 1)
+  (setq nlinum-relative-current-symbol "")
+  (setq nlinum-relative-redisplay-delay 0)
   )
 
 (use-package hideshow					; factorize functions {...}
