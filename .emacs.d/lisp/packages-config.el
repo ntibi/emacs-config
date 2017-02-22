@@ -31,6 +31,7 @@
   
   (define-key evil-visual-state-map "a" 'move-beginning-of-line)
   (define-key evil-visual-state-map "e" 'move-end-of-line)
+  (define-key evil-visual-state-map "F" 'evil-ace-jump-word-mode)
 
   (define-key evil-insert-state-map "\C-a" 'move-beginning-of-line)
   (define-key evil-insert-state-map "\C-e" 'move-end-of-line)
@@ -54,6 +55,19 @@
   :ensure t
   :config
   (vimish-fold-mode 1)
+  )
+
+(use-package evil-mc
+  :ensure t
+  :init
+  (define-key evil-normal-state-map "gcc" 'evil-mc-make-all-cursors)
+  (define-key evil-normal-state-map "gcr" 'evil-mc-undo-all-cursors)
+  (define-key evil-normal-state-map "gch" 'evil-mc-make-cursor-here)
+  (define-key evil-normal-state-map "gcp" 'evil-mc-pause-cursors)
+  (define-key evil-normal-state-map "gcm" 'evil-mc-make-and-goto-next-match)
+  (define-key evil-normal-state-map "gcs" 'evil-mc-skip-and-goto-next-match)
+  :config
+  (global-evil-mc-mode)
   )
 
 (use-package semantic
