@@ -120,7 +120,7 @@
   (setq nlinum-format "%4d \u2502 ")
   (setq nlinum-relative-offset 1)
   (setq nlinum-relative-current-symbol "")
-  (setq nlinum-relative-redisplay-delay 0)
+  (setq nlinum-relative-redisplay-delay 0.05)
   )
 
 (use-package hideshow					; factorize functions {...}
