@@ -28,6 +28,10 @@
   (define-key evil-normal-state-map ";" 'comment-line)
   (define-key evil-normal-state-map "zf" 'evil-toggle-fold)
   (define-key evil-normal-state-map "`" 'flycheck-next-error)
+  (define-key evil-normal-state-map "[" 'evil-backward-section-begin)
+  (define-key evil-normal-state-map "]" 'evil-forward-section-begin)
+  (define-key evil-normal-state-map "{" 'evil-previous-open-brace)
+  (define-key evil-normal-state-map "}" 'evil-next-close-brace)
   
   (define-key evil-visual-state-map "a" 'move-beginning-of-line)
   (define-key evil-visual-state-map "e" 'move-end-of-line)
