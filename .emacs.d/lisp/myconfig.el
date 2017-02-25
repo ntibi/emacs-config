@@ -42,19 +42,6 @@
 
 (electric-pair-mode)					; autopair "" {} () ...
 
-(use-package cc-mode					; common c mode (c/c++/...)
-  :defer t
-  :init
-  (add-hook 'c-mode-common-hook '(lambda () (progn
-											  (setq c-backspace-function 'backward-delete-char)
-											  (setq c-electric-pound-behavior (quote (alignleft)))
-											  (c-toggle-electric-state t)			; electric characters
-											  (c-toggle-syntactic-indentation t)	; automatic indentation
-											  (c-toggle-auto-newline t)				; automatic newlines after ';', '}',...
-											  (c-toggle-hungry-state t)				; hungry backspaces
-											  )))
-  )
-
 ;; TODO: delay modeline loading
 (add-hook 'prog-mode-hook 'set-mode-line) ; set my mode line in the new programming buffers
 

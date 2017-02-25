@@ -2,12 +2,30 @@
 ;;; commentary:
 ;;; code:
 
+
+(use-package cc-mode					; common c mode (c/c++/...)
+  :defer t
+  :init
+  (add-hook 'c-mode-common-hook '(lambda () (progn
+											  (setq c-backspace-function 'backward-delete-char)
+											  (setq c-electric-pound-behavior (quote (alignleft)))
+											  (c-toggle-electric-state t)			; electric characters
+											  (c-toggle-syntactic-indentation t)	; automatic indentation
+											  ;; (c-toggle-auto-newline t)				; automatic newlines after ';', '}',...
+											  (c-toggle-hungry-state t)				; hungry backspaces
+											  )))
+  )
+
+
 (use-package evil
   :ensure t
   :config
   (evil-mode)
   (setq evil-move-beyond-eol t)			; allows access to the \n
   (setq-default evil-cross-lines t)
+
+  (define-key evil-window-map "2" 'split-window-below)
+  (define-key evil-window-map "3" 'split-window-right)
 
   (define-key evil-normal-state-map "\C-z" 'suspend-frame)
   (define-key evil-normal-state-map "u" 'undo-tree-undo)
@@ -39,6 +57,7 @@
 
   (define-key evil-insert-state-map "\C-a" 'move-beginning-of-line)
   (define-key evil-insert-state-map "\C-e" 'move-end-of-line)
+  (define-key evil-insert-state-map "\C-w" 'evil-window-map)
 
   (define-key evil-motion-state-map [down-mouse-1] nil)
 
@@ -73,6 +92,47 @@
   :config
   (global-evil-mc-mode)
   )
+
+(use-package ace-jump-mode
+  :ensure t
+  :defer t
+  :config
+  (setq ace-jump-mode-case-fold t)				 ; case insensitive
+  (setq ace-jump-mode-move-keys (cl-loop for i from ?a to ?z collect i)) ; use [a-z]
+  )
+
+(use-package nlinum-relative			; get line number
+  :ensure t
+  :config
+  (nlinum-relative-setup-evil)
+  (add-hook 'prog-mode-hook 'nlinum-relative-mode)
+  (setq nlinum-format "%4d \u2502 ")
+  (setq nlinum-relative-offset 1)
+  (setq nlinum-relative-current-symbol "")
+  (setq nlinum-relative-redisplay-delay 0.05)
+  )
+
+
+(use-package mouse
+  :config
+  (xterm-mouse-mode t)					; mouse on mofo
+  (global-set-key (kbd "<mouse-2>") 'nil)
+  (global-set-key (kbd "<mouse-3>") 'xpaste) ; right clic to paste from xclipboard
+  (global-set-key (kbd "<mouse-4>") 'scroll-down-line)
+  (global-set-key (kbd "<mouse-5>") 'scroll-up-line)
+  )
+
+(use-package hideshow					; factorize functions {...}
+  :bind (
+		 ([f5] . hs-hide-all)
+		 ([f6] . hs-show-all)
+		 ("C-x x" . hs-toggle-hiding)
+		 ("M-v" . hs-toggle-hiding)
+		 )
+  :init
+  (add-hook 'prog-mode-hook 'hs-minor-mode)
+  )
+
 
 (use-package semantic
   :defer 2
@@ -114,48 +174,6 @@
 		 (concat emacs-wd "../include/")
 		 (concat emacs-wd "../includes/")
 		 ))
-  )
-
-(use-package nlinum-relative			; get line number
-  :ensure t
-  :config
-  (nlinum-relative-setup-evil)
-  (add-hook 'prog-mode-hook 'nlinum-relative-mode)
-  (setq nlinum-format "%4d \u2502 ")
-  (setq nlinum-relative-offset 1)
-  (setq nlinum-relative-current-symbol "")
-  (setq nlinum-relative-redisplay-delay 0.05)
-  )
-
-(use-package hideshow					; factorize functions {...}
-  :bind (
-		 ([f5] . hs-hide-all)
-		 ([f6] . hs-show-all)
-		 ("C-x x" . hs-toggle-hiding)
-		 ("M-v" . hs-toggle-hiding)
-		 )
-  :init
-  (add-hook 'prog-mode-hook 'hs-minor-mode)
-)
-
-(use-package paren						; show matching parenthese
-  :defer 2
-  :config
-  (show-paren-mode 1)			; ON
-  (setq show-paren-delay 0)		; delay
-  )
-
-(use-package mouse
-  :config
-  (xterm-mouse-mode t)					; mouse on mofo
-  (global-set-key (kbd "<mouse-2>") 'nil)
-  (global-set-key (kbd "<mouse-3>") 'xpaste) ; right clic to paste from xclipboard
-  (global-set-key (kbd "<mouse-4>") 'scroll-down-line)
-  (global-set-key (kbd "<mouse-5>") 'scroll-up-line)
-  )
-
-(use-package org-mode
-  :defer t
   )
 
 (use-package flycheck
@@ -228,7 +246,6 @@
   (add-to-list 'company-backends 'company-anaconda)
   )
 
-
 (use-package yasnippet							 ; yet another snippet
   :ensure t
   :defer t
@@ -244,6 +261,7 @@
 			  '(:with company-yasnippet))))
   ;; (setq company-backends (mapcar #'company-mode/backend-with-yas company-backends)) ; i don't want yasnippet suggestions
   )
+
 
 (use-package helm						; better minibuffer selection
   :defer 2
@@ -268,13 +286,19 @@
   :bind (("C-M-s" . helm-swoop))
   )
 
-
 (use-package find-file-in-project		; find a file anywhere in the project
   :ensure t
   :bind (("C-x f" . find-file-in-project))
   :config (setq ffip-project-file ".git")
   )
 
+
+(use-package paren						; show matching parenthese
+  :defer 2
+  :config
+  (show-paren-mode 1)			; ON
+  (setq show-paren-delay 0)		; delay
+  )
 
 (use-package highlight-thing			; highlight current line/word
   :ensure t
@@ -313,6 +337,7 @@
   (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
   (setq rainbow-identifiers-face-count 15)
   )
+
 
 (use-package neotree						; neo tree (files browsing tree)
   :ensure t
@@ -380,26 +405,6 @@
 								  (tabbar-current-tabset)))))))))
   )
 
-(use-package ace-jump-mode
-  :ensure t
-  :defer t
-  :bind (
-		 ("M-f" . ace-jump-word-mode)
-		 ("C-]" . jump-char-forward)
-		 )
-  :config
-  (setq ace-jump-mode-case-fold t)				 ; case insensitive
-  (setq ace-jump-mode-move-keys (cl-loop for i from ?a to ?z collect i)) ; use [a-z]
-  )
-
-(use-package multiple-cursors			; multiple cursors
-  :ensure t
-  :defer t
-  :bind (
-		 ("<C-down-mouse-1>" . mc/add-cursor-on-click) ; ctrl clic to add cursor
-		 ("C-x m" . mc/edit-lines)		; spawn a cursor on each line
-		 )
-  )
 
 (use-package magit						; magic git (git client)
   :ensure t
@@ -420,6 +425,12 @@
   (set-face-foreground 'git-gutter:modified "yellow")
   (set-face-foreground 'git-gutter:deleted "red")
   )
+
+
+(use-package org-mode
+  :defer t
+  )
+
 
 (provide 'myconfig)
 ;;; packages-config.el ends here
