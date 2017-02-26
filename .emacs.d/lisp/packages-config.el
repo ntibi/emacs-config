@@ -7,17 +7,17 @@
   :defer t
   :init
   (add-hook 'c-mode-common-hook '(lambda () (progn
-											  (setq c-backspace-function 'backward-delete-char)
-											  (setq c-electric-pound-behavior (quote (alignleft)))
-											  (c-toggle-electric-state t)			; electric characters
-											  (c-toggle-syntactic-indentation t)	; automatic indentation
-											  ;; (c-toggle-auto-newline t)				; automatic newlines after ';', '}',...
-											  (c-toggle-hungry-state t)				; hungry backspaces
-											  )))
+  (setq c-backspace-function 'backward-delete-char)
+  (setq c-electric-pound-behavior (quote (alignleft)))
+  (c-toggle-electric-state t)			; electric characters
+  (c-toggle-syntactic-indentation t)	; automatic indentation
+  ;; (c-toggle-auto-newline t)				; automatic newlines after ';', '}',...
+  (c-toggle-hungry-state t)				; hungry backspaces
+  )))
   )
 
 
-(use-package evil
+(use-package evil						; vim emulator mode
   :ensure t
   :config
   (evil-mode)
@@ -71,16 +71,15 @@
   (evil-ex-define-cmd "ws" 'whitespace-mode)
   (evil-ex-define-cmd "xt" 'xterm-mouse-mode)
   (evil-ex-define-cmd "fc" 'flycheck-mode)
-
   )
 
-(use-package vimish-fold
+(use-package vimish-fold				; vim-like folding
   :ensure t
   :config
   (vimish-fold-mode 1)
   )
 
-(use-package evil-mc
+(use-package evil-mc					; multiple cursors
   :ensure t
   :init
   (define-key evil-normal-state-map "gcc" 'evil-mc-make-all-cursors)
@@ -93,12 +92,20 @@
   (global-evil-mc-mode)
   )
 
-(use-package ace-jump-mode
+(use-package ace-jump-mode				; fast jump to words
   :ensure t
   :defer t
   :config
   (setq ace-jump-mode-case-fold t)				 ; case insensitive
   (setq ace-jump-mode-move-keys (cl-loop for i from ?a to ?z collect i)) ; use [a-z]
+  )
+
+(use-package evil-numbers				; {inc,dec}rement number at point
+  :ensure t
+  :defer t
+  :init
+  (define-key evil-normal-state-map "+" 'evil-numbers/inc-at-pt)
+  (define-key evil-normal-state-map "-" 'evil-numbers/dec-at-pt)
   )
 
 (use-package nlinum-relative			; get line number
@@ -113,9 +120,9 @@
   )
 
 
-(use-package mouse
+(use-package mouse						; enable xterm mouse
   :config
-  (xterm-mouse-mode t)					; mouse on mofo
+  (xterm-mouse-mode t)
   (global-set-key (kbd "<mouse-2>") 'nil)
   (global-set-key (kbd "<mouse-3>") 'xpaste) ; right clic to paste from xclipboard
   (global-set-key (kbd "<mouse-4>") 'scroll-down-line)
