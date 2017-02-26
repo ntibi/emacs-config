@@ -39,6 +39,8 @@
   (define-key evil-normal-state-map (kbd "<up>") 'tabbar-forward-group)
   (define-key evil-normal-state-map (kbd "<down>") 'tabbar-backward-group)
 
+  (define-key evil-normal-state-map "\C-j" 'scroll-up-line)
+  (define-key evil-normal-state-map "\C-k" 'scroll-down-line)
   (define-key evil-normal-state-map "J" 'tabbar-backward-tab)
   (define-key evil-normal-state-map "K" 'tabbar-forward-tab)
   (define-key evil-normal-state-map "gT" 'tabbar-backward-tab)
