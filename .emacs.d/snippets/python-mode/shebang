@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: shebang
+# key: !
+# group: general 
+# --
+#!/bin/python
+
+$0
