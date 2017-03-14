@@ -47,7 +47,7 @@
   (define-key evil-normal-state-map "gt" 'tabbar-forward-tab)
   (define-key evil-normal-state-map ";" 'comment-line)
   (define-key evil-normal-state-map "zf" 'evil-toggle-fold)
-  (define-key evil-normal-state-map "`" 'flycheck-next-error)
+  (define-key evil-normal-state-map "~" 'flycheck-next-error)
   (define-key evil-normal-state-map "[" 'evil-backward-section-begin)
   (define-key evil-normal-state-map "]" 'evil-forward-section-begin)
   (define-key evil-normal-state-map "{" 'evil-previous-open-brace)
@@ -188,7 +188,7 @@
 (use-package flycheck
   :ensure t
   :defer 2
-  :bind (("C-x `" . flycheck-next-error))
+  :bind (("C-x ~" . flycheck-next-error))
   :init
   (use-package flycheck-clangcheck
 	:ensure t
