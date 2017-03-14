@@ -244,6 +244,7 @@
   (setq company-backends (delete 'company-semantic company-backends)) ; semantic conflicts with company
   (add-to-list 'company-backends 'company-c-headers)	  ; headers auto completion
   (add-to-list 'company-backends 'company-clang)
+  (add-to-list 'company-backends 'company-anaconda)
   )
 
 (use-package anaconda-mode
@@ -251,8 +252,9 @@
   :defer t
   :init
   (add-hook 'python-mode-hook 'anaconda-mode)
+  ;; (eval-after-load 'company
+	;; '(add-to-list 'company-backends 'company-anaconda))
   :config
-  (add-to-list 'company-backends 'company-anaconda)
   )
 
 (use-package yasnippet							 ; yet another snippet

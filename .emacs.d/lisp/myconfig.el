@@ -46,9 +46,10 @@
 (add-hook 'prog-mode-hook 'set-mode-line) ; set my mode line in the new programming buffers
 
 (add-hook 'python-mode-hook
-		  (function (lambda ()
-                      (setq indent-tabs-mode t
-                            tab-width 4))))
+		  (lambda ()
+			(setq indent-tabs-mode t
+				  tab-width 4
+				  python-indent-offset 4)))
 
 (add-to-list 'auto-mode-alist '("\\.cpp\\'" . c++-mode))
 (add-to-list 'auto-mode-alist '("\\.cc\\'" . c++-mode))
