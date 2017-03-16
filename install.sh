@@ -9,7 +9,7 @@ mkdir -p $TRASH
 [ -e ~/.emacs ] && mv ~/.emacs $TRASH
 ln -s $REPO_BASE/.emacs ~/.emacs
 
-[ ! -d ~/.emacs.d ] && mkdir ~/.emacs
+[ ! -d ~/.emacs.d ] && mkdir ~/.emacs.d/
 
 [ -d ~/.emacs.d/lisp ] || [ -h ~/.emacs.d/lisp ] && mv ~/.emacs.d/lisp $TRASH
 ln -s $REPO_BASE/.emacs.d/lisp ~/.emacs.d/lisp
