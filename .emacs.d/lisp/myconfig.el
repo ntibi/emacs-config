@@ -42,6 +42,8 @@
 
 (electric-pair-mode)					; autopair "" {} () ...
 
+(modify-syntax-entry ?_ "w")			; _ is considered to be part of a word
+
 ;; TODO: delay modeline loading
 (add-hook 'prog-mode-hook 'set-mode-line) ; set my mode line in the new programming buffers
 
