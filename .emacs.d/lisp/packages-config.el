@@ -31,8 +31,8 @@
   (define-key evil-normal-state-map "u" 'undo-tree-undo)
   (define-key evil-normal-state-map "U" 'undo-tree-redo)
   (define-key evil-normal-state-map "\C-U" 'undo-tree-visualize)
-  (define-key evil-normal-state-map "a" 'move-beginning-of-line)
-  (define-key evil-normal-state-map "e" 'move-end-of-line)
+  (define-key evil-normal-state-map "\C-a" 'move-beginning-of-line)
+  (define-key evil-normal-state-map "\C-e" 'move-end-of-line)
   (define-key evil-normal-state-map "F" 'evil-ace-jump-word-mode)
   (define-key evil-normal-state-map (kbd "<left>") 'tabbar-backward-tab)
   (define-key evil-normal-state-map (kbd "<right>") 'tabbar-forward-tab)
@@ -53,8 +53,8 @@
   (define-key evil-normal-state-map "{" 'evil-previous-open-brace)
   (define-key evil-normal-state-map "}" 'evil-next-close-brace)
   
-  (define-key evil-visual-state-map "a" 'move-beginning-of-line)
-  (define-key evil-visual-state-map "e" 'move-end-of-line)
+  (define-key evil-visual-state-map "\C-a" 'move-beginning-of-line)
+  (define-key evil-visual-state-map "\C-e" 'move-end-of-line)
   (define-key evil-visual-state-map "F" 'evil-ace-jump-word-mode)
 
   (define-key evil-insert-state-map "\C-a" 'move-beginning-of-line)
