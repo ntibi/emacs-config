@@ -116,7 +116,7 @@
   (nlinum-relative-setup-evil)
   (add-hook 'prog-mode-hook 'nlinum-relative-mode)
   (setq nlinum-format "%4d \u2502 ")
-  (setq nlinum-relative-offset 1)
+  (setq nlinum-relative-offset 0)
   (setq nlinum-relative-current-symbol "")
   (setq nlinum-relative-redisplay-delay 0.05)
   )
