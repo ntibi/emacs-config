@@ -45,13 +45,14 @@
   (define-key evil-normal-state-map "K" 'tabbar-forward-tab)
   (define-key evil-normal-state-map "gT" 'tabbar-backward-tab)
   (define-key evil-normal-state-map "gt" 'tabbar-forward-tab)
-  (define-key evil-normal-state-map ";" 'comment-line)
+  (define-key evil-normal-state-map "," 'comment-line)
   (define-key evil-normal-state-map "zf" 'evil-toggle-fold)
   (define-key evil-normal-state-map "~" 'flycheck-next-error)
   (define-key evil-normal-state-map "[" 'evil-backward-section-begin)
   (define-key evil-normal-state-map "]" 'evil-forward-section-begin)
   (define-key evil-normal-state-map "{" 'evil-previous-open-brace)
   (define-key evil-normal-state-map "}" 'evil-next-close-brace)
+  (define-key evil-normal-state-map ";" 'evil-ex)
   
   (define-key evil-visual-state-map "\C-a" 'move-beginning-of-line)
   (define-key evil-visual-state-map "\C-e" 'move-end-of-line)
@@ -63,8 +64,8 @@
 
   (define-key evil-motion-state-map [down-mouse-1] nil)
 
-  (evil-ex-define-cmd "rln" 'nlinum-relative-toggle)
-  (evil-ex-define-cmd "ln" 'nlinum-mode)
+  (evil-ex-define-cmd "rnu" 'nlinum-relative-toggle)
+  (evil-ex-define-cmd "nu" 'nlinum-mode)
   (evil-ex-define-cmd "ele" 'c-toggle-electric-state)
   (evil-ex-define-cmd "nl" 'c-toggle-auto-newline)
   (evil-ex-define-cmd "hun" 'c-toggle-hungry-state)
