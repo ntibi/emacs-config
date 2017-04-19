@@ -41,6 +41,8 @@
 
   (define-key evil-normal-state-map "\C-j" 'scroll-up-line)
   (define-key evil-normal-state-map "\C-k" 'scroll-down-line)
+  (define-key evil-normal-state-map "\C-h" 'evil-scroll-column-left)
+  (define-key evil-normal-state-map "\C-l" 'evil-scroll-column-right)
   (define-key evil-normal-state-map "J" 'tabbar-backward-tab)
   (define-key evil-normal-state-map "K" 'tabbar-forward-tab)
   (define-key evil-normal-state-map "gT" 'tabbar-backward-tab)

@@ -1,7 +1,8 @@
-#!/bin/bash
+#!/bin/sh
 
 
-REPO_BASE="$(dirname "$PWD/$0/")"
+REPO_BASE="$(dirname "$PWD/$0")"
+REPO_BASE="$(readlink -f $REPO_BASE)"
 TRASH=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1)
 TRASH="/tmp/old.emacs/$TRASH"
 mkdir -p $TRASH
