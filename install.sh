@@ -10,8 +10,8 @@ mkdir -p $TRASH
 
 if [ -e ~/.emacs -a ! -L ~/.emacs ]; then
     mv ~/.emacs $TRASH
-    ln -s $REPO_BASE/.emacs ~/.emacs
 fi
+ln -s $REPO_BASE/.emacs ~/.emacs
 
 [ ! -d ~/.emacs.d ] && mkdir ~/.emacs.d/
 
