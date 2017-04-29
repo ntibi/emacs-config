@@ -11,13 +11,13 @@ mkdir -p $TRASH
 if [ -e ~/.emacs -a ! -L ~/.emacs ]; then
     mv ~/.emacs $TRASH
 fi
-ln -s $REPO_BASE/.emacs ~/.emacs
+[ ! -L ~/.emacs ] && ln -s $REPO_BASE/.emacs ~/.emacs
 
 [ ! -d ~/.emacs.d ] && mkdir ~/.emacs.d/
 
 [ -d ~/.emacs.d/lisp ] || [ -h ~/.emacs.d/lisp ] && mv ~/.emacs.d/lisp $TRASH
-ln -s $REPO_BASE/.emacs.d/lisp ~/.emacs.d/lisp
+[ ! -L ~/.emacs.d/lisp ] && ln -s $REPO_BASE/.emacs.d/lisp ~/.emacs.d/lisp
 
 [ -d ~/.emacs.d/snippets ] || [ -h ~/.emacs.d/snippets ] && mv ~/.emacs.d/snippets $TRASH
-ln -s $REPO_BASE/.emacs.d/snippets ~/.emacs.d/snippets
+[ ! -L ~/.emacs.d/snippets ] && ln -s $REPO_BASE/.emacs.d/snippets ~/.emacs.d/snippets
 
