@@ -39,8 +39,8 @@
   (define-key evil-normal-state-map (kbd "<up>") 'tabbar-forward-group)
   (define-key evil-normal-state-map (kbd "<down>") 'tabbar-backward-group)
 
-  (define-key evil-normal-state-map "\C-j" 'scroll-up-line)
-  (define-key evil-normal-state-map "\C-k" 'scroll-down-line)
+  (define-key evil-normal-state-map "\C-j" 'scroll-up-commandw)
+  (define-key evil-normal-state-map "\C-k" 'scroll-down-command)
   (define-key evil-normal-state-map "\C-h" 'evil-scroll-column-left)
   (define-key evil-normal-state-map "\C-l" 'evil-scroll-column-right)
   (define-key evil-normal-state-map "J" 'tabbar-backward-tab)
@@ -50,15 +50,12 @@
   (define-key evil-normal-state-map "," 'comment-line)
   (define-key evil-normal-state-map "zf" 'evil-toggle-fold)
   (define-key evil-normal-state-map "~" 'flycheck-next-error)
-  (define-key evil-normal-state-map "[" 'evil-backward-section-begin)
-  (define-key evil-normal-state-map "]" 'evil-forward-section-begin)
-  (define-key evil-normal-state-map "{" 'evil-previous-open-brace)
-  (define-key evil-normal-state-map "}" 'evil-next-close-brace)
   (define-key evil-normal-state-map ";" 'evil-ex)
+
+  (define-key evil-normal-state-map "\C-o" 'evil-execute-in-emacs-state)
   
   (define-key evil-visual-state-map "\C-a" 'move-beginning-of-line)
   (define-key evil-visual-state-map "\C-e" 'move-end-of-line)
-  (define-key evil-visual-state-map "F" 'evil-ace-jump-word-mode)
 
   (define-key evil-insert-state-map "\C-a" 'move-beginning-of-line)
   (define-key evil-insert-state-map "\C-e" 'move-end-of-line)
@@ -76,6 +73,16 @@
   (evil-ex-define-cmd "ws" 'whitespace-mode)
   (evil-ex-define-cmd "xt" 'xterm-mouse-mode)
   (evil-ex-define-cmd "fc" 'flycheck-mode)
+  )
+
+(use-package evil-leader
+  :ensure t
+  :init
+  (global-evil-leader-mode)
+  (evil-leader/set-leader "\\")
+  (evil-leader/set-key "w" 'save-buffer)
+  (evil-leader/set-key "q" 'save-buffers-kill-terminal)
+  (evil-leader/set-key "d" 'kill-this-buffer)
   )
 
 (use-package vimish-fold				; vim-like folding
